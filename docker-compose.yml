@@ -1,0 +1,16 @@
+version: "3.9"
+
+networks:
+  ss-net:
+    driver: bridge
+
+services:
+  supersonic:
+    container_name: supersonic-container
+    networks:
+      - ss-net
+    build:
+      context: .
+    restart: always
+    hostname: supersonic
+    env_file: .env
