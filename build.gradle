@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+group 'personal.opensrcerer'
+version '0.0.1'
+
+sourceCompatibility = 16
+targetCompatibility = 16
+
+repositories {
+    mavenCentral() // for transitive dependencies
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
+
+shadowJar {
+    manifest {
+        attributes(
+                'Main-Class': 'ReactorApplication'
+        )
+    }
+}
+
+dependencies {
+    // SLF4J
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
+
+    // JUnit
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    // JDA
+    implementation("net.dv8tion:JDA:4.3.0_310") {
+        exclude module: 'opus:java'
+    }
+
+    // Reactor
+    testImplementation "io.projectreactor:reactor-test:3.4.9"
+    implementation "io.projectreactor:reactor-core:3.4.9"
+
+    // Annotations
+    compileOnly 'org.jetbrains:annotations:22.0.0'
+}
+
+ext {
+    javaMainClass = "personal.opensrcerer.ReactorApplication"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task reactorrun(type: Exec, dependsOn: [compileJava, processResources, classes]) {
+    group = "Execution"
+    description = "Run the app"
+    commandLine "java", "-classpath", sourceSets.main.runtimeClasspath.getAsPath(),
+    javaMainClass
+}

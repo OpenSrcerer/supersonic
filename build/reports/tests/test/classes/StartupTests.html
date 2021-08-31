@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class StartupTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class StartupTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; StartupTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">1.251s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">checkEnvironmentVariables()</td>
+<td class="success">1.251s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2021-08-29 17:36:50,948 Test worker DEBUG Apache Log4j Core 2.14.1 initializing configuration XmlConfiguration[location=C:\Users\WeedPot\Desktop\Reactor\build\resources\main\log4j2.xml]
+2021-08-29 17:36:50,953 Test worker DEBUG Installed 0 script engines
+2021-08-29 17:36:50,957 Test worker DEBUG Took 0.002559 seconds to load 0 plugins from package org.apache.logging.log4j.test
+2021-08-29 17:36:50,957 Test worker DEBUG PluginManager 'Core' found 122 plugins
+2021-08-29 17:36:50,957 Test worker DEBUG PluginManager 'Level' found 0 plugins
+2021-08-29 17:36:50,961 Test worker DEBUG Building Plugin[name=property, class=org.apache.logging.log4j.core.config.Property].
+2021-08-29 17:36:50,968 Test worker DEBUG PluginManager 'TypeConverter' found 26 plugins
+2021-08-29 17:36:50,973 Test worker DEBUG createProperty(name=&quot;filename&quot;, value=&quot;target/test.log&quot;)
+2021-08-29 17:36:50,973 Test worker DEBUG Building Plugin[name=properties, class=org.apache.logging.log4j.core.config.PropertiesPlugin].
+2021-08-29 17:36:50,976 Test worker DEBUG configureSubstitutor(={filename=target/test.log}, Configuration(XMLConfigTest))
+2021-08-29 17:36:50,977 Test worker DEBUG PluginManager 'Lookup' found 16 plugins
+2021-08-29 17:36:50,977 Test worker DEBUG Building Plugin[name=filter, class=org.apache.logging.log4j.core.filter.ThresholdFilter].
+2021-08-29 17:36:50,979 Test worker DEBUG createFilter(level=&quot;TRACE&quot;, onMatch=&quot;null&quot;, onMismatch=&quot;null&quot;)
+2021-08-29 17:36:50,980 Test worker DEBUG Building Plugin[name=layout, class=org.apache.logging.log4j.core.layout.PatternLayout].
+2021-08-29 17:36:50,984 Test worker DEBUG PatternLayout$Builder(pattern=&quot;%m MDC%X%n&quot;, PatternSelector=null, Configuration(XMLConfigTest), Replace=null, charset=&quot;null&quot;, alwaysWriteExceptions=&quot;null&quot;, disableAnsi=&quot;null&quot;, noConsoleNoAnsi=&quot;null&quot;, header=&quot;null&quot;, footer=&quot;null&quot;)
+2021-08-29 17:36:50,984 Test worker DEBUG PluginManager 'Converter' found 44 plugins
+2021-08-29 17:36:50,985 Test worker DEBUG Building Plugin[name=filter, class=org.apache.logging.log4j.core.filter.MarkerFilter].
+2021-08-29 17:36:50,986 Test worker DEBUG createFilter(marker=&quot;FLOW&quot;, onMatch=&quot;DENY&quot;, onMismatch=&quot;NEUTRAL&quot;)
+2021-08-29 17:36:50,986 Test worker DEBUG Building Plugin[name=filter, class=org.apache.logging.log4j.core.filter.MarkerFilter].
+2021-08-29 17:36:50,987 Test worker DEBUG createFilter(marker=&quot;EXCEPTION&quot;, onMatch=&quot;DENY&quot;, onMismatch=&quot;ACCEPT&quot;)
+2021-08-29 17:36:50,987 Test worker DEBUG Building Plugin[name=filters, class=org.apache.logging.log4j.core.filter.CompositeFilter].
+2021-08-29 17:36:50,988 Test worker DEBUG createFilters(={FLOW, EXCEPTION})
+2021-08-29 17:36:50,988 Test worker DEBUG Building Plugin[name=appender, class=org.apache.logging.log4j.core.appender.ConsoleAppender].
+2021-08-29 17:36:50,993 Test worker DEBUG ConsoleAppender$Builder(target=&quot;null&quot;, follow=&quot;null&quot;, direct=&quot;null&quot;, bufferedIo=&quot;null&quot;, bufferSize=&quot;null&quot;, immediateFlush=&quot;null&quot;, ignoreExceptions=&quot;null&quot;, PatternLayout(%m MDC%X%n), name=&quot;STDOUT&quot;, Configuration(XMLConfigTest), Filters({FLOW, EXCEPTION}), ={})
+2021-08-29 17:36:50,995 Test worker DEBUG Starting OutputStreamManager SYSTEM_OUT.false.false
+2021-08-29 17:36:50,995 Test worker DEBUG Building Plugin[name=layout, class=org.apache.logging.log4j.core.layout.PatternLayout].
+2021-08-29 17:36:50,996 Test worker DEBUG PatternLayout$Builder(pattern=&quot;%C{1}.%M %m %ex%n&quot;, PatternSelector=null, Configuration(XMLConfigTest), Replace=null, charset=&quot;null&quot;, alwaysWriteExceptions=&quot;null&quot;, disableAnsi=&quot;null&quot;, noConsoleNoAnsi=&quot;null&quot;, header=&quot;null&quot;, footer=&quot;null&quot;)
+2021-08-29 17:36:50,996 Test worker DEBUG Building Plugin[name=filter, class=org.apache.logging.log4j.core.filter.MarkerFilter].
+2021-08-29 17:36:50,997 Test worker DEBUG createFilter(marker=&quot;FLOW&quot;, onMatch=&quot;ACCEPT&quot;, onMismatch=&quot;NEUTRAL&quot;)
+2021-08-29 17:36:50,997 Test worker DEBUG Building Plugin[name=filter, class=org.apache.logging.log4j.core.filter.MarkerFilter].
+2021-08-29 17:36:50,998 Test worker DEBUG createFilter(marker=&quot;EXCEPTION&quot;, onMatch=&quot;ACCEPT&quot;, onMismatch=&quot;DENY&quot;)
+2021-08-29 17:36:50,998 Test worker DEBUG Building Plugin[name=filters, class=org.apache.logging.log4j.core.filter.CompositeFilter].
+2021-08-29 17:36:50,998 Test worker DEBUG createFilters(={FLOW, EXCEPTION})
+2021-08-29 17:36:50,999 Test worker DEBUG Building Plugin[name=appender, class=org.apache.logging.log4j.core.appender.ConsoleAppender].
+2021-08-29 17:36:50,999 Test worker DEBUG ConsoleAppender$Builder(target=&quot;null&quot;, follow=&quot;null&quot;, direct=&quot;null&quot;, bufferedIo=&quot;null&quot;, bufferSize=&quot;null&quot;, immediateFlush=&quot;null&quot;, ignoreExceptions=&quot;null&quot;, PatternLayout(%C{1}.%M %m %ex%n), name=&quot;FLOW&quot;, Configuration(XMLConfigTest), Filters({FLOW, EXCEPTION}), ={})
+2021-08-29 17:36:51,001 Test worker DEBUG Building Plugin[name=layout, class=org.apache.logging.log4j.core.layout.PatternLayout].
+2021-08-29 17:36:51,001 Test worker DEBUG PatternLayout$Builder(pattern=&quot;%d %p %C{1.} [%t] %m%n&quot;, PatternSelector=null, Configuration(XMLConfigTest), Replace=null, charset=&quot;null&quot;, alwaysWriteExceptions=&quot;null&quot;, disableAnsi=&quot;null&quot;, noConsoleNoAnsi=&quot;null&quot;, header=&quot;null&quot;, footer=&quot;null&quot;)
+2021-08-29 17:36:51,009 Test worker DEBUG Building Plugin[name=appender, class=org.apache.logging.log4j.core.appender.FileAppender].
+2021-08-29 17:36:51,012 Test worker DEBUG FileAppender$Builder(fileName=&quot;target/test.log&quot;, append=&quot;null&quot;, locking=&quot;null&quot;, advertise=&quot;null&quot;, advertiseUri=&quot;null&quot;, createOnDemand=&quot;null&quot;, filePermissions=&quot;null&quot;, fileOwner=&quot;null&quot;, fileGroup=&quot;null&quot;, bufferedIo=&quot;null&quot;, bufferSize=&quot;null&quot;, immediateFlush=&quot;null&quot;, ignoreExceptions=&quot;null&quot;, PatternLayout(%d %p %C{1.} [%t] %m%n), name=&quot;File&quot;, Configuration(XMLConfigTest), Filter=null, ={})
+2021-08-29 17:36:51,013 Test worker DEBUG Starting FileManager target/test.log
+2021-08-29 17:36:51,014 Test worker DEBUG Building Plugin[name=appenders, class=org.apache.logging.log4j.core.config.AppendersPlugin].
+2021-08-29 17:36:51,014 Test worker DEBUG createAppenders(={STDOUT, FLOW, File})
+2021-08-29 17:36:51,015 Test worker DEBUG Building Plugin[name=AppenderRef, class=org.apache.logging.log4j.core.config.AppenderRef].
+2021-08-29 17:36:51,015 Test worker DEBUG createAppenderRef(ref=&quot;STDOUT&quot;, level=&quot;null&quot;, Filter=null)
+2021-08-29 17:36:51,016 Test worker DEBUG Building Plugin[name=root, class=org.apache.logging.log4j.core.config.LoggerConfig$RootLogger].
+2021-08-29 17:36:51,017 Test worker DEBUG createLogger(additivity=&quot;null&quot;, level=&quot;INFO&quot;, includeLocation=&quot;null&quot;, ={STDOUT}, ={}, Configuration(XMLConfigTest), Filter=null)
+2021-08-29 17:36:51,019 Test worker DEBUG Building Plugin[name=loggers, class=org.apache.logging.log4j.core.config.LoggersPlugin].
+2021-08-29 17:36:51,020 Test worker DEBUG createLoggers(={root})
+2021-08-29 17:36:51,020 Test worker DEBUG Configuration XmlConfiguration[location=C:\Users\WeedPot\Desktop\Reactor\build\resources\main\log4j2.xml] initialized
+2021-08-29 17:36:51,020 Test worker DEBUG Starting configuration XmlConfiguration[location=C:\Users\WeedPot\Desktop\Reactor\build\resources\main\log4j2.xml]
+2021-08-29 17:36:51,021 Test worker DEBUG Started configuration XmlConfiguration[location=C:\Users\WeedPot\Desktop\Reactor\build\resources\main\log4j2.xml] OK.
+2021-08-29 17:36:51,021 Test worker DEBUG Shutting down OutputStreamManager SYSTEM_OUT.false.false-1
+2021-08-29 17:36:51,022 Test worker DEBUG OutputStream closed
+2021-08-29 17:36:51,022 Test worker DEBUG Shut down OutputStreamManager SYSTEM_OUT.false.false-1, all resources released: true
+2021-08-29 17:36:51,022 Test worker DEBUG Appender DefaultConsole-1 stopped with status true
+2021-08-29 17:36:51,022 Test worker DEBUG Stopped org.apache.logging.log4j.core.config.DefaultConfiguration@2f6c8bd5 OK
+2021-08-29 17:36:51,062 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93
+2021-08-29 17:36:51,063 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93,component=StatusLogger
+2021-08-29 17:36:51,065 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93,component=ContextSelector
+2021-08-29 17:36:51,066 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93,component=Loggers,name=
+2021-08-29 17:36:51,067 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93,component=Appenders,name=STDOUT
+2021-08-29 17:36:51,068 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93,component=Appenders,name=File
+2021-08-29 17:36:51,068 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=73d16e93,component=Appenders,name=FLOW
+2021-08-29 17:36:51,069 Test worker DEBUG org.apache.logging.log4j.core.util.SystemClock supports precise timestamps.
+2021-08-29 17:36:51,070 Test worker DEBUG Reconfiguration complete for context[name=73d16e93] at URI C:\Users\WeedPot\Desktop\Reactor\build\resources\main\log4j2.xml (org.apache.logging.log4j.core.LoggerContext@2dc02a9) with optional ClassLoader: null
+2021-08-29 17:36:51,070 Test worker DEBUG Shutdown hook enabled. Registering a new one.
+2021-08-29 17:36:51,071 Test worker DEBUG LoggerContext[name=73d16e93, org.apache.logging.log4j.core.LoggerContext@2dc02a9] started OK.
+Login Successful! MDC{}
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.0</a> at Aug 29, 2021, 5:36:52 PM</p>
+</div>
+</div>
+</body>
+</html>
