@@ -1,19 +1,19 @@
 package personal.opensrcerer.launch;
 
 import net.dv8tion.jda.api.JDABuilder;
-import personal.opensrcerer.listeners.ListenerGroup;
+import personal.opensrcerer.listeners.FluxListener;
 import personal.opensrcerer.reactive.messageFluxes.ButtonClickEventFlux;
 import personal.opensrcerer.reactive.messageFluxes.GuildMessageReceivedFlux;
 
 import javax.security.auth.login.LoginException;
 
-public abstract class ReactorApplicationLaunchWrapper {
+public abstract class SupersonicLaunchWrapper {
     public static void run() throws LoginException {
-        ReactorApplicationRuntimeConstants.ENVIRONMENT_VARIABLES = System.getenv();
-        ReactorApplicationRuntimeConstants.JDA = JDABuilder.createDefault(
-                ReactorApplicationRuntimeConstants.getVariable("DISCORD_TOKEN")
+        SupersonicRuntimeConstants.ENVIRONMENT_VARIABLES = System.getenv();
+        SupersonicRuntimeConstants.JDA = JDABuilder.createDefault(
+                SupersonicRuntimeConstants.getVariable("DISCORD_TOKEN")
         ).build();
-        ListenerGroup.addListeners(
+        FluxListener.addListeners(
                 new GuildMessageReceivedFlux(),
                 new ButtonClickEventFlux()
         );

@@ -19,7 +19,7 @@ repositories {
 
 shadowJar {
     manifest {
-        attributes 'Main-Class': 'personal.opensrcerer.ReactorApplication'
+        attributes 'Main-Class': 'personal.opensrcerer.SupersonicApplication'
     }
 }
 
@@ -54,7 +54,7 @@ test {
 
 task runsupersonic(type: Exec, dependsOn: [compileJava, processResources, classes]) {
     group = "Execution"
-    description = "Run the app"
+    description = "Run the supersonic bot"
 
     Properties properties = new Properties()
     def variables = project.rootProject.file(".env")

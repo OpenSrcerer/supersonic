@@ -3,8 +3,8 @@ package personal.opensrcerer.reactive;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
-import personal.opensrcerer.launch.ReactorApplicationRuntimeConstants;
-import personal.opensrcerer.listeners.ListenerGroup;
+import personal.opensrcerer.launch.SupersonicRuntimeConstants;
+import personal.opensrcerer.listeners.FluxListener;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
@@ -14,7 +14,7 @@ import reactor.core.publisher.FluxSink;
  * @param <X> Type of event to handle.
  * @see GenericEvent
  */
-public abstract class DiscordFlux<X extends GenericEvent> implements ListenerGroup {
+public abstract class DiscordFlux<X extends GenericEvent> implements FluxListener {
 
     private final Class<X> type;
     private final Flux<X> messageFlux;
@@ -22,7 +22,7 @@ public abstract class DiscordFlux<X extends GenericEvent> implements ListenerGro
     public DiscordFlux(Class<X> type) {
         this.type = type;
         this.messageFlux = Flux.create(emitter -> {
-            JDA jda = ReactorApplicationRuntimeConstants.getJDA();
+            JDA jda = SupersonicRuntimeConstants.getJDA();
             EventListener el = getEventListener(emitter);
             jda.addEventListener(el);
             emitter.onDispose(() -> jda.removeEventListener(el));

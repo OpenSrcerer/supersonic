@@ -1,7 +1,7 @@
 package personal.opensrcerer.messaging;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import personal.opensrcerer.launch.ReactorApplicationConstants;
+import personal.opensrcerer.launch.SupersonicConstants;
 import personal.opensrcerer.messaging.dto.ParsedGuildMessageEvent;
 
 import java.util.ArrayList;
@@ -21,6 +21,6 @@ public class TextChannelMessageParser {
     }
 
     private boolean checkIfBotMentioned(List<String> arguments) {
-        return arguments.size() >= 1 && arguments.get(0).equalsIgnoreCase("<@!" + ReactorApplicationConstants.BOT_ID + ">");
+        return arguments.size() >= 1 && arguments.get(0).equalsIgnoreCase("<@!" + SupersonicConstants.BOT_ID + ">");
     }
 }

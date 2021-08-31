@@ -8,7 +8,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-public abstract class ReactorApplicationRuntimeConstants {
+public abstract class SupersonicRuntimeConstants {
     protected static JDA JDA;
     protected static Map<String, String> ENVIRONMENT_VARIABLES;
 
