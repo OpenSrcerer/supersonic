@@ -18,11 +18,4 @@ public abstract class GenericEmbeds {
                 .setFooter("Bonkers needs help", "https://cdn.icon-icons.com/icons2/2150/PNG/512/emoji_smiley_sticker_emo_fun_funny_icon_132665.png")
                 .build();
     }
-
-    public static MessageEmbed getPugEmbed() {
-        return new EmbedBuilder()
-                .setTitle("Pug Control Panel")
-                .setDescription("here you may control your friend pug.\nuse the buttons below pretty self explanatory")
-                .build();
-    }
 }

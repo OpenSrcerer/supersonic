@@ -8,6 +8,12 @@ import personal.opensrcerer.listeners.ListenerGroup;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
+/**
+ * Provides an interface for the creation of specialized fluxes that treat
+ * different types of Discord events wrapped by JDA.
+ * @param <X> Type of event to handle.
+ * @see GenericEvent
+ */
 public abstract class DiscordFlux<X extends GenericEvent> implements ListenerGroup {
 
     private final Class<X> type;

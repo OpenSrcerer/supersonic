@@ -6,6 +6,7 @@ import personal.opensrcerer.reactive.DiscordFlux;
 import personal.opensrcerer.reactive.handlers.messaging.MessageHandler;
 
 public class GuildMessageReceivedFlux extends DiscordFlux<GuildMessageReceivedEvent> {
+
     private final TextChannelMessageParser parser;
     private final MessageHandler handler;
 
