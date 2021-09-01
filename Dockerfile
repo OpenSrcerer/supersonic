@@ -14,7 +14,7 @@ RUN ./gradlew shadowJar
 #
 FROM openjdk:16.0.2-jdk
 
-ARG JAR_FILE=./build/libs/*-all.jar
+ARG JAR_FILE=build/libs/*-all.jar
 
 WORKDIR /app
 
