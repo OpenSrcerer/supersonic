@@ -11,7 +11,9 @@ jobs:
       arch: amd64
 
 before_script:
-  - "sudo cat /etc/docker/daemon.json | jq '. + {\"insecure-registries\": [\"$DOCKER_REGISTRY\"]}' | sudo tee /etc/docker/daemon.json"
+  - touch /etc/docker/daemon.json
+  - "echo \"{\"insecure-registries\": [\"$DOCKER_REGISTRY\"]}\" >> /etc/docker/daemon.json"
+  - cat /etc/docker/daemon.json
   - docker info
 
 script: DOCKER_REGISTRY=$DOCKER_REGISTRY ./dockerscript.sh
