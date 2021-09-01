@@ -10,11 +10,21 @@ jobs:
       jdk: openjdk16
       arch: amd64
 
-before_script:
+before_install:
   - sudo touch /etc/docker/daemon.json
   - "sudo echo \"{\n\"\tinsecure-registries\": [\"$DOCKER_REGISTRY\"]\n}\" | sudo tee /etc/docker/daemon.json"
   - sudo cat /etc/docker/daemon.json
+
+before_script:
   - docker info
-  - sudo systemctl restart docker
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 script: DOCKER_REGISTRY=$DOCKER_REGISTRY ./dockerscript.sh
