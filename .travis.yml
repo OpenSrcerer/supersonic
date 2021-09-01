@@ -13,6 +13,4 @@ jobs:
 script: ./gradlew shadowJar
 
 after_script:
-  - docker compose build
-  - docker tag supersonic_supersonic:latest ${{ secrets.DOCKER_REGISTRY }}/supersonic
-  - docker push ${{ secrets.DOCKER_REGISTRY }}/supersonic
+  - DOCKER_REGISTRY=$DOCKER_REGISTRY ./dockerscript.sh
