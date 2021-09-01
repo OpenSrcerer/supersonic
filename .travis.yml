@@ -13,7 +13,7 @@ before_install:
   - sudo cat /etc/docker/daemon.json
 
 before_script:
-  - sudo systemctl start docker
+  - sudo systemctl restart docker
   - docker info
 
 before_cache:
