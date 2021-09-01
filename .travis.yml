@@ -3,9 +3,9 @@ language: java
 jobs:
   include:
     - name: "AMD64/16"
-    - os: linux
-    - jdk: openjdk16
-    - arch: amd64
+      os: linux
+      jdk: openjdk16
+      arch: amd64
 
 before_install:
   - sudo touch /etc/docker/daemon.json
