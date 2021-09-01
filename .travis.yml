@@ -10,7 +10,4 @@ jobs:
       jdk: openjdk16
       arch: amd64
 
-script: ./gradlew shadowJar
-
-after_script:
-  - DOCKER_REGISTRY=$DOCKER_REGISTRY ./dockerscript.sh
+script: DOCKER_REGISTRY=$DOCKER_REGISTRY ./dockerscript.sh
