@@ -13,7 +13,8 @@ before_install:
   - sudo cat /etc/docker/daemon.json
 
 before_script:
-  - sudo systemctl restart docker
+  - sudo systemctl restart docker || true
+  - sudo journalctl -xe
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
