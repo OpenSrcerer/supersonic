@@ -12,7 +12,7 @@ jobs:
 
 before_script:
   - sudo touch /etc/docker/daemon.json
-  - "sudo echo \"{\"insecure-registries\": [\"$DOCKER_REGISTRY\"]}\" >> /etc/docker/daemon.json"
+  - "sudo echo \"{\"insecure-registries\": [\"$DOCKER_REGISTRY\"]}\" | sudo tee /etc/docker/daemon.json"
   - sudo cat /etc/docker/daemon.json
   - docker info
 
