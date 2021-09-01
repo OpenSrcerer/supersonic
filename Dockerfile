@@ -9,14 +9,12 @@ COPY . .
 
 RUN ./gradlew shadowJar
 
-RUN ls -R
-
 #
 # Run
 #
 FROM openjdk:16.0.2-jdk
 
-ARG JAR_FILE=./build/libs/*.jar
+ARG JAR_FILE=./build/libs/*-all.jar
 
 WORKDIR /app
 
