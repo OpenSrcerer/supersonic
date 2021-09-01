@@ -13,10 +13,7 @@ before_install:
   - sudo cat /etc/docker/daemon.json
 
 before_script:
-  - sudo /etc/init.d/docker stop
-  - sudo systemctl status docker
-  - sudo dockerd --debug
-  - sudo /etc/init.d/docker start
+  - sudo systemctl docker restart || true
   - docker info
 
 before_cache:
