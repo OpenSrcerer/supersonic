@@ -14,7 +14,7 @@ before_install:
 
 before_script:
   - sudo systemctl restart docker || true
-  - docker info
+  - journalctl -xe
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
