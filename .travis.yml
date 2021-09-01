@@ -1,8 +1,5 @@
 language: java
 
-services:
-  - docker
-
 jobs:
   include:
     - name: "AMD64/16"
@@ -16,6 +13,7 @@ before_install:
   - sudo cat /etc/docker/daemon.json
 
 before_script:
+  - sudo systemctl start docker
   - docker info
 
 before_cache:
