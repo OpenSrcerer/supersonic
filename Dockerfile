@@ -1,3 +1,6 @@
+#
+# Build & Package
+#
 FROM openjdk:16.0.2-jdk as build
 
 WORKDIR /buildapp
@@ -6,6 +9,11 @@ COPY . .
 
 RUN ./gradlew shadowJar
 
+RUN ls -R
+
+#
+# Run
+#
 FROM openjdk:16.0.2-jdk
 
 ARG JAR_FILE=./build/libs/*.jar
