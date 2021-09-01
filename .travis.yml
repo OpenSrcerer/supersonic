@@ -12,8 +12,9 @@ jobs:
 
 before_script:
   - sudo touch /etc/docker/daemon.json
-  - "sudo echo \"{\"insecure-registries\": [\"$DOCKER_REGISTRY\"]}\" | sudo tee /etc/docker/daemon.json"
+  - "sudo echo \"{\n\"\tinsecure-registries\": [\"$DOCKER_REGISTRY\"]\n}\" | sudo tee /etc/docker/daemon.json"
   - sudo cat /etc/docker/daemon.json
   - docker info
+  - sudo systemctl restart docker
 
 script: DOCKER_REGISTRY=$DOCKER_REGISTRY ./dockerscript.sh
