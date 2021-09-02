@@ -10,11 +10,9 @@ jobs:
 before_install:
   - sudo touch /etc/docker/daemon.json
   - 'sudo echo {\"insecure-registries\": [\"$DOCKER_REGISTRY\"]} | sudo tee /etc/docker/daemon.json'
-  - sudo cat /etc/docker/daemon.json
 
 before_script:
   - sudo systemctl restart docker
-  - docker info
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

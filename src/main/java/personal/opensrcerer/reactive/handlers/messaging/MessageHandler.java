@@ -21,7 +21,7 @@ public class MessageHandler implements FluxEventHandler<GuildMessageReceivedEven
         if (p.botMentioned()) {
             p.channel().sendMessageEmbeds(GenericEmbeds.getEmbed())
                     .reference(p.eventMessage())
-                    .setActionRow(Button.primary("OK", "OK"))
+                    .setActionRow(Button.primary("OK", "Okay mate"))
                     .queue();
         }
     }
