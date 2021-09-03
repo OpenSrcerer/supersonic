@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive.handlers;
+package personal.opensrcerer.handlers;
 
 /**
  * Handles events emitted by DiscordFluxes.

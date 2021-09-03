@@ -2,7 +2,7 @@ package personal.opensrcerer.reactive.messageFluxes;
 
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import personal.opensrcerer.reactive.DiscordFlux;
-import personal.opensrcerer.reactive.handlers.components.ButtonClickHandler;
+import personal.opensrcerer.handlers.components.ButtonClickHandler;
 
 public class ButtonClickEventFlux extends DiscordFlux<ButtonClickEvent> {
 

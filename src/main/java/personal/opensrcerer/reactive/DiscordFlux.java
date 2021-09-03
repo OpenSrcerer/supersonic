@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import personal.opensrcerer.launch.SupersonicRuntimeConstants;
-import personal.opensrcerer.listeners.FluxListener;
+import personal.opensrcerer.reactive.listeners.FluxListener;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 

@@ -1,6 +1,8 @@
 package personal.opensrcerer.requests
 
 import okhttp3.HttpUrl
+import personal.opensrcerer.client.cache.SubsonicCache
+import personal.opensrcerer.client.cache.SubsonicConfig
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.concurrent.ThreadLocalRandom
@@ -9,30 +11,34 @@ import kotlin.streams.asSequence
 object RequestFormatter {
     private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
-    fun getUrl(): HttpUrl {
-        val passwordAndSalt = hashMd5("")
-        val e = HttpUrl.Builder()
+    fun getUrl(type: RequestType, guildId: String): HttpUrl {
+        // val passwordAndSalt = hashMd5("DNFWTF4201?!")
+        val config: SubsonicConfig = SubsonicCache.get(guildId)!!
+        return HttpUrl.Builder()
             .scheme("http")
-            .host("")
-            .port(1)
+            .host(config.host)
+            .port(config.port)
             .addPathSegment("rest")
-            .addPathSegment("ping.view")
-            .addQueryParameter("u", "")
-            .addQueryParameter("t", passwordAndSalt.first)
-            .addQueryParameter("s", passwordAndSalt.second)
-            .addQueryParameter("v", "1.15.0")
+            .addPathSegment(type.path)
+            .addQueryParameter("u", config.username)
+            //.addQueryParameter("t", passwordAndSalt.first)
+            //.addQueryParameter("s", passwordAndSalt.second)
+            .addQueryParameter("p", config.password)
+            .addQueryParameter("v", config.version)
             .addQueryParameter("c", "supersonic-bot")
             .build()
-        println(e)
-        return e
     }
 
     private fun hashMd5(password: String): Pair<String, String> {
         val md = MessageDigest.getInstance("MD5")
         val salt = getNextSalt()
         val saltedPassword = "$password$salt"
-        println(saltedPassword)
-        return Pair(BigInteger(1, md.digest(saltedPassword.toByteArray())).toString(16).padStart(32, '0'), salt)
+        return Pair(
+            BigInteger(1, md.digest(
+                saltedPassword.toByteArray())
+            ).toString(16).padStart(32, '0'),
+            salt
+        )
     }
 
     private fun getNextSalt(): String {

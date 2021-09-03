@@ -3,7 +3,7 @@ package personal.opensrcerer.reactive.messageFluxes;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.messaging.TextChannelMessageParser;
 import personal.opensrcerer.reactive.DiscordFlux;
-import personal.opensrcerer.reactive.handlers.messaging.MessageHandler;
+import personal.opensrcerer.handlers.messaging.MessageHandler;
 
 public class GuildMessageReceivedFlux extends DiscordFlux<GuildMessageReceivedEvent> {
 

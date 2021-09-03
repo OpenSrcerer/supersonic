@@ -1,4 +1,4 @@
-package personal.opensrcerer.listeners;
+package personal.opensrcerer.reactive.listeners;
 
 public interface FluxListener {
     static void addListeners(FluxListener... groups) {

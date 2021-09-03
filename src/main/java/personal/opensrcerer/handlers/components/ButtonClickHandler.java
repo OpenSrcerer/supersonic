@@ -1,8 +1,8 @@
-package personal.opensrcerer.reactive.handlers.components;
+package personal.opensrcerer.handlers.components;
 
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import personal.opensrcerer.reactive.handlers.FluxEventHandler;
+import personal.opensrcerer.handlers.FluxEventHandler;
 
 import java.util.ArrayList;
 import java.util.List;

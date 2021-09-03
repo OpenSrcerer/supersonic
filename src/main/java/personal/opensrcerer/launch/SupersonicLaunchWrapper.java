@@ -1,7 +1,7 @@
 package personal.opensrcerer.launch;
 
 import net.dv8tion.jda.api.JDABuilder;
-import personal.opensrcerer.listeners.FluxListener;
+import personal.opensrcerer.reactive.listeners.FluxListener;
 import personal.opensrcerer.reactive.messageFluxes.ButtonClickEventFlux;
 import personal.opensrcerer.reactive.messageFluxes.GuildMessageReceivedFlux;
 
