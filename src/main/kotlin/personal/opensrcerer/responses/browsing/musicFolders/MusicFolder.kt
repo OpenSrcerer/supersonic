@@ -1,6 +1,8 @@
 package personal.opensrcerer.responses.browsing.musicFolders
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+
 data class MusicFolder(
-    val id: Long,
-    val name: String
+    @JacksonXmlProperty(localName = "id") val id: Long,
+    @JacksonXmlProperty(localName = "name") val name: String
 )

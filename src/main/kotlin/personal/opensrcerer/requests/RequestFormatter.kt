@@ -11,7 +11,7 @@ import kotlin.streams.asSequence
 object RequestFormatter {
     private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
-    fun getUrl(type: RequestType, guildId: String): HttpUrl {
+    fun getUrl(type: RequestPath, guildId: String): HttpUrl {
         // val passwordAndSalt = hashMd5("DNFWTF4201?!")
         val config: SubsonicConfig = SubsonicCache.get(guildId)!!
         return HttpUrl.Builder()

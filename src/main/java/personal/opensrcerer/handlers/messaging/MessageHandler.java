@@ -2,13 +2,13 @@ package personal.opensrcerer.handlers.messaging;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.client.SubsonicClient;
-import personal.opensrcerer.messaging.dto.ParsedGuildMessageEvent;
 import personal.opensrcerer.handlers.FluxEventHandler;
-import personal.opensrcerer.requests.RequestType;
-import personal.opensrcerer.responses.SubsonicData;
-import personal.opensrcerer.responses.SubsonicResponse;
+import personal.opensrcerer.messaging.dto.ParsedGuildMessageEvent;
+import personal.opensrcerer.requests.RequestPath;
+import personal.opensrcerer.responses.ResponseWrapper;
 import personal.opensrcerer.responses.browsing.musicFolders.MusicFolders;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class MessageHandler implements FluxEventHandler<GuildMessageReceivedEvent, ParsedGuildMessageEvent> {
@@ -23,11 +23,13 @@ public class MessageHandler implements FluxEventHandler<GuildMessageReceivedEven
     public void handle(ParsedGuildMessageEvent p) {
         if (p.botMentioned()) {
 
-            SubsonicResponse<SubsonicData> response = SubsonicClient.INSTANCE.<MusicFolders>request(
-                    RequestType.PING, p.channel().getGuild().getId()
+            ResponseWrapper<MusicFolders> response = SubsonicClient.INSTANCE.request(
+                    MusicFolders.class, RequestPath.GET_MUSIC_FOLDERS, p.channel().getGuild().getId()
             );
 
-            p.channel().sendMessage().queue();
+            p.channel().sendMessage(
+                    "folders: " + Arrays.toString(response.getParsed().getMusicFolders()) + "\n"
+            ).queue();
         }
     }
 

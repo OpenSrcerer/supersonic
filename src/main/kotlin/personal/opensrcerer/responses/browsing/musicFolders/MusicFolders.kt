@@ -1,22 +1,10 @@
 package personal.opensrcerer.responses.browsing.musicFolders
 
-import personal.opensrcerer.responses.SubsonicData
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+import personal.opensrcerer.responses.SubsonicResponse
 
-data class MusicFolders(
-    val musicFolders: Array<MusicFolder>
-) : SubsonicData {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as MusicFolders
-
-        if (!musicFolders.contentEquals(other.musicFolders)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return musicFolders.contentHashCode()
-    }
+class MusicFolders : SubsonicResponse<MusicFolders>() {
+    @JacksonXmlElementWrapper(localName = "musicFolders")
+    val musicFolders: Array<MusicFolder>? = null
 }

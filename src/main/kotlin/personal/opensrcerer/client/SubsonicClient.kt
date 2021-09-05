@@ -5,9 +5,9 @@ import okhttp3.Request
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import personal.opensrcerer.requests.RequestFormatter
-import personal.opensrcerer.requests.RequestType
-import personal.opensrcerer.responses.SubsonicData
+import personal.opensrcerer.requests.RequestPath
 import personal.opensrcerer.responses.SubsonicResponse
+import personal.opensrcerer.responses.ResponseWrapper
 import java.util.concurrent.TimeUnit
 
 object SubsonicClient {
@@ -22,8 +22,8 @@ object SubsonicClient {
             .build()
     }
 
-    fun <T> request(type: RequestType, guildId: String): SubsonicResponse<T>
-    where T : SubsonicData {
+    fun <T> request(target: Class<T>, type: RequestPath, guildId: String): ResponseWrapper<T>
+    where T : SubsonicResponse<T> {
         val response = client.newCall(
             Request.Builder()
                 .url(RequestFormatter.getUrl(type, guildId))
@@ -31,9 +31,8 @@ object SubsonicClient {
         ).execute()
 
         val body = response.body?.string()!!
-        val status = response.code
 
-        return SubsonicResponse(type.clazz, body, status)
+        return ResponseWrapper(target, body)
     }
 
     fun shutdown() {
