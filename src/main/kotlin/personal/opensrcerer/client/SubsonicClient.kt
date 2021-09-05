@@ -6,6 +6,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import personal.opensrcerer.requests.RequestFormatter
 import personal.opensrcerer.requests.RequestPath
+import personal.opensrcerer.requests.SubsonicRequest
 import personal.opensrcerer.responses.SubsonicResponse
 import personal.opensrcerer.responses.ResponseWrapper
 import java.util.concurrent.TimeUnit
@@ -22,15 +23,16 @@ object SubsonicClient {
             .build()
     }
 
-    fun <T> request(target: Class<T>, type: RequestPath, guildId: String): ResponseWrapper<T>
+    fun <T> request(target: Class<T>, req: SubsonicRequest, guildId: String): ResponseWrapper<T>
     where T : SubsonicResponse<T> {
         val response = client.newCall(
             Request.Builder()
-                .url(RequestFormatter.getUrl(type, guildId))
+                .url(RequestFormatter.getUrl(req, guildId))
                 .build()
         ).execute()
 
         val body = response.body?.string()!!
+        println(body)
 
         return ResponseWrapper(target, body)
     }

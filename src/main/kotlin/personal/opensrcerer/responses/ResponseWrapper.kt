@@ -7,10 +7,10 @@ class ResponseWrapper<T>(
     response: String
 ) where T : SubsonicResponse<T> {
 
-    val parsed: T
+    val data: T
 
     init {
-        this.parsed = xmlMapper.readValue(response, clazz)
+        this.data = xmlMapper.readValue(response, clazz)
     }
 
     private companion object {

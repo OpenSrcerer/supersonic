@@ -1,12 +1,9 @@
 package personal.opensrcerer.requests
 
-import personal.opensrcerer.responses.browsing.musicFolders.MusicFolders
-
 enum class RequestPath(
-    val path: String
+    val value: String
     )
 {
-
     // System
     PING                ("ping"),
 
@@ -39,7 +36,10 @@ enum class RequestPath(
     GET_STARRED2        ("getStarred2"),
 
     // Search
-    SEARCH              ("search"),
     SEARCH2             ("search2"),
-    SEARCH3             ("search3")
+    SEARCH3             ("search3");
+
+    override fun toString(): String {
+        return value
+    }
 }

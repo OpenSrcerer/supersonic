@@ -37,7 +37,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 
     // JDA
-    implementation("net.dv8tion:JDA:4.3.0_310")
+    implementation("net.dv8tion:JDA:4.3.0_323")
 
     // Jackson XML
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.5'

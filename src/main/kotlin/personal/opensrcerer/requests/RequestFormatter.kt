@@ -11,22 +11,28 @@ import kotlin.streams.asSequence
 object RequestFormatter {
     private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
-    fun getUrl(type: RequestPath, guildId: String): HttpUrl {
-        // val passwordAndSalt = hashMd5("DNFWTF4201?!")
+    fun getUrl(req: SubsonicRequest, guildId: String): HttpUrl {
+        // val passwordAndSalt = hashMd5(config.password)
         val config: SubsonicConfig = SubsonicCache.get(guildId)!!
-        return HttpUrl.Builder()
+        val builder = HttpUrl.Builder()
             .scheme("http")
+            .addPathSegment("rest")
+            .addPathSegment(req.path.toString())
+        addConfigParams(builder, config)
+        req.queryParams.forEach{ e -> builder.addQueryParameter(e.key, e.value.toString()) }
+        return builder.build()
+    }
+
+    private fun addConfigParams(builder: HttpUrl.Builder, config: SubsonicConfig) {
+        builder
             .host(config.host)
             .port(config.port)
-            .addPathSegment("rest")
-            .addPathSegment(type.path)
             .addQueryParameter("u", config.username)
             //.addQueryParameter("t", passwordAndSalt.first)
             //.addQueryParameter("s", passwordAndSalt.second)
             .addQueryParameter("p", config.password)
             .addQueryParameter("v", config.version)
             .addQueryParameter("c", "supersonic-bot")
-            .build()
     }
 
     private fun hashMd5(password: String): Pair<String, String> {
