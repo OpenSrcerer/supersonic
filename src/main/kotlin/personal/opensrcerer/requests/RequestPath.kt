@@ -37,7 +37,15 @@ enum class RequestPath(
 
     // Search
     SEARCH2             ("search2"),
-    SEARCH3             ("search3");
+    SEARCH3             ("search3"),
+
+    // Media
+    STREAM              ("stream"),
+    GET_COVER_ART       ("getCoverArt"),
+    GET_LYRICS          ("getLyrics"),
+    STAR                ("star"),
+    UNSTAR              ("unstar"),
+    SCROBBLE            ("scrobble");
 
     override fun toString(): String {
         return value

@@ -2,10 +2,8 @@ package personal.opensrcerer.responses.browsing.musicFolders
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
-import personal.opensrcerer.responses.SubsonicResponse
 
-class MusicFolders : SubsonicResponse<MusicFolders>() {
+class MusicFolders {
     @JacksonXmlElementWrapper
     val musicFolders: Array<MusicFolder>? = null
 

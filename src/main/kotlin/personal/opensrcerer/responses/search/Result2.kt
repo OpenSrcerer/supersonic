@@ -1,16 +1,16 @@
 package personal.opensrcerer.responses.search
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import personal.opensrcerer.responses.SubsonicResponse
 import personal.opensrcerer.responses.entities.Album
 import personal.opensrcerer.responses.entities.Artist
 import personal.opensrcerer.responses.entities.Song
 
-class Result2 : SubsonicResponse<Result2>(), SearchResult {
+class Result2 : SubsonicResponse(), SearchResult {
 
-    @JacksonXmlProperty(localName = "searchResult2")
+    @JsonProperty("searchResult2")
     private val searchResult2 = SearchResult2()
 
     private class SearchResult2 {

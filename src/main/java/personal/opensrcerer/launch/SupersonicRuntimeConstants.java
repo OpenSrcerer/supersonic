@@ -1,5 +1,8 @@
 package personal.opensrcerer.launch;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.api.JDA;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -11,6 +14,12 @@ import java.util.Map;
 public abstract class SupersonicRuntimeConstants {
     protected static JDA JDA;
     protected static Map<String, String> ENVIRONMENT_VARIABLES;
+    protected static AudioPlayerManager AUDIO_MANAGER;
+
+    static {
+        AUDIO_MANAGER = new DefaultAudioPlayerManager();
+        AudioSourceManagers.registerRemoteSources(AUDIO_MANAGER);
+    }
 
     @Nonnull
     @CheckReturnValue

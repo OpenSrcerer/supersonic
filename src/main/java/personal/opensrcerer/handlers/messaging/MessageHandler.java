@@ -4,10 +4,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.client.SubsonicClient;
 import personal.opensrcerer.handlers.FluxEventHandler;
 import personal.opensrcerer.messaging.dto.ParsedGuildMessageEvent;
-import personal.opensrcerer.requests.system.Ping;
-import personal.opensrcerer.responses.ResponseWrapper;
-import personal.opensrcerer.responses.system.Pong;
+import personal.opensrcerer.requests.media.StreamRequest;
 
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class MessageHandler implements FluxEventHandler<GuildMessageReceivedEvent, ParsedGuildMessageEvent> {
@@ -21,13 +20,16 @@ public class MessageHandler implements FluxEventHandler<GuildMessageReceivedEven
     @Override
     public void handle(ParsedGuildMessageEvent p) {
         if (p.botMentioned()) {
-            ResponseWrapper<Pong> response = SubsonicClient.INSTANCE.request(
-                    Pong.class,
-                    new Ping(),
+            var e = SubsonicClient.INSTANCE.stream(
+                    new StreamRequest(
+                            Map.of("id", "2071")
+                    ),
                     p.channel().getGuild().getId()
             );
 
-            p.channel().sendMessage("value: " + response.getData()).queue();
+            e.subscribe(s -> {
+
+            });
         }
     }
 

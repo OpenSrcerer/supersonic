@@ -9,10 +9,9 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.streams.asSequence
 
 object RequestFormatter {
-    private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    private val charPool : List<Char> = ('a'..'z') + ('0'..'9')
 
     fun getUrl(req: SubsonicRequest, guildId: String): HttpUrl {
-        // val passwordAndSalt = hashMd5(config.password)
         val config: SubsonicConfig = SubsonicCache.get(guildId)!!
         val builder = HttpUrl.Builder()
             .scheme("http")
@@ -27,24 +26,34 @@ object RequestFormatter {
         builder
             .host(config.host)
             .port(config.port)
-            .addQueryParameter("u", config.username)
-            //.addQueryParameter("t", passwordAndSalt.first)
-            //.addQueryParameter("s", passwordAndSalt.second)
-            .addQueryParameter("p", config.password)
             .addQueryParameter("v", config.version)
             .addQueryParameter("c", "supersonic-bot")
+        addCredentials(builder, config, true)
+    }
+
+    private fun addCredentials(builder: HttpUrl.Builder, config: SubsonicConfig, legacy: Boolean) {
+        builder.addQueryParameter("u", config.username)
+
+        if (legacy) {
+            builder.addQueryParameter("p", config.password)
+            return
+        }
+
+        val hashSalt = hashMd5(config.password)
+        builder
+            .addQueryParameter("t", hashSalt.first)
+            .addQueryParameter("s", hashSalt.second)
     }
 
     private fun hashMd5(password: String): Pair<String, String> {
         val md = MessageDigest.getInstance("MD5")
         val salt = getNextSalt()
         val saltedPassword = "$password$salt"
-        return Pair(
-            BigInteger(1, md.digest(
-                saltedPassword.toByteArray())
-            ).toString(16).padStart(32, '0'),
-            salt
-        )
+        val hash = BigInteger(1, md.digest(
+            saltedPassword.toByteArray())
+        ).toString(16).padStart(32, '0')
+
+        return Pair(hash, salt)
     }
 
     private fun getNextSalt(): String {

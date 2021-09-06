@@ -1,12 +1,16 @@
 package personal.opensrcerer.responses
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@JacksonXmlRootElement(localName = "subsonic-response")
-@JsonIgnoreProperties(ignoreUnknown = true)
-open class SubsonicResponse<T> {
+abstract class SubsonicResponse {
     val status: String = ""
-    val xmlns: String = ""
     val version: String = ""
+    val xmlns: String = ""
+    val error: SubsonicError? = null
+
+    class SubsonicError @JsonCreator constructor(
+        @JsonProperty("code") val code: Int,
+        @JsonProperty("message") val message: String
+    )
 }
