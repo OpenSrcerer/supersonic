@@ -3,14 +3,13 @@ package personal.opensrcerer.client
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.ResponseBody
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import personal.opensrcerer.requests.RequestFormatter
 import personal.opensrcerer.requests.SubsonicRequest
+import personal.opensrcerer.requests.VoidRequest
 import personal.opensrcerer.requests.media.StreamRequest
 import personal.opensrcerer.responses.SubsonicResponse
-import reactor.core.publisher.ConnectableFlux
 import reactor.core.publisher.Mono
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
@@ -43,7 +42,7 @@ object SubsonicClient {
         return Mono.justOrEmpty(response.body?.byteStream()).share()
     }
 
-    fun request(req: SubsonicRequest, guildId: String): SubsonicResponse {
+    fun request(req: VoidRequest, guildId: String): SubsonicResponse {
         val response = client.newCall(
             Request.Builder()
                 .url(RequestFormatter.getUrl(req, guildId))
@@ -56,7 +55,7 @@ object SubsonicClient {
         return this.parse(SubsonicResponse::class.java, body)
     }
 
-    fun <T> request(target: Class<T>, req: SubsonicRequest, guildId: String): T {
+    fun <T> request(req: SubsonicRequest<T>, guildId: String): T {
         val response = client.newCall(
             Request.Builder()
                 .url(RequestFormatter.getUrl(req, guildId))
@@ -66,7 +65,7 @@ object SubsonicClient {
         val body = response.body?.string()!!
         logger.debug(body)
 
-        return this.parse(target, body)
+        return this.parse(req.getClazz(), body)
     }
 
     fun shutdown() {
