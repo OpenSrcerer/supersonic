@@ -2,14 +2,14 @@ package personal.opensrcerer.handlers.messaging;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.client.SubsonicClient;
-import personal.opensrcerer.handlers.FluxEventHandler;
+import personal.opensrcerer.handlers.Handler;
 import personal.opensrcerer.messaging.dto.ParsedGuildMessageEvent;
 import personal.opensrcerer.requests.browsing.MusicFoldersRequest;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-public class MessageHandler implements FluxEventHandler<GuildMessageReceivedEvent, ParsedGuildMessageEvent> {
+public class MessageHandler implements Handler<GuildMessageReceivedEvent, ParsedGuildMessageEvent> {
 
     public Predicate<GuildMessageReceivedEvent> predicate;
 

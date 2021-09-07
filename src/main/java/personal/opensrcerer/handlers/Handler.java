@@ -8,7 +8,7 @@ import personal.opensrcerer.reactive.DiscordEventEmitter;
  * @param <M> Parsed type of event emitted.
  * @see DiscordEventEmitter
  */
-public interface FluxEventHandler<E, M> {
+public interface Handler<E, M> {
     void handle(M m);
 
     default boolean isValid(E e) {
