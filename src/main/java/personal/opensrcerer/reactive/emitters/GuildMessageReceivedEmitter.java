@@ -1,23 +1,23 @@
-package personal.opensrcerer.reactive.messageFluxes;
+package personal.opensrcerer.reactive.emitters;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.messaging.TextChannelMessageParser;
-import personal.opensrcerer.reactive.DiscordFlux;
+import personal.opensrcerer.reactive.DiscordEventEmitter;
 import personal.opensrcerer.handlers.messaging.MessageHandler;
 
-public class GuildMessageReceivedFlux extends DiscordFlux<GuildMessageReceivedEvent> {
+public class GuildMessageReceivedEmitter extends DiscordEventEmitter<GuildMessageReceivedEvent> {
 
     private final TextChannelMessageParser parser;
     private final MessageHandler handler;
 
-    public GuildMessageReceivedFlux() {
+    public GuildMessageReceivedEmitter() {
         super(GuildMessageReceivedEvent.class);
         this.handler = new MessageHandler(this::handleValid);
         this.parser = new TextChannelMessageParser();
     }
 
     @Override
-    public void listen() {
+    public void emit() {
         super.flux().map(parser::parse).subscribe(handler::handle);
     }
 

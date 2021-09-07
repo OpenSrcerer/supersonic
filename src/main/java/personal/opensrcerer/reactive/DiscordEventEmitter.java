@@ -4,22 +4,20 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import personal.opensrcerer.launch.SupersonicRuntimeConstants;
-import personal.opensrcerer.reactive.listeners.FluxListener;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
 /**
- * Provides an interface for the creation of specialized fluxes that treat
- * different types of Discord events wrapped by JDA.
- * @param <X> Type of event to handle.
+ * Creates fluxes which subscribe to handlers (and effectively emit) Discord Events.
+ * @param <E> Type of event to handle.
  * @see GenericEvent
  */
-public abstract class DiscordFlux<X extends GenericEvent> implements FluxListener {
+public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emitter {
 
-    private final Class<X> type;
-    private final Flux<X> messageFlux;
+    private final Class<E> type;
+    private final Flux<E> messageFlux;
 
-    public DiscordFlux(Class<X> type) {
+    public DiscordEventEmitter(Class<E> type) {
         this.type = type;
         this.messageFlux = Flux.create(emitter -> {
             JDA jda = SupersonicRuntimeConstants.getJDA();
@@ -29,7 +27,7 @@ public abstract class DiscordFlux<X extends GenericEvent> implements FluxListene
         });
     }
 
-    private EventListener getEventListener(FluxSink<X> emitter) {
+    private EventListener getEventListener(FluxSink<E> emitter) {
         return event -> {
             if (type.isInstance(event)) {
                 emitter.next(type.cast(event));
@@ -37,7 +35,7 @@ public abstract class DiscordFlux<X extends GenericEvent> implements FluxListene
         };
     }
 
-    public Flux<X> flux() {
+    public Flux<E> flux() {
         return this.messageFlux;
     }
 }

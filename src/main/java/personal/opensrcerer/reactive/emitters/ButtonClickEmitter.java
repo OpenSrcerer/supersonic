@@ -1,20 +1,20 @@
-package personal.opensrcerer.reactive.messageFluxes;
+package personal.opensrcerer.reactive.emitters;
 
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import personal.opensrcerer.reactive.DiscordFlux;
+import personal.opensrcerer.reactive.DiscordEventEmitter;
 import personal.opensrcerer.handlers.components.ButtonClickHandler;
 
-public class ButtonClickEventFlux extends DiscordFlux<ButtonClickEvent> {
+public class ButtonClickEmitter extends DiscordEventEmitter<ButtonClickEvent> {
 
     private final ButtonClickHandler handler;
 
-    public ButtonClickEventFlux() {
+    public ButtonClickEmitter() {
         super(ButtonClickEvent.class);
         this.handler = new ButtonClickHandler();
     }
 
     @Override
-    public void listen() {
+    public void emit() {
         super.flux().subscribe(handler::handle);
     }
 }

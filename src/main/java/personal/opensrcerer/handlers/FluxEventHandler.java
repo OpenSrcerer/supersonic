@@ -1,13 +1,17 @@
 package personal.opensrcerer.handlers;
 
+import personal.opensrcerer.reactive.DiscordEventEmitter;
+
 /**
  * Handles events emitted by DiscordFluxes.
  * @param <E> Raw JDA event emitted.
  * @param <M> Parsed type of event emitted.
- * @see personal.opensrcerer.reactive.DiscordFlux
+ * @see DiscordEventEmitter
  */
 public interface FluxEventHandler<E, M> {
     void handle(M m);
 
-    boolean isValid(E e);
+    default boolean isValid(E e) {
+        return true;
+    }
 }
