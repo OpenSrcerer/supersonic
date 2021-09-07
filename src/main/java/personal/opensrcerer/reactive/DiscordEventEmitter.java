@@ -29,7 +29,7 @@ public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emi
 
     private EventListener getEventListener(FluxSink<E> emitter) {
         return event -> {
-            if (type.isInstance(event)) {
+            if (type.isInstance(event)) { // This is done to replace the usage of ListenerAdapter (avoiding reflection)
                 emitter.next(type.cast(event));
             }
         };
