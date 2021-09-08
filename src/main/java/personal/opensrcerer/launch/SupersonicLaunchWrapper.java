@@ -1,21 +1,43 @@
 package personal.opensrcerer.launch;
 
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import personal.opensrcerer.reactive.Emitter;
 import personal.opensrcerer.reactive.emitters.ButtonClickEmitter;
-import personal.opensrcerer.reactive.emitters.GuildMessageReceivedEmitter;
+import personal.opensrcerer.reactive.emitters.ReadyEmitter;
+import personal.opensrcerer.reactive.emitters.slashCommands.JoinVoiceEmitter;
+import personal.opensrcerer.reactive.emitters.slashCommands.LeaveVoiceEmitter;
+import personal.opensrcerer.reactive.emitters.slashCommands.MumEmitter;
 
 import javax.security.auth.login.LoginException;
+import java.util.stream.Collectors;
 
 public abstract class SupersonicLaunchWrapper {
     public static void run() throws LoginException {
-        SupersonicRuntimeConstants.ENVIRONMENT_VARIABLES = System.getenv();
-        SupersonicRuntimeConstants.JDA = JDABuilder.createDefault(
-                SupersonicRuntimeConstants.getVariable("DISCORD_TOKEN")
-        ).build();
+        SupersonicConstants.ENVIRONMENT_VARIABLES = System.getenv();
+
+        SupersonicConstants.JDA = JDABuilder.create(
+                SupersonicConstants.getVariable("DISCORD_TOKEN"),
+                SupersonicConstants.cacheFlags
+                        .stream()
+                        .map(CacheFlag::getRequiredIntent)
+                        .collect(Collectors.toSet()))
+                .disableCache(SupersonicConstants.disabledCacheFlags)
+                .enableCache(SupersonicConstants.cacheFlags)
+                .setMemberCachePolicy(MemberCachePolicy.VOICE)
+                .setEnableShutdownHook(true)
+                .setActivity(Activity.of(
+                        Activity.ActivityType.DEFAULT, "w"
+                )).build();
+
         Emitter.addListeners(
-                new GuildMessageReceivedEmitter(),
-                new ButtonClickEmitter()
+                new JoinVoiceEmitter(),
+                new LeaveVoiceEmitter(),
+                new ReadyEmitter(),
+                new ButtonClickEmitter(),
+                new MumEmitter()
         );
     }
 }
