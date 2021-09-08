@@ -3,7 +3,7 @@ package personal.opensrcerer.reactive;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
-import personal.opensrcerer.launch.SupersonicRuntimeConstants;
+import personal.opensrcerer.launch.SupersonicConstants;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
@@ -20,7 +20,7 @@ public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emi
     public DiscordEventEmitter(Class<E> type) {
         this.type = type;
         this.messageFlux = Flux.create(emitter -> {
-            JDA jda = SupersonicRuntimeConstants.getJDA();
+            JDA jda = SupersonicConstants.getJDA();
             EventListener el = getEventListener(emitter);
             jda.addEventListener(el);
             emitter.onDispose(() -> jda.removeEventListener(el));
@@ -37,5 +37,9 @@ public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emi
 
     public Flux<E> flux() {
         return this.messageFlux;
+    }
+
+    public boolean filterValid(final E e) {
+        return true;
     }
 }
