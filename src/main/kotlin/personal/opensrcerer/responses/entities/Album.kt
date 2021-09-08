@@ -1,12 +1,12 @@
 package personal.opensrcerer.responses.entities
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Album(
-    @JacksonXmlProperty(localName = "id") val id: Long,
-    @JacksonXmlProperty(localName = "parent") val parentId: Long?,
-    @JacksonXmlProperty(localName = "title") val title: String?,
-    @JacksonXmlProperty(localName = "artist") val artist: String?,
-    @JacksonXmlProperty(localName = "isDir") val isDir: Boolean?,
-    @JacksonXmlProperty(localName = "coverArt") val coverArt: String?
+    @JsonProperty("id") val id: Long,
+    @JsonProperty("parent") val parentId: Long?,
+    @JsonProperty("title") val title: String?,
+    @JsonProperty("artist") val artist: String?,
+    @JsonProperty("isDir") val isDir: Boolean?,
+    @JsonProperty("coverArt") val coverArt: String?
 )

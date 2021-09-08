@@ -1,10 +1,10 @@
 package personal.opensrcerer.responses.entities
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
 data class Artist (
-    @JacksonXmlProperty(localName = "id") val id: String,
-    @JacksonXmlProperty(localName = "name") val name: String?,
-    @JacksonXmlProperty(localName = "starred") val starred: Date?
+    @JsonProperty("id") val id: String,
+    @JsonProperty("name") val name: String?,
+    @JsonProperty("starred") val starred: Date?
 )
