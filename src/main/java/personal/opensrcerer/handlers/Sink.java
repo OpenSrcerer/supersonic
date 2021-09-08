@@ -8,6 +8,7 @@ import personal.opensrcerer.reactive.DiscordEventEmitter;
  * @param <M> Parsed type of event emitted.
  * @see DiscordEventEmitter
  */
+@FunctionalInterface
 public interface Sink<E, M> {
     void receive(M m);
 
