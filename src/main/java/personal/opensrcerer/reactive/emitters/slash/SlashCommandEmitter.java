@@ -3,6 +3,11 @@ package personal.opensrcerer.reactive.emitters.slash;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
 
+/**
+ * Implementation of DiscordEventEmitter for Discord Slash Commands.
+ * @see SlashCommandEvent
+ * @see DiscordEventEmitter
+ */
 public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashCommandEvent> {
 
     private final String commandName;
@@ -14,6 +19,10 @@ public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashComma
 
     @Override
     public boolean filterValid(final SlashCommandEvent event) {
-        return event.getName().equals(commandName) && event.getMember() != null;
+        boolean commandNameMatches = event.getName().equals(commandName);
+        boolean eventMemberNotNull = event.getMember() != null;
+        boolean guildIsNotNull = event.getGuild() != null;
+
+        return commandNameMatches && eventMemberNotNull && guildIsNotNull;
     }
 }
