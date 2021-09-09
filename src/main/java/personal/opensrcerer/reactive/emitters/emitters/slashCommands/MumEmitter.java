@@ -1,7 +1,7 @@
-package personal.opensrcerer.reactive.emitters.slashCommands;
+package personal.opensrcerer.reactive.emitters.emitters.slashCommands;
 
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.sinks.slash.MumSink;
+import personal.opensrcerer.reactive.sinks.slash.MumSink;
 
 public class MumEmitter extends SlashCommandEmitter {
 

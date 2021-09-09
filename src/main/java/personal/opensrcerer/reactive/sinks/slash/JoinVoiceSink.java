@@ -1,4 +1,4 @@
-package personal.opensrcerer.sinks.slash;
+package personal.opensrcerer.reactive.sinks.slash;
 
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.VoiceChannel;
@@ -33,5 +33,10 @@ public class JoinVoiceSink extends SlashCommandSink {
 
         manager.openAudioConnection(memberChannel);
         event.reply("Joined <#" + memberChannel.getId() + ">").queue();
+    }
+
+    @Override
+    public boolean authorize(SlashCommandEvent event) {
+        return true;
     }
 }

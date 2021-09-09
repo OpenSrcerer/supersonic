@@ -4,8 +4,10 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import net.dv8tion.jda.internal.utils.tuple.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +18,10 @@ import java.util.Map;
 
 public abstract class SupersonicConstants {
     public static final String BOT_ID = "881544361643507713";
+    public static final Pair<Activity.ActivityType, String> activity = Pair.of(
+            Activity.ActivityType.DEFAULT,
+            "abcdefghijklmnopqrstuvxyz"
+    );
     public static final EnumSet<CacheFlag> cacheFlags = EnumSet.of(
             CacheFlag.VOICE_STATE
     );

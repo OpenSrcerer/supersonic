@@ -1,4 +1,4 @@
-package personal.opensrcerer.sinks.system;
+package personal.opensrcerer.reactive.sinks.system;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.RestAction;
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.sinks.Sink;
+import personal.opensrcerer.reactive.sinks.Sink;
 
 import java.util.EnumSet;
 

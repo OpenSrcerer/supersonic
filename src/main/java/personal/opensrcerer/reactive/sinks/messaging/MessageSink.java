@@ -1,9 +1,9 @@
-package personal.opensrcerer.sinks.messaging;
+package personal.opensrcerer.reactive.sinks.messaging;
 
 import personal.opensrcerer.client.SubsonicClient;
 import personal.opensrcerer.messaging.dto.ParsedGuildMessageEvent;
 import personal.opensrcerer.requests.browsing.IndexesRequest;
-import personal.opensrcerer.sinks.Sink;
+import personal.opensrcerer.reactive.sinks.Sink;
 
 import java.util.Arrays;
 

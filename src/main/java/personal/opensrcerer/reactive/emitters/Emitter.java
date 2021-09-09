@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive;
+package personal.opensrcerer.reactive.emitters;
 
 public interface Emitter {
     static void addListeners(Emitter... emitters) {

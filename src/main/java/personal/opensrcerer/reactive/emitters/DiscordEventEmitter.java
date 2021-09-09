@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive;
+package personal.opensrcerer.reactive.emitters;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.GenericEvent;

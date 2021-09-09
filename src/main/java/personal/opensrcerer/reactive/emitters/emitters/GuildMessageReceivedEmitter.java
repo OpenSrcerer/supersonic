@@ -1,11 +1,9 @@
-package personal.opensrcerer.reactive.emitters;
+package personal.opensrcerer.reactive.emitters.emitters;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.messaging.TextChannelMessageParser;
-import personal.opensrcerer.reactive.DiscordEventEmitter;
-import personal.opensrcerer.sinks.messaging.MessageSink;
-
-import javax.annotation.Nonnull;
+import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
+import personal.opensrcerer.reactive.sinks.messaging.MessageSink;
 
 public class GuildMessageReceivedEmitter extends DiscordEventEmitter<GuildMessageReceivedEvent> {
 

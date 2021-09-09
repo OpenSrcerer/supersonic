@@ -1,7 +1,7 @@
-package personal.opensrcerer.reactive.emitters.slashCommands;
+package personal.opensrcerer.reactive.emitters.emitters.slashCommands;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import personal.opensrcerer.reactive.DiscordEventEmitter;
+import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
 
 public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashCommandEvent> {
 
