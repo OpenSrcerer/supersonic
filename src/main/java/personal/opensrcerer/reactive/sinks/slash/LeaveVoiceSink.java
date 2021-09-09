@@ -1,10 +1,16 @@
 package personal.opensrcerer.reactive.sinks.slash;
 
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 public class LeaveVoiceSink extends SlashCommandSink {
+
+    public LeaveVoiceSink(Permission... permissions) {
+        super(permissions);
+    }
+
     @Override
     @SuppressWarnings("ConstantConditions")
     public void receive(SlashCommandEvent event) {
