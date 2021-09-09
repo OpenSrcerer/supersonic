@@ -5,11 +5,11 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import personal.opensrcerer.reactive.emitters.Emitter;
-import personal.opensrcerer.reactive.emitters.emitters.ButtonClickEmitter;
-import personal.opensrcerer.reactive.emitters.emitters.ReadyEmitter;
-import personal.opensrcerer.reactive.emitters.emitters.slashCommands.JoinVoiceEmitter;
-import personal.opensrcerer.reactive.emitters.emitters.slashCommands.LeaveVoiceEmitter;
-import personal.opensrcerer.reactive.emitters.emitters.slashCommands.MumEmitter;
+import personal.opensrcerer.reactive.emitters.components.ButtonClickEmitter;
+import personal.opensrcerer.reactive.emitters.system.ReadyEmitter;
+import personal.opensrcerer.reactive.emitters.slash.JoinVoiceEmitter;
+import personal.opensrcerer.reactive.emitters.slash.LeaveVoiceEmitter;
+import personal.opensrcerer.reactive.emitters.slash.MumEmitter;
 
 import javax.security.auth.login.LoginException;
 import java.util.stream.Collectors;

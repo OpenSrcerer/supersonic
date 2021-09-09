@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive.emitters.emitters;
+package personal.opensrcerer.reactive.emitters.messaging;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import personal.opensrcerer.messaging.TextChannelMessageParser;

@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive.emitters.emitters.slashCommands;
+package personal.opensrcerer.reactive.emitters.slash;
 
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.reactive.sinks.slash.LeaveVoiceSink;
