@@ -8,8 +8,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
 /**
- * Creates fluxes which subscribe to handlers (and effectively emit) Discord Events.
- * @param <E> Type of event to handle.
+ * An implementation of Emitter for Discord Events.
+ * @param <E> Type of JDA event to handle.
  * @see GenericEvent
  */
 public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emitter {
@@ -20,8 +20,8 @@ public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emi
     public DiscordEventEmitter(Class<E> type) {
         this.type = type;
         this.messageFlux = Flux.create(emitter -> {
-            JDA jda = SupersonicConstants.getJDA();
             EventListener el = getEventListener(emitter);
+            JDA jda = SupersonicConstants.getJDA();
             jda.addEventListener(el);
             emitter.onDispose(() -> jda.removeEventListener(el));
         });
