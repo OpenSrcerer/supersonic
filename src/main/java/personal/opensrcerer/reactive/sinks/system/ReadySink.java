@@ -3,6 +3,7 @@ package personal.opensrcerer.reactive.sinks.system;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.RestAction;
 import personal.opensrcerer.config.SlashCommand;
@@ -39,11 +40,15 @@ public class ReadySink implements Sink<ReadyEvent> {
     }
 
     private static RestAction<Command> getAction(Guild guild, SlashCommand command) {
-        return guild.upsertCommand(
-                new CommandData(
-                        command.getName(),
-                        command.getDescription()
-                )
+        CommandData data = new CommandData(
+                command.getName(),
+                command.getDescription()
         );
+
+        if (command.getParameters() != null) {
+            command.getParameters().forEach((name, td) -> data.addOption(td.getLeft(), name, td.getRight(), true));
+        }
+
+        return guild.upsertCommand(data);
     }
 }

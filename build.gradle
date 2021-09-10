@@ -54,6 +54,9 @@ dependencies {
 
     // Lavaplayer
     implementation 'com.sedmelluq:lavaplayer:1.3.78'
+
+    // Apache-Commons
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 ext {
@@ -68,14 +71,14 @@ task runsupersonic(type: Exec, dependsOn: [compileKotlin, compileJava, processRe
     group = "Execution"
     description = "Run the supersonic bot"
 
-    Properties properties = new Properties()
+    /*Properties properties = new Properties()
     def variables = project.rootProject.file(".env")
     if (variables.exists()) {
         properties.load(variables.newDataInputStream())
     } else {
         throw new Exception("Missing .env file in root project dir")
     }
-    environment "DISCORD_TOKEN", properties.getProperty('DISCORD_TOKEN')
+    environment "DISCORD_TOKEN", properties.getProperty('DISCORD_TOKEN')*/
 
     commandLine "java", "-classpath", sourceSets.main.runtimeClasspath.getAsPath(), javaMainClass
 }

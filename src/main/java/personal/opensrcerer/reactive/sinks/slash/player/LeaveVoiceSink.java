@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
+import personal.opensrcerer.audio.MusicPlayer;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 
 public class LeaveVoiceSink extends SlashCommandSink {
@@ -30,6 +31,7 @@ public class LeaveVoiceSink extends SlashCommandSink {
             return;
         }
 
+        MusicPlayer.MUSIC_PLAYER.stop(event.getGuild());
         manager.closeAudioConnection();
         event.reply("Bye bye!").queue();
     }

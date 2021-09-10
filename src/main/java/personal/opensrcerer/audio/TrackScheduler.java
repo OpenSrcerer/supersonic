@@ -37,6 +37,14 @@ public class TrackScheduler extends AudioEventAdapter {
         }
     }
 
+    public void pause() {
+        player.setPaused(true);
+    }
+
+    public void unpause() {
+        player.setPaused(false);
+    }
+
     /**
      * Start the next track, stopping the current one if it is playing.
      */
@@ -52,5 +60,14 @@ public class TrackScheduler extends AudioEventAdapter {
         if (endReason.mayStartNext) {
             nextTrack();
         }
+    }
+
+    public void clear() {
+        queue.clear();
+    }
+
+    public void stop() {
+        this.clear();
+        player.destroy();
     }
 }

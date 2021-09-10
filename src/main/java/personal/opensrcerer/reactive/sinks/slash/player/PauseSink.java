@@ -5,15 +5,14 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import personal.opensrcerer.audio.MusicPlayer;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 
-public class SkipSink extends SlashCommandSink {
-
-    public SkipSink(Permission... permissions) {
+public class PauseSink extends SlashCommandSink {
+    public PauseSink(Permission... permissions) {
         super(permissions);
     }
 
     @Override
     public void receive(SlashCommandEvent event) {
-        MusicPlayer.MUSIC_PLAYER.skipTrack(event.getGuild());
-        event.reply("Skipped current track!").queue();
+        MusicPlayer.MUSIC_PLAYER.pause(event.getGuild());
+        event.reply("Player paused!").queue();
     }
 }
