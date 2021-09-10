@@ -1,33 +1,60 @@
 package personal.opensrcerer.responses.browsing
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import personal.opensrcerer.responses.SubsonicResponse
 import personal.opensrcerer.responses.entities.Artist
-import personal.opensrcerer.responses.entities.Child
+import personal.opensrcerer.responses.entities.Song
 
 class Indexes : SubsonicResponse() {
 
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    val child: Array<Child>? = null
-
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    val shortcut: Array<Shortcut>? = null
-
     @JacksonXmlElementWrapper
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    val index: Set<Index>? = null
+    private val indexes: IndexesData? = null
+
+    data class IndexesData @JsonCreator constructor(
+        @JsonProperty("lastModified")
+        private val lastModified: String?,
+
+        @JsonProperty("ignoredArticles")
+        private val ignoredArticles: String?,
+
+        @JsonProperty("child")
+        @JacksonXmlElementWrapper(useWrapping = false)
+        val children: Array<Song>? = null,
+
+        @JsonProperty("shortcut")
+        @JacksonXmlElementWrapper(useWrapping = false)
+        val shortcuts: Array<Shortcut>? = null,
+
+        @JsonProperty("index")
+        @JacksonXmlElementWrapper(useWrapping = false)
+        val indexes: Set<Index>? = null
+    )
 
     data class Shortcut(
         val id: Long,
         val name: String
     )
 
-    data class Index(
+    data class Index @JsonCreator constructor(
+        @JsonProperty("name")
         val name: String,
-        @JacksonXmlElementWrapper(localName = "artist")
-        val index: Array<Artist>
+
+        @JsonProperty("artist")
+        @JacksonXmlElementWrapper(useWrapping = false)
+        val artists: Array<Artist>?
     )
+
+    fun getChildren(): Array<Song>? {
+        return this.indexes?.children
+    }
+
+    fun getShortcuts(): Array<Shortcut>? {
+        return this.indexes?.shortcuts
+    }
+
+    fun getIndex(): Set<Index>? {
+        return this.indexes?.indexes
+    }
 }

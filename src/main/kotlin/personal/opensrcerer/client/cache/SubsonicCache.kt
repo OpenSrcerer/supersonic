@@ -5,15 +5,12 @@ object SubsonicCache {
 
     init {
         cacheMap = HashMap()
-        cacheMap.put(
-            "824772718800666645",
-            SubsonicConfig(
-                "",
-                ,
-                "",
-                "?!",
-                "1.15.0"
-            )
+        cacheMap["824772718800666645"] = SubsonicConfig(
+            "bonkersmusic.onthewifi.com",
+            4040,
+            "Bonkers",
+            "DNFWTF4201?!",
+            "1.15.0"
         )
     }
 
