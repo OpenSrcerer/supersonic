@@ -7,20 +7,12 @@ import personal.opensrcerer.reactive.sinks.slash.player.LeaveVoiceSink;
 
 public class LeaveVoiceEmitter extends SlashCommandEmitter {
 
-    private final LeaveVoiceSink sink;
-
     public LeaveVoiceEmitter() {
-        super(SlashCommand.LEAVE.getName());
-        this.sink = new LeaveVoiceSink(
-                Permission.MESSAGE_WRITE
+        super(
+                SlashCommand.LEAVE.getName(),
+                new LeaveVoiceSink(
+                        Permission.MESSAGE_WRITE
+                )
         );
-    }
-
-    @Override
-    public void emit() {
-        super.flux()
-                .filter(super::filterValid)
-                .filter(sink::authorize)
-                .subscribe(sink::receive);
     }
 }

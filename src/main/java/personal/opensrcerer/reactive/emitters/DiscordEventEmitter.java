@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import personal.opensrcerer.launch.SupersonicConstants;
+import personal.opensrcerer.reactive.sinks.Sink;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
@@ -17,11 +18,13 @@ import reactor.core.publisher.FluxSink;
 public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emitter {
 
     private final Class<E> type;
-    private final Flux<E> messageFlux;
+    private final Flux<E> flux;
+    private final Sink<E> sink;
 
-    public DiscordEventEmitter(Class<E> type) {
+    public DiscordEventEmitter(Class<E> type, Sink<E> sink) {
         this.type = type;
-        this.messageFlux = Flux.create(emitter -> {
+        this.sink = sink;
+        this.flux = Flux.create(emitter -> {
             EventListener el = getEventListener(emitter);
             JDA jda = SupersonicConstants.getJDA();
             jda.addEventListener(el);
@@ -38,8 +41,17 @@ public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emi
         };
     }
 
+    @Override
+    public void emit() {
+        flux.subscribe(sink::receive);
+    }
+
     public Flux<E> flux() {
-        return this.messageFlux;
+        return this.flux;
+    }
+
+    public Sink<E> sink() {
+        return this.sink;
     }
 
     public boolean filterValid(final E e) {

@@ -6,15 +6,10 @@ import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
 
 public class ReadyEmitter extends DiscordEventEmitter<ReadyEvent> {
 
-    private final ReadySink sink;
-
     public ReadyEmitter() {
-        super(ReadyEvent.class);
-        this.sink = new ReadySink();
-    }
-
-    @Override
-    public void emit() {
-        super.flux().subscribe(sink::receive);
+        super(
+                ReadyEvent.class,
+                new ReadySink()
+        );
     }
 }

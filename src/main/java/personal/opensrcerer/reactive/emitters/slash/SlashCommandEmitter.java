@@ -2,6 +2,7 @@ package personal.opensrcerer.reactive.emitters.slash;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
+import personal.opensrcerer.reactive.sinks.AuthorizableSink;
 
 /**
  * Implementation of DiscordEventEmitter for Discord Slash Commands.
@@ -12,9 +13,17 @@ public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashComma
 
     private final String commandName;
 
-    public SlashCommandEmitter(String commandName) {
-        super(SlashCommandEvent.class);
+    public SlashCommandEmitter(String commandName, AuthorizableSink<SlashCommandEvent> sink) {
+        super(SlashCommandEvent.class, sink);
         this.commandName = commandName;
+    }
+
+    @Override
+    public void emit() {
+        super.flux()
+                .filter(super::filterValid)
+                .filter(sink()::authorize)
+                .subscribe(sink()::receive);
     }
 
     @Override
@@ -24,5 +33,10 @@ public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashComma
         boolean guildIsNotNull = event.getGuild() != null;
 
         return commandNameMatches && eventMemberNotNull && guildIsNotNull;
+    }
+
+    @Override
+    public AuthorizableSink<SlashCommandEvent> sink() {
+        return (AuthorizableSink<SlashCommandEvent>) super.sink();
     }
 }
