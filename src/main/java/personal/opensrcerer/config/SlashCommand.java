@@ -4,6 +4,7 @@ public enum SlashCommand {
 
     MUM("areyoumymum", "Answers the most important question in one's life."),
     JOIN("join", "Join a voice channel."),
+    SKIP("skip", "Skip the song that is currently playing."),
     LEAVE("leave", "Leave the voice channel, if currently in one.");
 
     private final String name;
