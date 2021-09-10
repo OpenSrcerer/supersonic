@@ -21,7 +21,7 @@ public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashComma
     @Override
     public void emit() {
         super.flux()
-                .filter(super::filterValid)
+                .filter(this::filterValid)
                 .filter(sink()::authorize)
                 .subscribe(sink()::receive);
     }
