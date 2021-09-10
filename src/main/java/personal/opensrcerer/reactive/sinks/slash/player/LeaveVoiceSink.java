@@ -1,9 +1,10 @@
-package personal.opensrcerer.reactive.sinks.slash;
+package personal.opensrcerer.reactive.sinks.slash.player;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
+import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 
 public class LeaveVoiceSink extends SlashCommandSink {
 
