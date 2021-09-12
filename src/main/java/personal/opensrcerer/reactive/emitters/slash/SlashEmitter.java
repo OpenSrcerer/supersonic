@@ -9,11 +9,11 @@ import personal.opensrcerer.reactive.sinks.AuthorizableSink;
  * @see SlashCommandEvent
  * @see DiscordEmitter
  */
-public abstract class SlashCommandEmitter extends DiscordEmitter<SlashCommandEvent> {
+public abstract class SlashEmitter extends DiscordEmitter<SlashCommandEvent> {
 
     private final String commandName;
 
-    public SlashCommandEmitter(String commandName, AuthorizableSink<SlashCommandEvent> sink) {
+    public SlashEmitter(String commandName, AuthorizableSink<SlashCommandEvent> sink) {
         super(SlashCommandEvent.class, sink);
         this.commandName = commandName;
     }
