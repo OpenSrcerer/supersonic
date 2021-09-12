@@ -15,13 +15,13 @@ import reactor.core.publisher.FluxSink;
  * @param <E> Type of JDA event to handle.
  * @see GenericEvent
  */
-public abstract class DiscordEventEmitter<E extends GenericEvent> implements Emitter {
+public abstract class DiscordEmitter<E extends GenericEvent> implements Emitter {
 
     private final Class<E> type;
     private final Flux<E> flux;
     private final Sink<E> sink;
 
-    public DiscordEventEmitter(Class<E> type, Sink<E> sink) {
+    public DiscordEmitter(Class<E> type, Sink<E> sink) {
         this.type = type;
         this.sink = sink;
         this.flux = Flux.create(emitter -> {

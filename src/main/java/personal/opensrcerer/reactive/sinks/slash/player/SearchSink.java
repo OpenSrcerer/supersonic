@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.Map;
 
 public class SearchSink extends SlashCommandSink {
-
     public SearchSink(Permission... permissions) {
         super(permissions);
     }
