@@ -1,12 +1,11 @@
 package personal.opensrcerer.reactive.sinks.system;
 
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.interactions.commands.Command;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.RestAction;
 import personal.opensrcerer.config.SlashCommand;
+import personal.opensrcerer.launch.SupersonicConstants;
 import personal.opensrcerer.reactive.sinks.Sink;
 
 import java.util.EnumSet;
@@ -20,26 +19,19 @@ public class ReadySink implements Sink<ReadyEvent> {
             return;
         }
 
-        Guild guild = readyEvent.getJDA()
-                .getGuildById("824772718800666645");
-
         RestAction<?> action = null;
 
-        if (guild != null) {
-            for (SlashCommand command : commands) {
-                if (action == null) {
-                    action = getAction(guild, command);
-                }
-                action = action.and(getAction(guild, command));
+        for (SlashCommand command : commands) {
+            if (action == null) {
+                action = getAction(command);
             }
-
-            if (action != null) {
-                action.queue();
-            }
+            action = action.and(getAction(command));
         }
+
+        action.queue();
     }
 
-    private static RestAction<Command> getAction(Guild guild, SlashCommand command) {
+    private static RestAction<Command> getAction(SlashCommand command) {
         CommandData data = new CommandData(
                 command.getName(),
                 command.getDescription()
@@ -49,6 +41,6 @@ public class ReadySink implements Sink<ReadyEvent> {
             command.getParameters().forEach((name, td) -> data.addOption(td.getLeft(), name, td.getRight(), true));
         }
 
-        return guild.upsertCommand(data);
+        return SupersonicConstants.getJDA().upsertCommand(data);
     }
 }

@@ -1,6 +1,8 @@
 package personal.opensrcerer.reactive.sinks;
 
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.events.GenericEvent;
+import personal.opensrcerer.reactive.emitters.DiscordEmitter;
 
 import java.util.EnumSet;
 
@@ -9,9 +11,9 @@ import java.util.EnumSet;
  * before sending back a reply.
  * @param <E> Type of event to receive.
  * @see Sink
- * @see personal.opensrcerer.reactive.emitters.DiscordEventEmitter
+ * @see DiscordEmitter
  */
-public abstract class AuthorizableSink<E> implements Sink<E> {
+public abstract class AuthorizableSink<E extends GenericEvent> implements Sink<E> {
     private final EnumSet<Permission> requiredPermissions;
 
     public AuthorizableSink(Permission[] permissions) {

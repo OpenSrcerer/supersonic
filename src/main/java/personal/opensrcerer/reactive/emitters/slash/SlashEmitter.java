@@ -1,19 +1,19 @@
 package personal.opensrcerer.reactive.emitters.slash;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
+import personal.opensrcerer.reactive.emitters.DiscordEmitter;
 import personal.opensrcerer.reactive.sinks.AuthorizableSink;
 
 /**
  * Implementation of DiscordEventEmitter for Discord Slash Commands.
  * @see SlashCommandEvent
- * @see DiscordEventEmitter
+ * @see DiscordEmitter
  */
-public abstract class SlashCommandEmitter extends DiscordEventEmitter<SlashCommandEvent> {
+public abstract class SlashEmitter extends DiscordEmitter<SlashCommandEvent> {
 
     private final String commandName;
 
-    public SlashCommandEmitter(String commandName, AuthorizableSink<SlashCommandEvent> sink) {
+    public SlashEmitter(String commandName, AuthorizableSink<SlashCommandEvent> sink) {
         super(SlashCommandEvent.class, sink);
         this.commandName = commandName;
     }

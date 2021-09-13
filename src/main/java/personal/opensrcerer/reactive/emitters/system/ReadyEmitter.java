@@ -2,9 +2,9 @@ package personal.opensrcerer.reactive.emitters.system;
 
 import net.dv8tion.jda.api.events.ReadyEvent;
 import personal.opensrcerer.reactive.sinks.system.ReadySink;
-import personal.opensrcerer.reactive.emitters.DiscordEventEmitter;
+import personal.opensrcerer.reactive.emitters.DiscordEmitter;
 
-public class ReadyEmitter extends DiscordEventEmitter<ReadyEvent> {
+public class ReadyEmitter extends DiscordEmitter<ReadyEvent> {
 
     public ReadyEmitter() {
         super(

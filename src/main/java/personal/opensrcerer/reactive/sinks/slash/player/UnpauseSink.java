@@ -6,6 +6,7 @@ import personal.opensrcerer.audio.MusicPlayer;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 
 public class UnpauseSink extends SlashCommandSink {
+
     public UnpauseSink(Permission... permissions) {
         super(permissions);
     }
@@ -13,6 +14,6 @@ public class UnpauseSink extends SlashCommandSink {
     @Override
     public void receive(SlashCommandEvent event) {
         MusicPlayer.MUSIC_PLAYER.unpause(event.getGuild());
-        event.reply("Player paused!").queue();
+        event.reply("Player unpaused!").queue();
     }
 }

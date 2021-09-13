@@ -3,6 +3,7 @@ package personal.opensrcerer.reactive.sinks.slash.player;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.managers.AudioManager;
 import personal.opensrcerer.audio.MusicPlayer;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 import personal.opensrcerer.requests.RequestFormatter;
@@ -19,6 +20,7 @@ public class PlaySink extends SlashCommandSink {
     @Override
     @SuppressWarnings("ConstantConditions")
     public void receive(SlashCommandEvent event) {
+        AudioManager manager = event.getGuild().getAudioManager();
         OptionMapping o = event.getOption("id");
 
         if (o == null) {
@@ -30,7 +32,10 @@ public class PlaySink extends SlashCommandSink {
                 event.getTextChannel(),
                 RequestFormatter.INSTANCE.getUrl(
                         new StreamRequest(
-                                Map.of("id", o.getAsString())
+                                Map.of(
+                                        "id", o.getAsString(),
+                                        "maxBitRate", manager.getConnectedChannel().getBitrate() / 1000
+                                )
                         ),
                         event.getGuild().getId()
                 ).toString()

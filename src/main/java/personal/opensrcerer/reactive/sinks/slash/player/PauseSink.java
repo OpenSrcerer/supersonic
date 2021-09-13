@@ -6,6 +6,7 @@ import personal.opensrcerer.audio.MusicPlayer;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 
 public class PauseSink extends SlashCommandSink {
+
     public PauseSink(Permission... permissions) {
         super(permissions);
     }
