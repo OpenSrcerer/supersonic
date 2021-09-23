@@ -16,15 +16,15 @@ public interface Sink<E extends GenericEvent> {
 
     void onEvent(E e);
 
+    default void onError(E e, Throwable t) {
+        lgr.error("Unhandled exception:", t);
+    }
+
     default void receive(E e) {
         try {
             onEvent(e);
         } catch (Exception ex) {
             onError(e, ex);
         }
-    }
-
-    default void onError(E e, Throwable t) {
-        lgr.error("Unhandled exception:", t);
     }
 }

@@ -7,11 +7,11 @@ import personal.opensrcerer.responses.entities.Song
 
 sealed interface SearchResult {
     @Nullable
+    fun getSongs() : Array<Song>?
+
+    @Nullable
     fun getArtists() : Array<Artist>?
 
     @Nullable
     fun getAlbums() : Array<Album>?
-
-    @Nullable
-    fun getSongs() : Array<Song>?
 }

@@ -1,9 +1,9 @@
-package personal.opensrcerer.messaging.embeds;
+package personal.opensrcerer.messaging;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
-public abstract class GenericEmbeds {
+public abstract class EmbedTemplates {
     public static MessageEmbed getEmbed() {
         return new EmbedBuilder()
                 .setTitle("Why are you mentioning me?")

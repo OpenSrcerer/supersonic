@@ -28,4 +28,11 @@ public abstract class SlashCommandSink extends AuthorizableSink<SlashCommandEven
         event.reply(builder.toString()).queue();
         return false;
     }
+
+    @Override
+    public void onError(SlashCommandEvent slashCommandEvent, Throwable t) {
+        slashCommandEvent
+                .reply("Uh oh! Some error occurred.\nReport this error with this message: " + t.getMessage())
+                .queue();
+    }
 }

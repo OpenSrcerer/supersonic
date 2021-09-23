@@ -38,7 +38,7 @@ public class SearchSink extends SlashCommandSink {
                 event.getGuild().getId()
         );
 
-        if (abc.getSongs().length == 0) {
+        if (abc.getSongs() == null || abc.getSongs().length == 0) {
             event.reply("No results!").queue();
             return;
         }
