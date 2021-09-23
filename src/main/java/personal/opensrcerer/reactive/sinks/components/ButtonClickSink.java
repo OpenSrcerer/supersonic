@@ -5,6 +5,6 @@ import personal.opensrcerer.reactive.sinks.Sink;
 
 public class ButtonClickSink implements Sink<ButtonClickEvent> {
     @Override
-    public void receive(ButtonClickEvent p) {
+    public void onEvent(ButtonClickEvent p) {
     }
 }

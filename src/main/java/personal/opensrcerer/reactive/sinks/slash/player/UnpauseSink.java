@@ -12,7 +12,7 @@ public class UnpauseSink extends SlashCommandSink {
     }
 
     @Override
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         MusicPlayer.MUSIC_PLAYER.unpause(event.getGuild());
         event.reply("Player unpaused!").queue();
     }

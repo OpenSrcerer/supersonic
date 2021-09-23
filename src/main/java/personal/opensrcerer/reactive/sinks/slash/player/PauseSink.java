@@ -12,7 +12,7 @@ public class PauseSink extends SlashCommandSink {
     }
 
     @Override
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         MusicPlayer.MUSIC_PLAYER.pause(event.getGuild());
         event.reply("Player paused!").queue();
     }

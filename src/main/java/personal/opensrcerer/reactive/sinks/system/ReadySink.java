@@ -12,7 +12,7 @@ import java.util.EnumSet;
 
 public class ReadySink implements Sink<ReadyEvent> {
     @Override
-    public void receive(ReadyEvent readyEvent) {
+    public void onEvent(ReadyEvent readyEvent) {
         EnumSet<SlashCommand> commands = EnumSet.allOf(SlashCommand.class);
 
         if (commands.isEmpty()) {

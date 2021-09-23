@@ -15,7 +15,7 @@ public class JoinVoiceSink extends SlashCommandSink {
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         GuildVoiceState state = event.getMember().getVoiceState();
         AudioManager manager = event.getGuild().getAudioManager();
         boolean botConnected = manager.isConnected();

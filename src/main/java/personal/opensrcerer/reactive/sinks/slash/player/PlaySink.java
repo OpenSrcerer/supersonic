@@ -19,7 +19,7 @@ public class PlaySink extends SlashCommandSink {
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         AudioManager manager = event.getGuild().getAudioManager();
         OptionMapping o = event.getOption("id");
 

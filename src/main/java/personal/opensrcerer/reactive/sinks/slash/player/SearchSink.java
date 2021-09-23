@@ -20,7 +20,7 @@ public class SearchSink extends SlashCommandSink {
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         OptionMapping o = event.getOption("query");
 
         if (o == null) {

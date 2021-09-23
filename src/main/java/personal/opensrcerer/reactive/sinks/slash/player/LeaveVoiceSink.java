@@ -15,7 +15,7 @@ public class LeaveVoiceSink extends SlashCommandSink {
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         AudioManager manager = event.getGuild().getAudioManager();
         GuildVoiceState state = event.getMember().getVoiceState();
         boolean botConnected = manager.isConnected();

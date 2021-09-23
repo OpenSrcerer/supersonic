@@ -12,7 +12,7 @@ public class SkipSink extends SlashCommandSink {
     }
 
     @Override
-    public void receive(SlashCommandEvent event) {
+    public void onEvent(SlashCommandEvent event) {
         MusicPlayer.MUSIC_PLAYER.skipTrack(event.getGuild());
         event.reply("Skipped current track!").queue();
     }

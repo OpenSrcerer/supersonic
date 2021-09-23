@@ -1,6 +1,8 @@
 package personal.opensrcerer.reactive.sinks;
 
 import net.dv8tion.jda.api.events.GenericEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import personal.opensrcerer.reactive.emitters.DiscordEmitter;
 
 /**
@@ -10,5 +12,19 @@ import personal.opensrcerer.reactive.emitters.DiscordEmitter;
  */
 @FunctionalInterface
 public interface Sink<E extends GenericEvent> {
-    void receive(E e);
+    Logger lgr = LoggerFactory.getLogger(Sink.class);
+
+    void onEvent(E e);
+
+    default void receive(E e) {
+        try {
+            onEvent(e);
+        } catch (Exception ex) {
+            onError(e, ex);
+        }
+    }
+
+    default void onError(E e, Throwable t) {
+        lgr.error("Unhandled exception:", t);
+    }
 }
