@@ -1,5 +1,6 @@
 package personal.opensrcerer.messaging.pagination.search.entities;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import personal.opensrcerer.messaging.pagination.PaginatedEmbedImpl;
 
@@ -12,5 +13,9 @@ public abstract class SearchResult extends PaginatedEmbedImpl {
     public SearchResult(List<MessageEmbed> results, SearchResultType type) {
         super(results);
         this.type = type;
+    }
+
+    public SearchResultType getType() {
+        return type;
     }
 }

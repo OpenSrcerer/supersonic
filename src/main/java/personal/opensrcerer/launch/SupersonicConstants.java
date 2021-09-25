@@ -31,6 +31,7 @@ public abstract class SupersonicConstants {
             CacheFlag.CLIENT_STATUS,
             CacheFlag.ONLINE_STATUS
     );
+    public static final int DEFAULT_PAGE_SIZE = 8;
 
     protected static JDA JDA;
     protected static Map<String, String> ENVIRONMENT_VARIABLES;
