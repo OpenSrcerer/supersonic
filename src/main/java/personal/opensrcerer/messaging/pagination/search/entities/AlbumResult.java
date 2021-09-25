@@ -17,7 +17,7 @@ public class AlbumResult extends SearchResult {
 
         for (Album album : albums) {
             builder.addField(album.getTitle(), album.getArtist(), false);
-        }
+        } // test
 
         return builder.build();
     }
