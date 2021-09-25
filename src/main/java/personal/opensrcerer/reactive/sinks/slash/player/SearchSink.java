@@ -5,8 +5,13 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.apache.commons.lang3.StringUtils;
 import personal.opensrcerer.client.SubsonicClient;
+import personal.opensrcerer.messaging.pagination.search.SearchEmbed;
+import personal.opensrcerer.messaging.pagination.search.entities.AlbumResult;
+import personal.opensrcerer.messaging.pagination.search.entities.ArtistResult;
+import personal.opensrcerer.messaging.pagination.search.entities.SearchResultType;
+import personal.opensrcerer.messaging.pagination.search.entities.SongResult;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
-import personal.opensrcerer.requests.search.Search2;
+import personal.opensrcerer.requests.search.Search3;
 import personal.opensrcerer.responses.entities.Song;
 
 import java.util.Arrays;
@@ -29,7 +34,7 @@ public class SearchSink extends SlashCommandSink {
         }
 
         var abc = SubsonicClient.INSTANCE.request(
-                new Search2(
+                new Search3(
                         Map.of(
                                 "query", o.getAsString(),
                                 "songCount", "10"
@@ -38,25 +43,19 @@ public class SearchSink extends SlashCommandSink {
                 event.getGuild().getId()
         );
 
-        if (abc.getSongs() == null || abc.getSongs().length == 0) {
+        if (abc.isEmpty()) {
             event.reply("No results!").queue();
             return;
         }
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("```css\n");
-        builder.append(String.format("%-10s%-25s%-20s%n%n", "ID", "TITLE", "ALBUM"));
-        Arrays.stream(abc.getSongs())
-                .sorted(Comparator.comparing(Song::getTitle))
-                .forEachOrdered(e -> builder.append(
-                        String.format(
-                                "%-10s%-25s%-20s%n",
-                                e.getId(),
-                                StringUtils.abbreviate(e.getTitle(), 22),
-                                StringUtils.abbreviate(e.getAlbum(), 17)
-                        )
-                ));
-        builder.append("```");
-        event.reply(builder.toString()).queue();
+        SearchEmbed embed = new SearchEmbed(
+                new SongResult(abc.getSongs()),
+                new AlbumResult(abc.getAlbums()),
+                new ArtistResult(abc.getArtists())
+        );
+
+        event.replyEmbeds(
+                embed.getResultByType(SearchResultType.SONG).current()
+        ).queue();
     }
 }
