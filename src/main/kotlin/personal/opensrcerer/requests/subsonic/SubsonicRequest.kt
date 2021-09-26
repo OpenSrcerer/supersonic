@@ -1,5 +1,6 @@
-package personal.opensrcerer.requests
+package personal.opensrcerer.requests.subsonic
 
+import personal.opensrcerer.requests.RequestPath
 import java.io.Serializable
 
 abstract class SubsonicRequest<out T> {
@@ -9,5 +10,4 @@ abstract class SubsonicRequest<out T> {
     open val queryParams : Map<String, Serializable> = emptyMap()
 
     abstract fun getClazz() : Class<out T>
-
 }

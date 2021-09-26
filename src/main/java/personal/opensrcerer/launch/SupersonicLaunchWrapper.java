@@ -4,10 +4,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import personal.opensrcerer.reactive.emitters.Emitter;
-import personal.opensrcerer.reactive.emitters.slash.player.*;
 import personal.opensrcerer.reactive.emitters.system.ReadyEmitter;
-import personal.opensrcerer.reactive.emitters.slash.misc.MumEmitter;
 
 import javax.security.auth.login.LoginException;
 import java.util.stream.Collectors;
@@ -33,21 +30,6 @@ public abstract class SupersonicLaunchWrapper {
                         )
                 ).build();
 
-        Emitter.addListeners(
-                /* SYSTEM */
-                new ReadyEmitter(),
-
-                /* MISC */
-                new MumEmitter(),
-
-                /* PLAYER */
-                new JoinVoiceEmitter(),
-                new LeaveVoiceEmitter(),
-                new PauseEmitter(),
-                new UnpauseEmitter(),
-                new PlayEmitter(),
-                new SearchEmitter(),
-                new SkipEmitter()
-        );
+        new ReadyEmitter().emit();
     }
 }

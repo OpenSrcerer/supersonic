@@ -6,7 +6,6 @@ import personal.opensrcerer.reactive.emitters.slash.SlashEmitter;
 import personal.opensrcerer.reactive.sinks.slash.player.LeaveVoiceSink;
 
 public class LeaveVoiceEmitter extends SlashEmitter {
-
     public LeaveVoiceEmitter() {
         super(
                 SlashCommand.LEAVE.getName(),

@@ -6,7 +6,6 @@ import personal.opensrcerer.reactive.emitters.slash.SlashEmitter;
 import personal.opensrcerer.reactive.sinks.slash.misc.MumSink;
 
 public class MumEmitter extends SlashEmitter {
-
     public MumEmitter() {
         super(
                 SlashCommand.MUM.getName(),

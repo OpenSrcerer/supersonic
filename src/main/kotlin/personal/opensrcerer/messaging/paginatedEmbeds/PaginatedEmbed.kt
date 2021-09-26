@@ -1,6 +1,6 @@
-package personal.opensrcerer.messaging.pagination;
+package personal.opensrcerer.messaging.paginatedEmbeds
 
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.MessageEmbed
 
 interface PaginatedEmbed {
     /**
@@ -9,7 +9,7 @@ interface PaginatedEmbed {
      * @return The page with the corresponding number.
      * The first/last page if the number is out of the bounds of the result list.
      */
-    MessageEmbed getPage(int pageNumber);
+    fun getPage(pageNumber: Int): MessageEmbed?
 
     /**
      * Skips N pages back. If given a number larger than
@@ -17,24 +17,24 @@ interface PaginatedEmbed {
      * @param skip Positive integer (number of pages to skip).
      * @return The current page after skipping.
      */
-    MessageEmbed previous(int skip);
+    fun previous(skip: Int): MessageEmbed?
 
     /**
      * Goes one page back.
      * @return The previous page, or the first page if there is no previous page.
      */
-    MessageEmbed previous();
+    fun previous(): MessageEmbed?
 
     /**
      * @return The current page.
      */
-    MessageEmbed current();
+    fun current(): MessageEmbed?
 
     /**
      * Goes to the next page.
      * @return The next page, or the last page if there is no next page.
      */
-    MessageEmbed next();
+    fun next(): MessageEmbed?
 
     /**
      * Goes forward by the N given pages. If given a number larger than
@@ -42,5 +42,5 @@ interface PaginatedEmbed {
      * @param skip Positive integer (number of pages to skip).
      * @return The current page after skipping.
      */
-    MessageEmbed next(int skip);
+    fun next(skip: Int): MessageEmbed?
 }

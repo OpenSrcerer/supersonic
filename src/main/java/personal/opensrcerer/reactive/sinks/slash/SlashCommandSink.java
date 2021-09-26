@@ -12,7 +12,7 @@ public abstract class SlashCommandSink extends AuthorizableSink<SlashCommandEven
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public boolean authorize(SlashCommandEvent event) {
+    public final boolean authorize(SlashCommandEvent event) {
         Member self = event.getGuild().getSelfMember();
 
         if (self.hasPermission(super.permissions())) {
@@ -34,5 +34,6 @@ public abstract class SlashCommandSink extends AuthorizableSink<SlashCommandEven
         slashCommandEvent
                 .reply("Uh oh! Some error occurred.\nReport this error with this message: " + t.getMessage())
                 .queue();
+        super.onError(slashCommandEvent, t);
     }
 }

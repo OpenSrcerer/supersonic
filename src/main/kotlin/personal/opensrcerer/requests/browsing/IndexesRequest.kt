@@ -1,7 +1,7 @@
 package personal.opensrcerer.requests.browsing
 
 import personal.opensrcerer.requests.RequestPath
-import personal.opensrcerer.requests.SubsonicRequest
+import personal.opensrcerer.requests.subsonic.SubsonicRequest
 import personal.opensrcerer.responses.browsing.Indexes
 
 class IndexesRequest: SubsonicRequest<Indexes>() {

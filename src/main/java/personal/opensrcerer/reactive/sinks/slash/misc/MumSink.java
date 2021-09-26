@@ -16,16 +16,8 @@ public class MumSink extends SlashCommandSink {
     }
 
     @Override
-    @SuppressWarnings("ConstantConditions")
     public void onEvent(SlashCommandEvent event) {
         String reply = (event.getUser().getId().equals("178603029115830282")) ? "Yes." : "No.";
         event.reply(reply).queue();
-
-        var e = SubsonicClient.INSTANCE.request(
-                new Search2(Map.of("query", "local h")),
-                event.getGuild().getId()
-        );
-
-        System.out.println(Arrays.toString(e.getArtists()));
     }
 }

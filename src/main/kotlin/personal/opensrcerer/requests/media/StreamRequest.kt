@@ -1,6 +1,6 @@
 package personal.opensrcerer.requests.media
 
-import personal.opensrcerer.requests.VoidRequest
+import personal.opensrcerer.requests.subsonic.VoidRequest
 import personal.opensrcerer.requests.RequestPath
 import java.io.Serializable
 

@@ -6,7 +6,6 @@ import personal.opensrcerer.reactive.emitters.slash.SlashEmitter;
 import personal.opensrcerer.reactive.sinks.slash.player.JoinVoiceSink;
 
 public class JoinVoiceEmitter extends SlashEmitter {
-
     public JoinVoiceEmitter() {
         super(
                 SlashCommand.JOIN.getName(),

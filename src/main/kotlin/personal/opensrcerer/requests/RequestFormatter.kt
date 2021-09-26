@@ -3,6 +3,7 @@ package personal.opensrcerer.requests
 import okhttp3.HttpUrl
 import personal.opensrcerer.client.cache.SubsonicCache
 import personal.opensrcerer.client.cache.SubsonicConfig
+import personal.opensrcerer.requests.subsonic.SubsonicRequest
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.concurrent.ThreadLocalRandom

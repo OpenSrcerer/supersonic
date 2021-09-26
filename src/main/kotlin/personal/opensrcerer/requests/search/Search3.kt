@@ -1,7 +1,7 @@
 package personal.opensrcerer.requests.search
 
 import personal.opensrcerer.requests.RequestPath
-import personal.opensrcerer.requests.SubsonicRequest
+import personal.opensrcerer.requests.subsonic.SubsonicRequest
 import personal.opensrcerer.responses.search.Result3
 import java.io.Serializable
 

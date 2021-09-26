@@ -3,7 +3,7 @@ package personal.opensrcerer.responses.search
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
-import personal.opensrcerer.responses.SubsonicResponse
+import personal.opensrcerer.responses.subsonic.SubsonicResponse
 import personal.opensrcerer.responses.entities.Album
 import personal.opensrcerer.responses.entities.Artist
 import personal.opensrcerer.responses.entities.Song
@@ -37,11 +37,5 @@ class Result3 : SubsonicResponse(), SearchResult {
 
     override fun getSongs() : Array<Song>? {
         return this.searchResult3.song
-    }
-
-    fun isEmpty(): Boolean {
-        return this.searchResult3.artist.isNullOrEmpty() &&
-                this.searchResult3.album.isNullOrEmpty() &&
-                this.searchResult3.song.isNullOrEmpty()
     }
 }

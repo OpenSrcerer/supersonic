@@ -3,7 +3,7 @@ package personal.opensrcerer.responses.browsing
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
-import personal.opensrcerer.responses.SubsonicResponse
+import personal.opensrcerer.responses.subsonic.SubsonicResponse
 import personal.opensrcerer.responses.entities.Artist
 import personal.opensrcerer.responses.entities.Song
 
