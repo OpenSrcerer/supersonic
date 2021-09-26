@@ -7,6 +7,9 @@ import java.util.Map;
 
 public enum SlashCommand {
 
+    /* SYSTEM & CHECKS */
+    PING("ping", "Check the status of the Subsonic server you are currently connected to."),
+
     /* MISCELLANEOUS */
     MUM("areyoumymum", "Answers the most important question in one's life."),
 
