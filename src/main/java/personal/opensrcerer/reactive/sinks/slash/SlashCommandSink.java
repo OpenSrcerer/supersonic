@@ -12,7 +12,7 @@ public abstract class SlashCommandSink extends AuthorizableSink<SlashCommandEven
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public boolean authorize(SlashCommandEvent event) {
+    public final boolean authorize(SlashCommandEvent event) {
         Member self = event.getGuild().getSelfMember();
 
         if (self.hasPermission(super.permissions())) {

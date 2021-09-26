@@ -36,10 +36,12 @@ public class SearchSink extends SlashCommandSink {
                 event.getGuild().getId()
         );
 
-        SearchEmbed embed = new SearchEmbed(results);
-
-        event.replyEmbeds(
-                embed.getEmbed(SearchEmbedType.SONG).current()
-        ).queue();
+        results.map(SearchEmbed::new)
+                .subscribe(
+                        embed -> event.replyEmbeds(
+                        embed.getEmbed(
+                                SearchEmbedType.SONG
+                        ).current()
+                ).queue());
     }
 }

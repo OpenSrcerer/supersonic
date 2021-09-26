@@ -2,7 +2,7 @@ package personal.opensrcerer.responses.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
-import personal.opensrcerer.responses.entities.enum.Unknown
+import personal.opensrcerer.responses.enum.Unknown
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Song(

@@ -1,4 +1,4 @@
-package personal.opensrcerer.responses.entities.enum
+package personal.opensrcerer.responses.enum
 
 enum class Unknown(val value: String) {
     ID("Unknown ID"),
