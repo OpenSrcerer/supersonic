@@ -34,5 +34,6 @@ public abstract class SlashCommandSink extends AuthorizableSink<SlashCommandEven
         slashCommandEvent
                 .reply("Uh oh! Some error occurred.\nReport this error with this message: " + t.getMessage())
                 .queue();
+        super.onError(slashCommandEvent, t);
     }
 }

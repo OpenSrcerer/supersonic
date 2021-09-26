@@ -38,10 +38,4 @@ class Result3 : SubsonicResponse(), SearchResult {
     override fun getSongs() : Array<Song>? {
         return this.searchResult3.song
     }
-
-    fun isEmpty(): Boolean {
-        return this.searchResult3.artist.isNullOrEmpty() &&
-                this.searchResult3.album.isNullOrEmpty() &&
-                this.searchResult3.song.isNullOrEmpty()
-    }
 }
