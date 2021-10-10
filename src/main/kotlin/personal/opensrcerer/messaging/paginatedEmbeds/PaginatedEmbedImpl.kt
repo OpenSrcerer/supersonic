@@ -14,11 +14,11 @@ open class PaginatedEmbedImpl(
         }
         return if (pageNumber < 1) {
             results[0]
-        } else results[pageNumber]
+        } else results[pageNumber - 1]
     }
 
     override fun previous(skip: Int): MessageEmbed {
-        return if (page.get() - skip < 0) {
+        return if (page.get() - skip < 0 || page.get() + skip > results.size - 1) {
             results[page.updateAndGet { 0 }]
         } else results[page.updateAndGet { p: Int -> p - skip }]
     }
@@ -40,7 +40,7 @@ open class PaginatedEmbedImpl(
     }
 
     override fun next(skip: Int): MessageEmbed {
-        return if (page.get() + skip > results.size - 1) {
+        return if (page.get() + skip > results.size - 1 || page.get() + skip < 0) {
             results[page.updateAndGet { results.size - 1 }]
         } else results[page.updateAndGet { p: Int -> p + skip }]
     }

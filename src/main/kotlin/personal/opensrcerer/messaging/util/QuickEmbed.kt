@@ -1,4 +1,4 @@
-package personal.opensrcerer.messaging
+package personal.opensrcerer.messaging.util
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed

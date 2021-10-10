@@ -43,7 +43,8 @@ public abstract class DiscordEmitter<E extends GenericEvent> implements Emitter 
 
     @Override
     public void emit() {
-        flux.subscribe(sink::receive);
+        flux.filter(this::filterValid)
+                .subscribe(sink::receive);
     }
 
     public Flux<E> flux() {

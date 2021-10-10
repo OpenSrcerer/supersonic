@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbedType;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
@@ -17,7 +18,6 @@ import java.util.EnumSet;
 import java.util.Map;
 
 public abstract class SupersonicConstants {
-    public static final String BOT_ID = "881544361643507713";
     public static final Pair<Activity.ActivityType, String> activity = Pair.of(
             Activity.ActivityType.DEFAULT,
             "abcdefghijklmnopqrstuvxyz"
@@ -31,7 +31,10 @@ public abstract class SupersonicConstants {
             CacheFlag.CLIENT_STATUS,
             CacheFlag.ONLINE_STATUS
     );
+
     public static final int DEFAULT_PAGE_SIZE = 8;
+    public static final int DEFAULT_PAGINATION_EMBED_LIFE_TIME_MINUTES = 15; // JDA interaction hook expiry time
+    public static final SearchEmbedType DEFAULT_SEARCH_EMBED_TYPE = SearchEmbedType.SONG;
 
     protected static JDA JDA;
     protected static Map<String, String> ENVIRONMENT_VARIABLES;
