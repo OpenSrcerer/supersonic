@@ -3,7 +3,7 @@ package personal.opensrcerer.messaging.paginatedEmbeds.search
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
-import personal.opensrcerer.messaging.ConstantEmbeds
+import personal.opensrcerer.messaging.constant.ConstantEmbeds
 import personal.opensrcerer.messaging.paginatedEmbeds.PaginatedEmbedImpl
 import personal.opensrcerer.responses.entities.EmbedMusicEntity
 
@@ -19,21 +19,30 @@ class SearchEmbedResult(
 
             val pagedResult = ArrayList<MessageEmbed>()
             val builder = EmbedBuilder()
+            val totalPages: Int =
+                if (entity.size % SupersonicConstants.DEFAULT_PAGE_SIZE == 0)
+                    entity.size / SupersonicConstants.DEFAULT_PAGE_SIZE
+                else entity.size / SupersonicConstants.DEFAULT_PAGE_SIZE + 1
 
             var page = 0
+            var pageSize = 0
             for (element in entity) {
-                if (page == SupersonicConstants.DEFAULT_PAGE_SIZE) {
+                if (pageSize == SupersonicConstants.DEFAULT_PAGE_SIZE) {
+                    builder.setFooter("Page ${page + 1} of $totalPages")
                     pagedResult.add(builder.build())
                     builder.clear()
-                    page = 0
+                    pageSize = 0
+                    ++page
                 }
                 builder.addField(element.asEmbedField())
-                ++page
+                ++pageSize
             }
 
-            if (builder.isEmpty) {
+            if (!builder.isEmpty) {
+                builder.setFooter("Page ${page + 1} of $totalPages")
                 pagedResult.add(builder.build())
             }
+
             return pagedResult
         }
     }

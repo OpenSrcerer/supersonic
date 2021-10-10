@@ -5,9 +5,10 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import personal.opensrcerer.client.SubsonicClient;
 import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbed;
-import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbedType;
+import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbedActionRowTemplates;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 import personal.opensrcerer.requests.search.Search3;
+import personal.opensrcerer.services.pagination.PaginationService;
 
 import java.util.Map;
 
@@ -30,18 +31,19 @@ public class SearchSink extends SlashCommandSink {
                 new Search3(
                         Map.of(
                                 "query", o.getAsString(),
-                                "songCount", "10"
+                                "songCount", "100",
+                                "albumCount", "100",
+                                "artistCount", "100"
                         )
-                ),
-                event.getGuild().getId()
+                ), event.getGuild().getId()
         );
 
         results.map(SearchEmbed::new)
-                .subscribe(
-                        embed -> event.replyEmbeds(
-                        embed.getEmbed(
-                                SearchEmbedType.SONG
-                        ).current()
-                ).queue());
+                .subscribe(e -> event.replyEmbeds(e.current())
+                            .addActionRows(SearchEmbedActionRowTemplates.Companion.get(e))
+                            .queue(i -> i.retrieveOriginal()
+                            .queue(m -> PaginationService
+                            .add(m.getId(), e, i)))
+                );
     }
 }

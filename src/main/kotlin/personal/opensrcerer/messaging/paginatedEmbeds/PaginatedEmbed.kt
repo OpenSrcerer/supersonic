@@ -1,6 +1,8 @@
 package personal.opensrcerer.messaging.paginatedEmbeds
 
 import net.dv8tion.jda.api.entities.MessageEmbed
+import net.dv8tion.jda.api.interactions.components.ActionRow
+import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbedActionRowTemplates
 
 interface PaginatedEmbed {
     /**
@@ -43,4 +45,12 @@ interface PaginatedEmbed {
      * @return The current page after skipping.
      */
     fun next(skip: Int): MessageEmbed?
+
+    /**
+     * Returns an Array of ActionRow-s to use in the Discord
+     * message for this PaginatedEmbed.
+     */
+    fun getRows(): List<ActionRow> {
+        return SearchEmbedActionRowTemplates.get(this)
+    }
 }

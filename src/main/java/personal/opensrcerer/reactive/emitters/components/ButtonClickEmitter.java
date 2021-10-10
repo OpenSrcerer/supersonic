@@ -13,4 +13,9 @@ public class ButtonClickEmitter extends DiscordEmitter<ButtonClickEvent> {
                 new ButtonClickSink()
         );
     }
+
+    @Override
+    public boolean filterValid(ButtonClickEvent buttonClickEvent) {
+        return buttonClickEvent.getButton() != null && buttonClickEvent.getButton().getId() != null;
+    }
 }
