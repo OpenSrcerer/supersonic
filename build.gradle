@@ -40,10 +40,10 @@ dependencies {
     implementation("net.dv8tion:JDA:4.3.0_333")
 
     // Jackson XML
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.5'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0'
 
     // OkHttp4
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation('com.squareup.okhttp3:okhttp:4.9.2')
 
     // Reactor
     testImplementation 'io.projectreactor:reactor-test:3.4.10'
