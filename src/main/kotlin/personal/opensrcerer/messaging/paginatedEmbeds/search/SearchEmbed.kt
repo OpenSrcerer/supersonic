@@ -19,7 +19,10 @@ class SearchEmbed(results: List<SearchEmbedResult>) : PaginatedEmbed {
         listOf(
             SearchEmbedResult(SearchEmbedType.ALBUM, result.getAlbums() ?: emptyArray<EmbedMusicEntity>()),
             SearchEmbedResult(SearchEmbedType.ARTIST, result.getArtists() ?: emptyArray<EmbedMusicEntity>()),
-            SearchEmbedResult(SearchEmbedType.SONG, result.getSongs() ?: emptyArray<EmbedMusicEntity>())
+            SearchEmbedResult(SearchEmbedType.SONG,
+                result.getSongs()?.filter { s -> s.isVideo != "true" }?.toTypedArray() ?:
+                emptyArray<EmbedMusicEntity>()
+            )
         )
     )
 
