@@ -3,7 +3,7 @@ package personal.opensrcerer.messaging.paginatedEmbeds.search
 import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
 import personal.opensrcerer.messaging.paginatedEmbeds.PaginatedEmbed
-import personal.opensrcerer.responses.entities.EmbedMusicEntity
+import personal.opensrcerer.messaging.entities.EmbedEntity
 import personal.opensrcerer.responses.search.Result3
 import java.util.*
 
@@ -17,11 +17,11 @@ class SearchEmbed(results: List<SearchEmbedResult>) : PaginatedEmbed {
 
     constructor(result: Result3) : this(
         listOf(
-            SearchEmbedResult(SearchEmbedType.ALBUM, result.getAlbums() ?: emptyArray<EmbedMusicEntity>()),
-            SearchEmbedResult(SearchEmbedType.ARTIST, result.getArtists() ?: emptyArray<EmbedMusicEntity>()),
+            SearchEmbedResult(SearchEmbedType.ALBUM, result.getAlbums() ?: emptyArray<EmbedEntity>()),
+            SearchEmbedResult(SearchEmbedType.ARTIST, result.getArtists() ?: emptyArray<EmbedEntity>()),
             SearchEmbedResult(SearchEmbedType.SONG,
                 result.getSongs()?.filter { s -> s.isVideo != "true" }?.toTypedArray() ?:
-                emptyArray<EmbedMusicEntity>()
+                emptyArray<EmbedEntity>()
             )
         )
     )

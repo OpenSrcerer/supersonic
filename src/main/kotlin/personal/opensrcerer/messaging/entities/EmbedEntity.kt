@@ -1,8 +1,8 @@
-package personal.opensrcerer.responses.entities
+package personal.opensrcerer.messaging.entities
 
 import net.dv8tion.jda.api.entities.MessageEmbed
 
-interface EmbedMusicEntity {
+interface EmbedEntity {
     fun embedName() : String
 
     fun embedValue() : String

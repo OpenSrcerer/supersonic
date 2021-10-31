@@ -2,6 +2,7 @@ package personal.opensrcerer.responses.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import personal.opensrcerer.messaging.entities.EmbedEntity
 import personal.opensrcerer.responses.enum.Unknown
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -25,7 +26,7 @@ class Song(
     @JsonProperty("duration")              duration: String?,
     @JsonProperty("bitRate")               bitrate: String?,
     @JsonProperty("path")                  path: String?
-) : EmbedMusicEntity {
+) : EmbedEntity {
 
     val id = id ?: Unknown.ID.value
     val parent = parent ?: Unknown.PARENT.value

@@ -5,14 +5,14 @@ import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
 import personal.opensrcerer.messaging.constant.ConstantEmbeds
 import personal.opensrcerer.messaging.paginatedEmbeds.PaginatedEmbedImpl
-import personal.opensrcerer.responses.entities.EmbedMusicEntity
+import personal.opensrcerer.messaging.entities.EmbedEntity
 
 class SearchEmbedResult(
     val type: SearchEmbedType,
-    entityList: Array<out EmbedMusicEntity>
+    entityList: Array<out EmbedEntity>
 ) : PaginatedEmbedImpl(getResults(entityList)) {
     companion object {
-        private fun getResults(entity: Array<out EmbedMusicEntity>): List<MessageEmbed> {
+        private fun getResults(entity: Array<out EmbedEntity>): List<MessageEmbed> {
             if (entity.isEmpty()) {
                 return listOf(ConstantEmbeds.NO_SEARCH_RESULTS)
             }
