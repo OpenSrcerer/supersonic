@@ -40,8 +40,8 @@ class SearchEmbedActionRowTemplates {
         private fun defaultPaginationActionRow(): ActionRow {
             return ActionRow.of(
                 Button.primary("first", "⏪"),
-                Button.primary("prev", "\uD83E\uDC44"),
-                Button.primary("next", "\uD83E\uDC46"),
+                Button.primary("prev", "◀"),
+                Button.primary("next", "▶"),
                 Button.primary("last", "⏩"),
                 Button.danger("delete", "\uD83D\uDDD1️")
             )
