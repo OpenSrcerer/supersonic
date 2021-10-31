@@ -1,6 +1,7 @@
-package personal.opensrcerer.messaging.paginatedEmbeds
+package personal.opensrcerer.messaging.implementations.paginatedEmbeds
 
 import net.dv8tion.jda.api.entities.MessageEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
 import java.util.concurrent.atomic.AtomicInteger
 
 open class PaginatedEmbedImpl(

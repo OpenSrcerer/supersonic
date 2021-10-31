@@ -1,7 +1,7 @@
 package personal.opensrcerer.messaging.constant
 
 import net.dv8tion.jda.api.entities.MessageEmbed
-import personal.opensrcerer.messaging.util.QuickEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.QuickEmbed
 
 class ConstantEmbeds {
     companion object {

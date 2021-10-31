@@ -1,7 +1,7 @@
-package personal.opensrcerer.messaging.discordInterface
+package personal.opensrcerer.messaging.interfaces.discordInterfaces
 
 import net.dv8tion.jda.api.interactions.InteractionHook
-import personal.opensrcerer.messaging.paginatedEmbeds.PaginatedEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
 import java.util.function.Consumer
 
 /**

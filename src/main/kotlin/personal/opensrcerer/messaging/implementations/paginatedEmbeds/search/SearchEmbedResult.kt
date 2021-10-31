@@ -1,10 +1,10 @@
-package personal.opensrcerer.messaging.paginatedEmbeds.search
+package personal.opensrcerer.messaging.implementations.paginatedEmbeds.search
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
 import personal.opensrcerer.messaging.constant.ConstantEmbeds
-import personal.opensrcerer.messaging.paginatedEmbeds.PaginatedEmbedImpl
+import personal.opensrcerer.messaging.implementations.paginatedEmbeds.PaginatedEmbedImpl
 import personal.opensrcerer.messaging.entities.EmbedEntity
 
 class SearchEmbedResult(

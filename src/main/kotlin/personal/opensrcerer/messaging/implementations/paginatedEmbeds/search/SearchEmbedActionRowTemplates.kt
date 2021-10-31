@@ -1,8 +1,8 @@
-package personal.opensrcerer.messaging.paginatedEmbeds.search
+package personal.opensrcerer.messaging.implementations.paginatedEmbeds.search
 
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.Button
-import personal.opensrcerer.messaging.paginatedEmbeds.PaginatedEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
 
 class SearchEmbedActionRowTemplates {
     companion object {
