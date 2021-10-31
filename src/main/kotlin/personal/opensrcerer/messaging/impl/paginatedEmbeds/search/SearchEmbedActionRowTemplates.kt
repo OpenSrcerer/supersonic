@@ -6,7 +6,7 @@ import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
 
 class SearchEmbedActionRowTemplates {
     companion object {
-        fun get(embed: PaginatedEmbed): List<ActionRow> {
+        fun <R> get(embed: PaginatedEmbed<R>): List<ActionRow> {
             return when (embed) {
                 is SearchEmbed -> {
                     return when (embed.currentType()) {

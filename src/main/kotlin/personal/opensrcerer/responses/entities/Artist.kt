@@ -14,6 +14,10 @@ class Artist (
     val id = id ?: Unknown.ID.value
     val name = name ?: Unknown.ARTIST_NAME.value
 
+    override fun id(): String {
+        return id
+    }
+
     override fun embedName(): String {
         return name
     }

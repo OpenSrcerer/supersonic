@@ -20,6 +20,10 @@ class Album(
     val isDir = isDir ?: Unknown.IS_DIRECTORY.value
     val coverArt = coverArt ?: Unknown.COVER_ART.value
 
+    override fun id(): String {
+        return id
+    }
+
     override fun embedName(): String {
         return "[$id] / $name"
     }

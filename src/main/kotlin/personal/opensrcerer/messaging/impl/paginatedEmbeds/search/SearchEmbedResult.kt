@@ -1,46 +1,39 @@
 package personal.opensrcerer.messaging.impl.paginatedEmbeds.search
 
-import net.dv8tion.jda.api.EmbedBuilder
-import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
-import personal.opensrcerer.messaging.constant.ConstantEmbeds
-import personal.opensrcerer.messaging.impl.paginatedEmbeds.PaginatedEmbedImpl
 import personal.opensrcerer.messaging.entities.EmbedEntity
+import personal.opensrcerer.messaging.entities.Page
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.ReactiveEmbed
 
 class SearchEmbedResult(
     val type: SearchEmbedType,
     entityList: Array<out EmbedEntity>
-) : PaginatedEmbedImpl(getResults(entityList)) {
+) : ReactiveEmbed(getResults(entityList)) {
     companion object {
-        private fun getResults(entity: Array<out EmbedEntity>): List<MessageEmbed> {
-            if (entity.isEmpty()) {
-                return listOf(ConstantEmbeds.NO_SEARCH_RESULTS)
+        private fun getResults(
+            entityArray: Array<out EmbedEntity>,
+            pageSize: Int = SupersonicConstants.DEFAULT_PAGE_SIZE
+        ): List<Page> {
+            if (entityArray.isEmpty()) {
+                return emptyList()
             }
 
-            val pagedResult = ArrayList<MessageEmbed>()
-            val builder = EmbedBuilder()
+            val pagedResult = ArrayList<Page>()
             val totalPages: Int =
-                if (entity.size % SupersonicConstants.DEFAULT_PAGE_SIZE == 0)
-                    entity.size / SupersonicConstants.DEFAULT_PAGE_SIZE
-                else entity.size / SupersonicConstants.DEFAULT_PAGE_SIZE + 1
+                if (entityArray.size % pageSize == 0)
+                    entityArray.size / pageSize
+                else entityArray.size / pageSize + 1
 
-            var page = 0
-            var pageSize = 0
-            for (element in entity) {
-                if (pageSize == SupersonicConstants.DEFAULT_PAGE_SIZE) {
-                    builder.setFooter("Page ${page + 1} of $totalPages")
-                    pagedResult.add(builder.build())
-                    builder.clear()
-                    pageSize = 0
-                    ++page
-                }
-                builder.addField(element.asEmbedField())
-                ++pageSize
-            }
+            for (i in 1 until totalPages + 1) {
+                val begin = pageSize * (i - 1)
+                val end =
+                    if (i * pageSize >= entityArray.size)
+                        entityArray.size - 1
+                    else i * pageSize - 1
 
-            if (!builder.isEmpty) {
-                builder.setFooter("Page ${page + 1} of $totalPages")
-                pagedResult.add(builder.build())
+                val page = Page(i, totalPages)
+                page.addRows(entityArray.sliceArray(begin..end))
+                pagedResult.add(page)
             }
 
             return pagedResult

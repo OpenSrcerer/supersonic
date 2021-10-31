@@ -48,6 +48,10 @@ class Song(
     val bitrate = bitrate ?: Unknown.BITRATE.value
     val path = path ?: Unknown.PATH.value
 
+    override fun id(): String {
+        return id
+    }
+
     override fun embedName(): String {
         return "[$id] / $title"
     }

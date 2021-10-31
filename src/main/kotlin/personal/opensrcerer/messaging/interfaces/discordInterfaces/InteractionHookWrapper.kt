@@ -1,5 +1,6 @@
 package personal.opensrcerer.messaging.interfaces.discordInterfaces
 
+import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.interactions.InteractionHook
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
 import java.util.function.Consumer
@@ -7,14 +8,14 @@ import java.util.function.Consumer
 /**
  * Symbolizes a "window" to easily page paginated embeds upon user request.
  */
-class InteractionHookWrapper(private val embed: PaginatedEmbed,
+class InteractionHookWrapper(private val embed: PaginatedEmbed<MessageEmbed>,
                              private val hook: InteractionHook) {
 
     /**
      * Changes an embed locally and pushes changes to Discord.
      * @param paginatedEmbedConsumer Action to perform on the embed.
      */
-    fun alter(paginatedEmbedConsumer: Consumer<PaginatedEmbed>) {
+    fun alter(paginatedEmbedConsumer: Consumer<PaginatedEmbed<MessageEmbed>>) {
         paginatedEmbedConsumer.accept(embed)
         hook.editOriginalEmbeds(embed.current())
             .setActionRows(embed.getRows())
