@@ -1,9 +1,10 @@
 package personal.opensrcerer.services.pagination;
 
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import personal.opensrcerer.launch.SupersonicConstants;
 import personal.opensrcerer.messaging.interfaces.discordInterfaces.InteractionHookWrapper;
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed;
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 
@@ -42,7 +43,7 @@ public class PaginationService {
          * Action to perform on given embed.
          * @param embed Embed to change.
          */
-        void perform(PaginatedEmbed embed);
+        void perform(Paginated<?> embed);
     }
 
     public static void decode(@Nonnull String userId, @Nonnull String messageId, String action) {
@@ -57,8 +58,8 @@ public class PaginationService {
                                @Nonnull ButtonAction action) {
         switch (action) {
             case FIRST -> alter(wrapper, e -> e.previous(Integer.MAX_VALUE));
-            case PREV -> alter(wrapper, PaginatedEmbed::previous);
-            case NEXT -> alter(wrapper, PaginatedEmbed::next);
+            case PREV -> alter(wrapper, Paginated::previous);
+            case NEXT -> alter(wrapper, Paginated::next);
             case LAST -> alter(wrapper, e -> e.next(Integer.MAX_VALUE));
             case DELETE -> removeNow(wrapper, messageId);
 
@@ -81,7 +82,7 @@ public class PaginationService {
     }
 
     public static void add(@Nonnull String messageId,
-                           @Nonnull PaginatedEmbed embed,
+                           @Nonnull Paginated<MessageEmbed> embed,
                            @Nonnull InteractionHook hook) {
         paginationMap.put(messageId, new InteractionHookWrapper(embed, hook));
         remove(messageId);

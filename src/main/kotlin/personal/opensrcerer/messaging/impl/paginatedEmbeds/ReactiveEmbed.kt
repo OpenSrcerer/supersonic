@@ -2,13 +2,13 @@ package personal.opensrcerer.messaging.impl.paginatedEmbeds
 
 import personal.opensrcerer.messaging.entities.EmbedEntity
 import personal.opensrcerer.messaging.entities.Page
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.CursorizedEmbed
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.Cursorized
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated
 import java.util.concurrent.atomic.AtomicInteger
 
 open class ReactiveEmbed(
     private val pages: List<Page>
-) : PaginatedEmbed<Page>, CursorizedEmbed {
+) : Paginated<Page>, Cursorized<EmbedEntity> {
     private val page = AtomicInteger(0)
     private val row = AtomicInteger(if (pages.isEmpty()) -1 else 0)
 
@@ -39,8 +39,7 @@ open class ReactiveEmbed(
     }
 
     override fun current(): Page? {
-        if (pages.isEmpty()) return null
-        return pages[page.get()]
+        return if (pages.isEmpty()) null else pages[page.get()]
     }
 
     override operator fun next(): Page? {
@@ -59,15 +58,20 @@ open class ReactiveEmbed(
 
     /* Implementation for Cursorization */
 
-    override fun up(scrollBy: Int) {
+    override fun up(scrollBy: Int): EmbedEntity? {
+        if (pages.isEmpty()) return null
         row.decrementAndGet()
+        return null
     }
 
-    override fun down(scrollBy: Int) {
+    override fun select(): EmbedEntity? {
+        if (pages.isEmpty()) return null
+        return null
+    }
+
+    override fun down(scrollBy: Int): EmbedEntity? {
+        if (pages.isEmpty()) return null
         row.incrementAndGet()
-    }
-
-    override fun select(): EmbedEntity {
-        TODO("Not yet implemented")
+        return null
     }
 }

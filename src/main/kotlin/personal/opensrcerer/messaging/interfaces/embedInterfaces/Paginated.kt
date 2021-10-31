@@ -3,7 +3,7 @@ package personal.opensrcerer.messaging.interfaces.embedInterfaces
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedActionRowTemplates
 
-interface PaginatedEmbed<R> {
+interface Paginated<R> {
     /**
      * Get a page by its number.
      * @param pageNumber Page number where 1 is the first page.

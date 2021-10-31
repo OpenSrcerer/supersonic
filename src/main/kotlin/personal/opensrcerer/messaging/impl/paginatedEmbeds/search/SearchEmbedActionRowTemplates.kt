@@ -2,11 +2,11 @@ package personal.opensrcerer.messaging.impl.paginatedEmbeds.search
 
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.Button
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated
 
 class SearchEmbedActionRowTemplates {
     companion object {
-        fun <R> get(embed: PaginatedEmbed<R>): List<ActionRow> {
+        fun <R> get(embed: Paginated<R>): List<ActionRow> {
             return when (embed) {
                 is SearchEmbed -> {
                     return when (embed.currentType()) {

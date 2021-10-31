@@ -2,13 +2,13 @@ package personal.opensrcerer.messaging.impl.paginatedEmbeds.search
 
 import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated
 import personal.opensrcerer.messaging.entities.EmbedEntity
 import personal.opensrcerer.messaging.entities.Page
 import personal.opensrcerer.responses.search.Result3
 import java.util.*
 
-class SearchEmbed(results: List<SearchEmbedResult>) : PaginatedEmbed<MessageEmbed> {
+class SearchEmbed(results: List<SearchEmbedResult>) : Paginated<MessageEmbed> {
     private var currentType: SearchEmbedType = SupersonicConstants.DEFAULT_SEARCH_EMBED_TYPE
     private val map: EnumMap<SearchEmbedType, SearchEmbedResult> = EnumMap(SearchEmbedType::class.java)
 
