@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
-import personal.opensrcerer.messaging.implementations.paginatedEmbeds.search.SearchEmbedType;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;

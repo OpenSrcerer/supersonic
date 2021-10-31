@@ -1,4 +1,4 @@
-package personal.opensrcerer.messaging.implementations.paginatedEmbeds
+package personal.opensrcerer.messaging.impl.paginatedEmbeds
 
 import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed

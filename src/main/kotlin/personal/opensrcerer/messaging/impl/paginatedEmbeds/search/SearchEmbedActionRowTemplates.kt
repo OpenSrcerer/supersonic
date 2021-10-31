@@ -1,4 +1,4 @@
-package personal.opensrcerer.messaging.implementations.paginatedEmbeds.search
+package personal.opensrcerer.messaging.impl.paginatedEmbeds.search
 
 import net.dv8tion.jda.api.interactions.components.ActionRow
 import net.dv8tion.jda.api.interactions.components.Button

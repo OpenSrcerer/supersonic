@@ -4,8 +4,8 @@ import net.dv8tion.jda.api.interactions.InteractionHook;
 import personal.opensrcerer.launch.SupersonicConstants;
 import personal.opensrcerer.messaging.interfaces.discordInterfaces.InteractionHookWrapper;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedEmbed;
-import personal.opensrcerer.messaging.implementations.paginatedEmbeds.search.SearchEmbed;
-import personal.opensrcerer.messaging.implementations.paginatedEmbeds.search.SearchEmbedType;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
