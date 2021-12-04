@@ -6,11 +6,17 @@ package personal.opensrcerer.messaging.interfaces.embedInterfaces
  */
 interface Cursorized<R> {
     /**
+     * Scrolls up the embed list of results by 1 row.
+     * If the top has been reached, scrolls to the first element.
+     */
+    fun up()
+
+    /**
      * Scrolls up the embed list of results by N rows.
      * If the top has been reached, scrolls to the first element.
      * @param scrollBy Number of rows to scroll.
      */
-    fun up(scrollBy: Int): R?
+    fun up(scrollBy: Int)
 
     /**
      * Selects and returns the first element.
@@ -22,5 +28,12 @@ interface Cursorized<R> {
      * If the bottom has been reached, scrolls to the last element.
      * @param scrollBy Number of rows to scroll.
      */
-    fun down(scrollBy: Int): R?
+    fun down(scrollBy: Int)
+
+    /**
+     * Scrolls down the embed list of results by 1 row.
+     * If the bottom has been reached, scrolls to the last element.
+     * @param scrollBy Number of rows to scroll.
+     */
+    fun down()
 }

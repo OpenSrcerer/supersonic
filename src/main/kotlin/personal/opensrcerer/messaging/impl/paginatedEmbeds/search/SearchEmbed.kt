@@ -36,26 +36,26 @@ class SearchEmbed(results: List<SearchEmbedResult>) : Paginated<MessageEmbed> {
     }
 
     override fun getPage(pageNumber: Int): MessageEmbed {
-        return Page.asMessageEmbed(map[currentType]?.getPage(pageNumber))
+        return map[currentType]?.getPage(pageNumber)!!.asMessageEmbed()
     }
 
     override fun previous(skip: Int): MessageEmbed {
-        return Page.asMessageEmbed(map[currentType]?.previous(skip))
+        return map[currentType]?.previous(skip)!!.asMessageEmbed()
     }
 
     override fun previous(): MessageEmbed {
-        return Page.asMessageEmbed(map[currentType]?.previous())
+        return map[currentType]?.previous()!!.asMessageEmbed()
     }
 
     override fun current(): MessageEmbed {
-        return Page.asMessageEmbed(map[currentType]?.current())
+        return map[currentType]?.current()!!.asMessageEmbed()
     }
 
     override fun next(): MessageEmbed {
-        return Page.asMessageEmbed(map[currentType]?.next())
+        return map[currentType]?.next()!!.asMessageEmbed()
     }
 
     override fun next(skip: Int): MessageEmbed {
-        return Page.asMessageEmbed(map[currentType]?.next(skip))
+        return map[currentType]?.next(skip)!!.asMessageEmbed()
     }
 }

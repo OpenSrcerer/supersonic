@@ -2,10 +2,16 @@ package personal.opensrcerer.services.pagination;
 
 public enum ButtonAction {
 
+    /* Pagination */
     FIRST("first"),
     PREV("prev"),
     NEXT("next"),
     LAST("last"),
+
+    /* Cursorization */
+    UP("up"),
+    SELECT("select"),
+    DOWN("down"),
 
     /* Search Embed Results */
     SONG("song"),

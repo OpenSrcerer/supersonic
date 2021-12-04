@@ -41,9 +41,9 @@ public class SearchSink extends SlashCommandSink {
         results.map(SearchEmbed::new)
                 .subscribe(e -> event.replyEmbeds(e.current())
                             .addActionRows(SearchEmbedActionRowTemplates.Companion.get(e))
-                            .queue(i -> i.retrieveOriginal()
-                            .queue(m -> PaginationService
-                            .add(m.getId(), e, i)))
+                            .queue(hook -> hook.retrieveOriginal()
+                            .queue(message -> PaginationService
+                            .add(message.getId(), e, hook)))
                 );
     }
 }

@@ -3,6 +3,7 @@ package personal.opensrcerer.services.pagination;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import personal.opensrcerer.launch.SupersonicConstants;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.ReactiveEmbed;
 import personal.opensrcerer.messaging.interfaces.discordInterfaces.InteractionHookWrapper;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
@@ -40,10 +41,10 @@ public class PaginationService {
     @FunctionalInterface
     interface PaginationServiceAction {
         /**
-         * Action to perform on given embed.
+         * Pagination to perform on given embed.
          * @param embed Embed to change.
          */
-        void perform(Paginated<?> embed);
+        void perform(ReactiveEmbed embed);
     }
 
     public static void decode(@Nonnull String userId, @Nonnull String messageId, String action) {
@@ -57,28 +58,35 @@ public class PaginationService {
                                @Nonnull String messageId,
                                @Nonnull ButtonAction action) {
         switch (action) {
-            case FIRST -> alter(wrapper, e -> e.previous(Integer.MAX_VALUE));
-            case PREV -> alter(wrapper, Paginated::previous);
-            case NEXT -> alter(wrapper, Paginated::next);
-            case LAST -> alter(wrapper, e -> e.next(Integer.MAX_VALUE));
-            case DELETE -> removeNow(wrapper, messageId);
+            /* Pagination */
+            case FIRST -> navigate(wrapper, e -> e.previous(Integer.MAX_VALUE));
+            case PREV -> navigate(wrapper, Paginated::previous);
+            case NEXT -> navigate(wrapper, Paginated::next);
+            case LAST -> navigate(wrapper, e -> e.next(Integer.MAX_VALUE));
+
+            /* Cursorization */
+            case UP -> navigate(wrapper, ReactiveEmbed::up);
+            case SELECT -> navigate(wrapper, e -> e.up());
+            case DOWN -> navigate(wrapper, ReactiveEmbed::down);
 
             /* SearchEmbed Specific */
-            case SONG -> alter(wrapper, e -> {
+            case SONG -> navigate(wrapper, e -> {
                 if (e instanceof SearchEmbed) ((SearchEmbed) e).type(SearchEmbedType.SONG);
             });
-            case ALBUM -> alter(wrapper, e -> {
+            case ALBUM -> navigate(wrapper, e -> {
                 if (e instanceof SearchEmbed) ((SearchEmbed) e).type(SearchEmbedType.ALBUM);
             });
-            case ARTIST -> alter(wrapper, e -> {
+            case ARTIST -> navigate(wrapper, e -> {
                 if (e instanceof SearchEmbed) ((SearchEmbed) e).type(SearchEmbedType.ARTIST);
             });
+
+            case DELETE -> removeNow(wrapper, messageId);
         }
     }
 
-    public static void alter(@Nonnull InteractionHookWrapper wrapper,
-                             @Nonnull PaginationServiceAction action) {
-        wrapper.alter(action::perform);
+    public static void navigate(@Nonnull InteractionHookWrapper wrapper,
+                                @Nonnull PaginationServiceAction action) {
+        wrapper.nav(action::perform);
     }
 
     public static void add(@Nonnull String messageId,
