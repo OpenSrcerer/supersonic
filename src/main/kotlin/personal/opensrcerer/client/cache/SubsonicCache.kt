@@ -12,6 +12,13 @@ object SubsonicCache {
             "DNFWTF4201?!",
             "1.15.0"
         )
+        cacheMap["289746418816516098"] = SubsonicConfig(
+            "bonkersmusic.onthewifi.com",
+            4040,
+            "Bonkers",
+            "DNFWTF4201?!",
+            "1.15.0"
+        )
     }
 
     fun get(guildId: String): SubsonicConfig? {
