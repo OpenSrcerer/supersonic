@@ -25,7 +25,7 @@ class Album(
     }
 
     override fun embedName(): String {
-        return "[$id] / $name"
+        return name
     }
 
     override fun embedValue(): String {

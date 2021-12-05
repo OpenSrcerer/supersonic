@@ -39,7 +39,7 @@ public class SearchSink extends SlashCommandSink {
         );
 
         results.map(SearchEmbed::new)
-                .subscribe(e -> event.replyEmbeds(e.current())
+                .subscribe(e -> event.replyEmbeds(e.current().asMessageEmbed(e.currentRow()))
                             .addActionRows(SearchEmbedActionRowTemplates.Companion.get(e))
                             .queue(hook -> hook.retrieveOriginal()
                             .queue(message -> PaginationService

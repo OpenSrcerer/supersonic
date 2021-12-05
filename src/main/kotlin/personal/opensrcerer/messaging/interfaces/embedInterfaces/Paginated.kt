@@ -44,12 +44,4 @@ interface Paginated<R> {
      * @return The current page after skipping.
      */
     fun next(skip: Int): R?
-
-    /**
-     * Returns an Array of ActionRow-s to use in the Discord
-     * message for this PaginatedEmbed.
-     */
-    fun getRows(): List<ActionRow> {
-        return SearchEmbedActionRowTemplates.get(this)
-    }
 }

@@ -2,13 +2,12 @@ package personal.opensrcerer.messaging.impl.paginatedEmbeds
 
 import personal.opensrcerer.messaging.entities.EmbedEntity
 import personal.opensrcerer.messaging.entities.Page
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.Cursorized
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedCursorized
 import java.util.concurrent.atomic.AtomicInteger
 
 open class ReactiveEmbed(
     private val pages: List<Page>
-) : Paginated<Page>, Cursorized<EmbedEntity> {
+) : PaginatedCursorized<EmbedEntity, Page> {
     private val currentPage = AtomicInteger(0)
     private val currentRow = AtomicInteger(if (pages.isEmpty()) -1 else 0)
 
@@ -58,6 +57,10 @@ open class ReactiveEmbed(
 
     /* Implementation for Cursorization */
 
+    override fun selectedRow(): Int {
+        return currentRow.get()
+    }
+
     override fun up() {
         up(1)
     }
@@ -66,7 +69,7 @@ open class ReactiveEmbed(
         if (currentRow.get() <= 0) {
             return
         }
-        currentRow.incrementAndGet()
+        currentRow.decrementAndGet()
     }
 
     override fun select(): EmbedEntity? {

@@ -12,7 +12,11 @@ interface EmbedEntity {
 
     fun embedValue() : String
 
-    fun asEmbedField() : MessageEmbed.Field {
-        return MessageEmbed.Field(embedName(), embedValue(), false)
+    fun asEmbedField(selected: Boolean) : MessageEmbed.Field {
+        return MessageEmbed.Field(
+            "${if (selected) "➡️ " else ""}${embedName()}",
+            embedValue(),
+            false
+        )
     }
 }

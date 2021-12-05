@@ -1,3 +1,0 @@
-package personal.opensrcerer.messaging.impl.parameterizedEmbeds
-
-class PlainEmbeds

@@ -21,8 +21,13 @@ class Page(
         return entityPage.size
     }
 
-    fun asMessageEmbed(): MessageEmbed {
-        val builder = entityPage.fold(EmbedBuilder()) { b, e -> b.addField(e.asEmbedField()) }
+    fun asMessageEmbed(selectedRow: Int): MessageEmbed {
+        var row = 0
+        val builder = entityPage.fold(EmbedBuilder()) { b, e ->
+            b.addField(e.asEmbedField(row == selectedRow))
+            row++
+            b
+        }
         builder.setFooter("Page $pageNumber of $totalPages")
         return builder.build()
     }

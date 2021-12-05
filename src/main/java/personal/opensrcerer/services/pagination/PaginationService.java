@@ -3,11 +3,15 @@ package personal.opensrcerer.services.pagination;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import personal.opensrcerer.launch.SupersonicConstants;
+import personal.opensrcerer.messaging.entities.EmbedEntity;
+import personal.opensrcerer.messaging.entities.Page;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.ReactiveEmbed;
 import personal.opensrcerer.messaging.interfaces.discordInterfaces.InteractionHookWrapper;
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.Cursorized;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedCursorized;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -39,12 +43,12 @@ public class PaginationService {
     }
 
     @FunctionalInterface
-    interface PaginationServiceAction {
+    interface EmbedAction {
         /**
          * Pagination to perform on given embed.
-         * @param embed Embed to change.
+         * @param paginatedCursorized Embed to change.
          */
-        void perform(ReactiveEmbed embed);
+        void perform(PaginatedCursorized<EmbedEntity, Page> paginatedCursorized);
     }
 
     public static void decode(@Nonnull String userId, @Nonnull String messageId, String action) {
@@ -65,9 +69,9 @@ public class PaginationService {
             case LAST -> navigate(wrapper, e -> e.next(Integer.MAX_VALUE));
 
             /* Cursorization */
-            case UP -> navigate(wrapper, ReactiveEmbed::up);
-            case SELECT -> navigate(wrapper, e -> e.up());
-            case DOWN -> navigate(wrapper, ReactiveEmbed::down);
+            case UP -> navigate(wrapper, Cursorized::up);
+            case SELECT -> navigate(wrapper, e -> e.select());
+            case DOWN -> navigate(wrapper, Cursorized::down);
 
             /* SearchEmbed Specific */
             case SONG -> navigate(wrapper, e -> {
@@ -85,12 +89,12 @@ public class PaginationService {
     }
 
     public static void navigate(@Nonnull InteractionHookWrapper wrapper,
-                                @Nonnull PaginationServiceAction action) {
+                                @Nonnull EmbedAction action) {
         wrapper.nav(action::perform);
     }
 
     public static void add(@Nonnull String messageId,
-                           @Nonnull Paginated<MessageEmbed> embed,
+                           @Nonnull PaginatedCursorized<EmbedEntity, Page> embed,
                            @Nonnull InteractionHook hook) {
         paginationMap.put(messageId, new InteractionHookWrapper(embed, hook));
         remove(messageId);

@@ -1,14 +1,13 @@
 package personal.opensrcerer.messaging.impl.paginatedEmbeds.search
 
-import net.dv8tion.jda.api.entities.MessageEmbed
 import personal.opensrcerer.launch.SupersonicConstants
-import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated
 import personal.opensrcerer.messaging.entities.EmbedEntity
 import personal.opensrcerer.messaging.entities.Page
+import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedCursorized
 import personal.opensrcerer.responses.search.Result3
 import java.util.*
 
-class SearchEmbed(results: List<SearchEmbedResult>) : Paginated<MessageEmbed> {
+class SearchEmbed(results: List<SearchEmbedResult>) : PaginatedCursorized<EmbedEntity, Page> {
     private var currentType: SearchEmbedType = SupersonicConstants.DEFAULT_SEARCH_EMBED_TYPE
     private val map: EnumMap<SearchEmbedType, SearchEmbedResult> = EnumMap(SearchEmbedType::class.java)
 
@@ -31,31 +30,59 @@ class SearchEmbed(results: List<SearchEmbedResult>) : Paginated<MessageEmbed> {
         currentType = type
     }
 
+    fun currentRow(): Int? {
+        return map[currentType]?.selectedRow()
+    }
+
     fun currentType(): SearchEmbedType {
         return currentType
     }
 
-    override fun getPage(pageNumber: Int): MessageEmbed {
-        return map[currentType]?.getPage(pageNumber)!!.asMessageEmbed()
+    override fun getPage(pageNumber: Int): Page? {
+        return map[currentType]?.getPage(pageNumber)
     }
 
-    override fun previous(skip: Int): MessageEmbed {
-        return map[currentType]?.previous(skip)!!.asMessageEmbed()
+    override fun previous(skip: Int): Page? {
+        return map[currentType]?.previous(skip)
     }
 
-    override fun previous(): MessageEmbed {
-        return map[currentType]?.previous()!!.asMessageEmbed()
+    override fun previous(): Page? {
+        return map[currentType]?.previous()
     }
 
-    override fun current(): MessageEmbed {
-        return map[currentType]?.current()!!.asMessageEmbed()
+    override fun current(): Page? {
+        return map[currentType]?.current()
     }
 
-    override fun next(): MessageEmbed {
-        return map[currentType]?.next()!!.asMessageEmbed()
+    override fun next(): Page? {
+        return map[currentType]?.next()
     }
 
-    override fun next(skip: Int): MessageEmbed {
-        return map[currentType]?.next(skip)!!.asMessageEmbed()
+    override fun next(skip: Int): Page? {
+        return map[currentType]?.next(skip)
+    }
+
+    override fun selectedRow(): Int {
+        return map[currentType]!!.selectedRow()
+    }
+
+    override fun up() {
+        map[currentType]?.up()
+    }
+
+    override fun up(scrollBy: Int) {
+        map[currentType]?.up(scrollBy)
+    }
+
+    override fun select(): EmbedEntity? {
+        return map[currentType]?.select()
+    }
+
+    override fun down(scrollBy: Int) {
+        map[currentType]?.down(scrollBy)
+    }
+
+    override fun down() {
+        map[currentType]?.down()
     }
 }

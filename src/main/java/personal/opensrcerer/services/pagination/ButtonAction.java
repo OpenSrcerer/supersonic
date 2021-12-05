@@ -26,6 +26,10 @@ public enum ButtonAction {
         this.buttonId = buttonId;
     }
 
+    public String id() {
+        return buttonId;
+    }
+
     public static ButtonAction fromString(String text) {
         for (ButtonAction b : ButtonAction.values()) {
             if (b.buttonId.equalsIgnoreCase(text)) {

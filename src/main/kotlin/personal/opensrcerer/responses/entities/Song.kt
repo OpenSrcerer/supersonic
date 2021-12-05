@@ -53,7 +53,7 @@ class Song(
     }
 
     override fun embedName(): String {
-        return "[$id] / $title"
+        return title
     }
 
     override fun embedValue(): String {
