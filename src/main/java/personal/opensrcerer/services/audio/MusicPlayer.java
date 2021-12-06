@@ -1,4 +1,4 @@
-package personal.opensrcerer.audio;
+package personal.opensrcerer.services.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;

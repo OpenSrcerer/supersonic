@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.managers.AudioManager;
-import personal.opensrcerer.audio.MusicPlayer;
+import personal.opensrcerer.services.audio.MusicPlayer;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 import personal.opensrcerer.requests.RequestFormatter;
 import personal.opensrcerer.requests.media.StreamRequest;

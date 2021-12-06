@@ -5,12 +5,11 @@ import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
-import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbedType;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;

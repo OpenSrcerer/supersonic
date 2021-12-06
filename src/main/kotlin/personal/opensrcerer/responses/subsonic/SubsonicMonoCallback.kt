@@ -6,11 +6,8 @@ import okhttp3.Callback
 import okhttp3.Response
 import reactor.core.publisher.MonoSink
 import java.io.IOException
-import java.lang.Exception
 import java.time.Instant
 import java.time.temporal.ChronoUnit
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class SubsonicMonoCallback<T>(
     private val sink: MonoSink<T>,

@@ -4,8 +4,8 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import personal.opensrcerer.client.SubsonicClient;
-import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbed;
-import personal.opensrcerer.messaging.paginatedEmbeds.search.SearchEmbedActionRowTemplates;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedActionRowTemplates;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
 import personal.opensrcerer.requests.search.Search3;
 import personal.opensrcerer.services.pagination.PaginationService;
@@ -39,11 +39,11 @@ public class SearchSink extends SlashCommandSink {
         );
 
         results.map(SearchEmbed::new)
-                .subscribe(e -> event.replyEmbeds(e.current())
+                .subscribe(e -> event.replyEmbeds(e.current().asMessageEmbed(e.currentRow()))
                             .addActionRows(SearchEmbedActionRowTemplates.Companion.get(e))
-                            .queue(i -> i.retrieveOriginal()
-                            .queue(m -> PaginationService
-                            .add(m.getId(), e, i)))
+                            .queue(hook -> hook.retrieveOriginal()
+                            .queue(message -> PaginationService
+                            .add(message.getId(), e, hook)))
                 );
     }
 }

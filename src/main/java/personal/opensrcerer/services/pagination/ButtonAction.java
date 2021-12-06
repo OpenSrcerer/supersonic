@@ -2,10 +2,16 @@ package personal.opensrcerer.services.pagination;
 
 public enum ButtonAction {
 
+    /* Pagination */
     FIRST("first"),
     PREV("prev"),
     NEXT("next"),
     LAST("last"),
+
+    /* Cursorization */
+    UP("up"),
+    SELECT("select"),
+    DOWN("down"),
 
     /* Search Embed Results */
     SONG("song"),
@@ -18,6 +24,10 @@ public enum ButtonAction {
 
     ButtonAction(String buttonId) {
         this.buttonId = buttonId;
+    }
+
+    public String id() {
+        return buttonId;
     }
 
     public static ButtonAction fromString(String text) {

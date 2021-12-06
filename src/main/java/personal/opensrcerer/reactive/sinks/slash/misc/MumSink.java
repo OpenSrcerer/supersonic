@@ -2,12 +2,7 @@ package personal.opensrcerer.reactive.sinks.slash.misc;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import personal.opensrcerer.client.SubsonicClient;
 import personal.opensrcerer.reactive.sinks.slash.SlashCommandSink;
-import personal.opensrcerer.requests.search.Search2;
-
-import java.util.Arrays;
-import java.util.Map;
 
 public class MumSink extends SlashCommandSink {
 
