@@ -1,6 +1,8 @@
 language: java
 
-if: branch = master
+branches:
+  only:
+    - master
 
 jobs:
   include:
