@@ -54,7 +54,7 @@ public class AudioService {
             manager.openAudioConnection(event.getGuild().getVoiceChannelById(memberChannelId));
         }
 
-        if (manager.isConnected()) {
+        if (!manager.isConnected()) {
             manager.setConnectionListener(new ConnectionListener() {
                 @Override
                 public void onPing(long ping) {
@@ -74,7 +74,6 @@ public class AudioService {
         } else {
             addToQueue(event, embed.select().id());
         }
-
 
         event.deferEdit().queue();
     }
