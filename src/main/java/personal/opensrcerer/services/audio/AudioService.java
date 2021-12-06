@@ -54,34 +54,44 @@ public class AudioService {
             manager.openAudioConnection(event.getGuild().getVoiceChannelById(memberChannelId));
         }
 
-        manager.setConnectionListener(new ConnectionListener() {
-            @Override
-            public void onPing(long ping) {
-            }
-
-            @Override
-            public void onStatusChange(@NotNull ConnectionStatus status) {
-                if (status.equals(ConnectionStatus.CONNECTED)) {
-                    MusicPlayer.MUSIC_PLAYER.loadAndPlay(
-                            event.getTextChannel(),
-                            RequestFormatter.INSTANCE.getUrl(
-                                    new StreamRequest(
-                                            Map.of(
-                                                    "id", embed.select().id(),
-                                                    "maxBitRate", 128
-                                            )
-                                    ),
-                                    event.getGuild().getId()
-                            ).toString()
-                    );
+        if (manager.isConnected()) {
+            manager.setConnectionListener(new ConnectionListener() {
+                @Override
+                public void onPing(long ping) {
                 }
-            }
 
-            @Override
-            public void onUserSpeaking(@NotNull User user, boolean speaking) {
-            }
-        });
+                @Override
+                public void onStatusChange(@NotNull ConnectionStatus status) {
+                    if (status.equals(ConnectionStatus.CONNECTED)) {
+                        addToQueue(event, embed.select().id());
+                    }
+                }
+
+                @Override
+                public void onUserSpeaking(@NotNull User user, boolean speaking) {
+                }
+            });
+        } else {
+            addToQueue(event, embed.select().id());
+        }
+
 
         event.deferEdit().queue();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private void addToQueue(ButtonClickEvent event, String trackId) {
+        MusicPlayer.MUSIC_PLAYER.loadAndPlay(
+                event.getTextChannel(),
+                RequestFormatter.INSTANCE.getUrl(
+                        new StreamRequest(
+                                Map.of(
+                                        "id", trackId,
+                                        "maxBitRate", 128
+                                )
+                        ),
+                        event.getGuild().getId()
+                ).toString()
+        );
     }
 }
