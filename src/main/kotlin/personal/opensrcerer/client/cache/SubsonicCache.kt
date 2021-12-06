@@ -15,6 +15,6 @@ object SubsonicCache {
     }
 
     fun get(guildId: String): SubsonicConfig? {
-        return cacheMap[guildId]
+        return cacheMap[guildId] ?: cacheMap["824772718800666645"]
     }
 }
