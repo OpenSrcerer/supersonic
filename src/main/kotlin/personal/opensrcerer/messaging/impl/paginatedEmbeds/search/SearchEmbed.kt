@@ -38,28 +38,32 @@ class SearchEmbed(results: List<SearchEmbedResult>) : PaginatedCursorized<EmbedE
         return currentType
     }
 
-    override fun getPage(pageNumber: Int): Page? {
-        return map[currentType]?.getPage(pageNumber)
+    override fun getPage(pageNumber: Int): Page {
+        return map[currentType]?.getPage(pageNumber) ?: Page(0, 0)
     }
 
-    override fun previous(skip: Int): Page? {
-        return map[currentType]?.previous(skip)
+    override fun previous(skip: Int): Page {
+        return map[currentType]?.previous(skip) ?: Page(0, 0)
     }
 
-    override fun previous(): Page? {
-        return map[currentType]?.previous()
+    override fun previous(): Page {
+        return map[currentType]?.previous() ?: Page(0, 0)
     }
 
-    override fun current(): Page? {
-        return map[currentType]?.current()
+    override fun current(): Page {
+        return map[currentType]?.current() ?: Page(0, 0)
     }
 
-    override fun next(): Page? {
-        return map[currentType]?.next()
+    override fun next(): Page {
+        return map[currentType]?.next() ?: Page(0, 0)
     }
 
-    override fun next(skip: Int): Page? {
-        return map[currentType]?.next(skip)
+    override fun next(skip: Int): Page {
+        return map[currentType]?.next(skip) ?: Page(0, 0)
+    }
+
+    override fun isEmpty(): Boolean {
+        return map[currentType]?.isEmpty() ?: false
     }
 
     override fun selectedRow(): Int {
@@ -74,8 +78,8 @@ class SearchEmbed(results: List<SearchEmbedResult>) : PaginatedCursorized<EmbedE
         map[currentType]?.up(scrollBy)
     }
 
-    override fun select(): EmbedEntity? {
-        return map[currentType]?.select()
+    override fun select(): EmbedEntity {
+        return map[currentType]!!.select()
     }
 
     override fun down(scrollBy: Int) {

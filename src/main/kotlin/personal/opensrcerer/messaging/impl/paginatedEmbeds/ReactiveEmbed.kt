@@ -55,6 +55,10 @@ open class ReactiveEmbed(
         } else pages[currentPage.updateAndGet { p: Int -> p + skip }]
     }
 
+    override fun isEmpty(): Boolean {
+        return pages.isEmpty()
+    }
+
     /* Implementation for Cursorization */
 
     override fun selectedRow(): Int {
@@ -72,8 +76,7 @@ open class ReactiveEmbed(
         currentRow.decrementAndGet()
     }
 
-    override fun select(): EmbedEntity? {
-        if (pages.isEmpty()) return null
+    override fun select(): EmbedEntity {
         return pages[currentPage.get()].getEntityAtRow(currentRow.get())
     }
 

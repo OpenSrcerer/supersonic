@@ -20,10 +20,10 @@ public abstract class SlashEmitter extends DiscordEmitter<SlashCommandEvent> {
 
     @Override
     public void emit() {
-        super.flux()
+        super.topFlux()
                 .filter(this::filterValid)
-                .filter(sink()::authorize)
-                .subscribe(sink()::receive);
+                .filter(topSink()::authorize)
+                .subscribe(topSink()::receive);
     }
 
     @Override
@@ -36,7 +36,7 @@ public abstract class SlashEmitter extends DiscordEmitter<SlashCommandEvent> {
     }
 
     @Override
-    public AuthorizableSink<SlashCommandEvent> sink() {
-        return (AuthorizableSink<SlashCommandEvent>) super.sink();
+    public AuthorizableSink<SlashCommandEvent> topSink() {
+        return (AuthorizableSink<SlashCommandEvent>) super.topSink();
     }
 }

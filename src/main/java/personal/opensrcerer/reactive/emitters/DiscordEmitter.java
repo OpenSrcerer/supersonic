@@ -47,11 +47,20 @@ public abstract class DiscordEmitter<E extends GenericEvent> implements Emitter 
                 .subscribe(sink::receive);
     }
 
-    public Flux<E> flux() {
+    /**
+     * @return The Flux of the object that implemented this
+     * method last.
+     */
+    public Flux<E> topFlux() {
         return this.flux;
     }
 
-    public Sink<E> sink() {
+
+    /**
+     * @return The Sink of the object that implemented
+     * this method last.
+     */
+    public Sink<E> topSink() {
         return this.sink;
     }
 

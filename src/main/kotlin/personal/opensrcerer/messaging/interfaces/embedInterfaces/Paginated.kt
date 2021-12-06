@@ -1,8 +1,5 @@
 package personal.opensrcerer.messaging.interfaces.embedInterfaces
 
-import net.dv8tion.jda.api.interactions.components.ActionRow
-import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedActionRowTemplates
-
 interface Paginated<R> {
     /**
      * Get a page by its number.
@@ -44,4 +41,9 @@ interface Paginated<R> {
      * @return The current page after skipping.
      */
     fun next(skip: Int): R?
+
+    /**
+     * @return Whether this embed has any data.
+     */
+    fun isEmpty(): Boolean
 }

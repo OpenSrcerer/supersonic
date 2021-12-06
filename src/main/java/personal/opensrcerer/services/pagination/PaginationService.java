@@ -1,17 +1,18 @@
 package personal.opensrcerer.services.pagination;
 
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import personal.opensrcerer.launch.SupersonicConstants;
+import personal.opensrcerer.messaging.constant.ConstantEmbeds;
 import personal.opensrcerer.messaging.entities.EmbedEntity;
 import personal.opensrcerer.messaging.entities.Page;
-import personal.opensrcerer.messaging.impl.paginatedEmbeds.ReactiveEmbed;
 import personal.opensrcerer.messaging.interfaces.discordInterfaces.InteractionHookWrapper;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.Cursorized;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedCursorized;
+import personal.opensrcerer.services.audio.AudioService;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -43,54 +44,69 @@ public class PaginationService {
     }
 
     @FunctionalInterface
-    interface EmbedAction {
+    interface EmbedAction<T, U> {
         /**
          * Pagination to perform on given embed.
          * @param paginatedCursorized Embed to change.
          */
-        void perform(PaginatedCursorized<EmbedEntity, Page> paginatedCursorized);
+        void perform(PaginatedCursorized<T, U> paginatedCursorized);
     }
 
-    public static void decode(@Nonnull String userId, @Nonnull String messageId, String action) {
-        var wrapper = paginationMap.get(messageId);
-        if (wrapper != null && wrapper.isOwner(userId)) {
-            decode(wrapper, messageId, ButtonAction.fromString(action));
+    @SuppressWarnings("ConstantConditions")
+    public static void decode(@Nonnull ButtonClickEvent event) {
+        var wrapper = paginationMap.get(event.getMessageId());
+        if (wrapper != null && wrapper.isOwner(event.getUser().getId())) {
+            decode(event, wrapper, event.getMessageId(), ButtonAction.fromString(event.getButton().getId()));
         }
     }
 
-    private static void decode(@Nonnull InteractionHookWrapper wrapper,
+    private static void decode(@Nonnull ButtonClickEvent event,
+                               @Nonnull InteractionHookWrapper wrapper,
                                @Nonnull String messageId,
                                @Nonnull ButtonAction action) {
         switch (action) {
             /* Pagination */
-            case FIRST -> navigate(wrapper, e -> e.previous(Integer.MAX_VALUE));
-            case PREV -> navigate(wrapper, Paginated::previous);
-            case NEXT -> navigate(wrapper, Paginated::next);
-            case LAST -> navigate(wrapper, e -> e.next(Integer.MAX_VALUE));
+            case FIRST -> navigate(event, wrapper, pc -> pc.previous(Integer.MAX_VALUE));
+            case PREV -> navigate(event, wrapper, Paginated::previous);
+            case NEXT -> navigate(event, wrapper, Paginated::next);
+            case LAST -> navigate(event, wrapper, pc -> pc.next(Integer.MAX_VALUE));
 
             /* Cursorization */
-            case UP -> navigate(wrapper, Cursorized::up);
-            case SELECT -> navigate(wrapper, e -> e.select());
-            case DOWN -> navigate(wrapper, Cursorized::down);
+            case UP -> navigate(event, wrapper, Cursorized::up);
+            case SELECT -> addTrackToQueue(event, wrapper);
+            case DOWN -> navigate(event, wrapper, Cursorized::down);
 
             /* SearchEmbed Specific */
-            case SONG -> navigate(wrapper, e -> {
-                if (e instanceof SearchEmbed) ((SearchEmbed) e).type(SearchEmbedType.SONG);
+            case SONG -> navigate(event, wrapper, pc -> {
+                if (pc instanceof SearchEmbed) ((SearchEmbed) pc).type(SearchEmbedType.SONG);
             });
-            case ALBUM -> navigate(wrapper, e -> {
-                if (e instanceof SearchEmbed) ((SearchEmbed) e).type(SearchEmbedType.ALBUM);
+            case ALBUM -> navigate(event, wrapper, pc -> {
+                if (pc instanceof SearchEmbed) ((SearchEmbed) pc).type(SearchEmbedType.ALBUM);
             });
-            case ARTIST -> navigate(wrapper, e -> {
-                if (e instanceof SearchEmbed) ((SearchEmbed) e).type(SearchEmbedType.ARTIST);
+            case ARTIST -> navigate(event, wrapper, pc -> {
+                if (pc instanceof SearchEmbed) ((SearchEmbed) pc).type(SearchEmbedType.ARTIST);
             });
 
             case DELETE -> removeNow(wrapper, messageId);
         }
     }
 
-    public static void navigate(@Nonnull InteractionHookWrapper wrapper,
-                                @Nonnull EmbedAction action) {
-        wrapper.nav(action::perform);
+    public static void addTrackToQueue(@Nonnull ButtonClickEvent event,
+                                       @Nonnull InteractionHookWrapper wrapper) {
+        wrapper.run(embed -> {
+            AudioService.getInstance().addToQueueHandler(event, embed);
+            wrapper.replace(ConstantEmbeds.Companion.addedToQueue(embed.select()));
+        });
+    }
+
+    /**
+     * Move up or down using cursorization, or left or right using pagination,
+     */
+    public static void navigate(@Nonnull ButtonClickEvent event,
+                                @Nonnull InteractionHookWrapper wrapper,
+                                @Nonnull EmbedAction<EmbedEntity, Page> action) {
+        wrapper.modify(action::perform);
+        event.deferEdit().queue();
     }
 
     public static void add(@Nonnull String messageId,

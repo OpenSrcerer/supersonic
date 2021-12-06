@@ -13,6 +13,10 @@ class SearchEmbedActionRowTemplates {
          * message for PaginatedCursorized embeds.
          */
         fun <T, U> get(embed: PaginatedCursorized<T, U>): List<ActionRow> {
+            if (embed.isEmpty()) {
+                return emptyList()
+            }
+
             return when (embed) {
                 is SearchEmbed -> {
                     return when (embed.currentType()) {
@@ -59,7 +63,7 @@ class SearchEmbedActionRowTemplates {
             return ActionRow.of(
                 Button.secondary(UUID.randomUUID().toString(), " "),
                 Button.primary(ButtonAction.UP.id(), "⬆️"),
-                Button.primary(ButtonAction.SELECT.id(), "\uD83C\uDFB6"),
+                Button.danger(ButtonAction.DELETE.id(), "\uD83D\uDDD1️"),
                 Button.primary(ButtonAction.DOWN.id(), "⬇️"),
                 Button.secondary(UUID.randomUUID().toString(), " ")
             )
@@ -68,9 +72,9 @@ class SearchEmbedActionRowTemplates {
         private fun defaultPaginationActionRow(): ActionRow {
             return ActionRow.of(
                 Button.primary(ButtonAction.FIRST.id(), "⏪"),
-                Button.primary(ButtonAction.PREV.id(), "◀"),
-                Button.danger(ButtonAction.DELETE.id(), "\uD83D\uDDD1️"),
-                Button.primary(ButtonAction.NEXT.id(), "▶"),
+                Button.primary(ButtonAction.PREV.id(), "⬅️"),
+                Button.primary(ButtonAction.SELECT.id(), "▶️"),
+                Button.primary(ButtonAction.NEXT.id(), "➡️"),
                 Button.primary(ButtonAction.LAST.id(), "⏩")
             )
         }

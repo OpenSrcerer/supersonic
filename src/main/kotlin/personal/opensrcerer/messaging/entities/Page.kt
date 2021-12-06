@@ -2,6 +2,7 @@ package personal.opensrcerer.messaging.entities
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed
+import personal.opensrcerer.messaging.constant.ConstantEmbeds
 
 class Page(
     private val pageNumber: Int,
@@ -22,6 +23,10 @@ class Page(
     }
 
     fun asMessageEmbed(selectedRow: Int): MessageEmbed {
+        if (entityPage.isEmpty()) {
+            return ConstantEmbeds.noResults()
+        }
+
         var row = 0
         val builder = entityPage.fold(EmbedBuilder()) { b, e ->
             b.addField(e.asEmbedField(row == selectedRow))

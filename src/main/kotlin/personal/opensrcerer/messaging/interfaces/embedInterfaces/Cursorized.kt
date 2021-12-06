@@ -26,7 +26,7 @@ interface Cursorized<R> {
     /**
      * Selects and returns the first element.
      */
-    fun select(): R?
+    fun select(): R
 
     /**
      * Scrolls down the embed list of results by N rows.
