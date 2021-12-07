@@ -26,6 +26,7 @@ After larger music bots like Groovy and Rhythm were taken down by Youtube in an 
 <br>
 
 <h1 align=center>Features</h1>
+
 * Powerful audio managment using Slash Commands & Buttons
 * Choose from a collection of public music servers to use in your Discord server
 * If you don't like the content they have, you can always make and add your own!
