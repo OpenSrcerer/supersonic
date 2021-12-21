@@ -70,5 +70,15 @@ test {
 task runsupersonic(type: Exec, dependsOn: [compileKotlin, compileJava, processResources, classes]) {
     group = "Execution"
     description = "Run the supersonic bot"
+
+    Properties properties = new Properties()
+    def variables = project.rootProject.file(".env")
+    if (variables.exists()) {
+        properties.load(variables.newDataInputStream())
+    } else {
+        throw new Exception("Missing .env file in root project dir")
+    }
+    environment "DISCORD_TOKEN", properties.getProperty('DISCORD_TOKEN')
+
     commandLine "java", "-classpath", sourceSets.main.runtimeClasspath.getAsPath(), javaMainClass
 }
