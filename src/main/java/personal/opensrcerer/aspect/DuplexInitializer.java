@@ -45,6 +45,7 @@ public class DuplexInitializer {
                     try {
                         Emitter emitter = (Emitter) con.newInstance();
                         emitter.emit();
+                        logger.info("Duplex up: " + duplex.getSimpleName());
                     } catch (Exception ex) {
                         logger.error("Issue initializing duplexes:", ex);
                     }
