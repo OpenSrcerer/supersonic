@@ -19,9 +19,8 @@ repositories {
 }
 
 shadowJar {
-    manifest {
-        attributes 'Main-Class': 'personal.opensrcerer.SupersonicApplication'
-    }
+    manifest.attributes('Multi-Release': 'true')
+    manifest.attributes('Main-Class' : 'personal.opensrcerer.SupersonicApplication')
 }
 
 compileKotlin {
