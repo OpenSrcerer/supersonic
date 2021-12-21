@@ -5,16 +5,16 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.RestAction;
-import personal.opensrcerer.config.EmitterConfiguration;
+import personal.opensrcerer.aspect.DuplexInitializer;
+import personal.opensrcerer.aspect.PreDuplex;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.duplex.abstractions.DiscordDuplex;
 import personal.opensrcerer.launch.SupersonicConstants;
-import personal.opensrcerer.reactive.emitters.Emitter;
 
 import java.util.EnumSet;
 
+@PreDuplex
 public class ReadyDuplex extends DiscordDuplex<ReadyEvent> {
-
     public ReadyDuplex() {
         super(ReadyEvent.class);
     }
@@ -22,11 +22,7 @@ public class ReadyDuplex extends DiscordDuplex<ReadyEvent> {
     @Override
     public void onEvent(ReadyEvent readyEvent) {
         initSlashCommands();
-        initEmitters();
-    }
-
-    private static void initEmitters() {
-        EmitterConfiguration.get().forEach(Emitter::emit);
+        DuplexInitializer.initializePostDuplexes();
     }
 
     private static void initSlashCommands() {

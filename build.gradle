@@ -52,11 +52,14 @@ dependencies {
     // Annotations
     compileOnly 'org.jetbrains:annotations:22.0.0'
 
-    // Lavaplayer
+    // LavaPlayer
     implementation 'com.sedmelluq:lavaplayer:1.3.78'
 
     // Apache-Commons
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+    // Reflections
+    implementation 'org.reflections:reflections:0.10.2'
 }
 
 ext {

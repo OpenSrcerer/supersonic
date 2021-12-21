@@ -2,6 +2,7 @@ package personal.opensrcerer.duplex.impl.slash.player;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import personal.opensrcerer.aspect.PostDuplex;
 import personal.opensrcerer.client.SubsonicClient;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
@@ -12,6 +13,7 @@ import personal.opensrcerer.services.pagination.PaginationService;
 
 import java.util.Map;
 
+@PostDuplex
 public class SearchDuplex extends SlashCommandDuplex {
     public SearchDuplex() {
         super(SlashCommand.SEARCH.getName());

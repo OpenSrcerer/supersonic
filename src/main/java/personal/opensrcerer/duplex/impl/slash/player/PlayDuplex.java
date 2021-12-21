@@ -3,6 +3,7 @@ package personal.opensrcerer.duplex.impl.slash.player;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.managers.AudioManager;
+import personal.opensrcerer.aspect.PostDuplex;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
 import personal.opensrcerer.requests.RequestFormatter;
@@ -11,6 +12,7 @@ import personal.opensrcerer.services.audio.MusicPlayer;
 
 import java.util.Map;
 
+@PostDuplex
 public class PlayDuplex extends SlashCommandDuplex {
     public PlayDuplex() {
         super(SlashCommand.PLAY.getName());
