@@ -2,12 +2,10 @@ package personal.opensrcerer.duplex.interfaces;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import personal.opensrcerer.reactive.emitters.DiscordEmitter;
 
 /**
  * Handles events emitted by Emitters.
  * @param <E> Type of event to receive.
- * @see DiscordEmitter
  */
 @FunctionalInterface
 public interface Sink<E> {
