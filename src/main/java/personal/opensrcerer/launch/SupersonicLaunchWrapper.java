@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public abstract class SupersonicLaunchWrapper {
     public static void run() throws LoginException {
+        DuplexInitializer.scan();
+
         SupersonicConstants.ENVIRONMENT_VARIABLES = System.getenv();
 
         SupersonicConstants.JDA = JDABuilder.create(

@@ -8,15 +8,16 @@ import org.slf4j.LoggerFactory;
 import personal.opensrcerer.duplex.interfaces.Emitter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 
 public class DuplexInitializer {
     private static final Logger logger = LoggerFactory.getLogger(DuplexInitializer.class);
 
-    private static final Set<Class<?>> preDuplexes;
-    private static final Set<Class<?>> postDuplexes;
+    private static Set<Class<?>> preDuplexes = Collections.emptySet();
+    private static Set<Class<?>> postDuplexes = Collections.emptySet();
 
-    static {
+    public static void scan() {
         Reflections reflections = new Reflections(
                 new ConfigurationBuilder()
                         .forPackage("personal.opensrcerer.duplex")
@@ -27,11 +28,11 @@ public class DuplexInitializer {
         postDuplexes = reflections.getTypesAnnotatedWith(PostDuplex.class);
     }
 
-    public synchronized static void initializePreDuplexes() {
+    public static void initializePreDuplexes() {
         initializeDuplexes(preDuplexes);
     }
 
-    public synchronized static void initializePostDuplexes() {
+    public static void initializePostDuplexes() {
         initializeDuplexes(postDuplexes);
     }
 
