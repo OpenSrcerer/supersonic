@@ -23,16 +23,9 @@ public abstract class DiscordDuplex<
     protected final Flux<E> flux;
     private EnumSet<Permission> requiredPermissions;
 
-    public DiscordDuplex(Class<E> type, Permission... permissions) {
+    public DiscordDuplex(Class<E> type) {
         this.type = type;
         this.flux = Flux.create(this::consumeFluxSink, FluxSink.OverflowStrategy.BUFFER);
-
-        if (permissions.length == 0) {
-            requiredPermissions = EnumSet.noneOf(Permission.class);
-            return;
-        }
-
-        requiredPermissions = EnumSet.of(permissions[0], permissions);
     }
 
     @Override

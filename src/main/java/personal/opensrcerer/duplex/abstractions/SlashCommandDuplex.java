@@ -9,11 +9,8 @@ public abstract class SlashCommandDuplex
 {
     private final String commandName;
 
-    public SlashCommandDuplex(
-            String commandName,
-            Permission... permissions
-    ) {
-        super(SlashCommandEvent.class, permissions);
+    public SlashCommandDuplex(String commandName) {
+        super(SlashCommandEvent.class);
         this.commandName = commandName;
     }
 

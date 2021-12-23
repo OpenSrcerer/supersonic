@@ -19,13 +19,7 @@ import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
 })
 public class JoinDuplex extends SlashCommandDuplex {
     public JoinDuplex() {
-        super(
-                SlashCommand.JOIN.getName(),
-                Permission.MESSAGE_WRITE,
-                Permission.VIEW_CHANNEL,
-                Permission.VOICE_CONNECT,
-                Permission.VOICE_SPEAK
-        );
+        super(SlashCommand.JOIN.getName());
     }
 
     @Override
