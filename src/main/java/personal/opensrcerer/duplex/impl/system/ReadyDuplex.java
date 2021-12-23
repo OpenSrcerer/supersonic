@@ -33,14 +33,12 @@ public class ReadyDuplex extends DiscordDuplex<ReadyEvent> {
         }
 
         RestAction<?> action = null;
-
         for (SlashCommand command : commands) {
             if (action == null) {
                 action = getAction(command);
             }
             action = action.and(getAction(command));
         }
-
         action.queue();
     }
 

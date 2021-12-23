@@ -5,11 +5,18 @@ import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
+import personal.opensrcerer.aspect.AuthorizedBy;
 import personal.opensrcerer.aspect.PostDuplex;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
 
 @PostDuplex
+@AuthorizedBy(requiredPermissions = {
+        Permission.MESSAGE_WRITE,
+        Permission.VIEW_CHANNEL,
+        Permission.VOICE_CONNECT,
+        Permission.VOICE_SPEAK
+})
 public class JoinDuplex extends SlashCommandDuplex {
     public JoinDuplex() {
         super(
