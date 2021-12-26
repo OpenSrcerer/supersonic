@@ -1,16 +1,36 @@
 version: "3.9"
 
 networks:
-  ss-net:
+  ss-bridge:
     driver: bridge
+
+volumes:
+  ss-db-data:
 
 services:
   supersonic:
-    container_name: supersonic-container
+    container_name: supersonic
     networks:
-      - ss-net
+      - ss-bridge
     build:
       context: .
     restart: always
     hostname: supersonic
     env_file: .env
+
+  supersonic-db:
+    container_name: supersonic-db
+    hostname: supersonic-db
+    image: postgres:14.1-bullseye
+    restart: always
+    networks:
+      - ss-bridge
+    expose:
+      - 5432
+    ports: # Remove after testing
+      - "5432:5432"
+    env_file: .env
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ss-db-data:/var/lib/postgresql/data

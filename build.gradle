@@ -59,6 +59,12 @@ dependencies {
 
     // Reflections
     implementation 'org.reflections:reflections:0.10.2'
+
+    // H2
+    implementation 'com.h2database:h2:2.0.204'
+
+    // Hibernate
+    implementation 'org.hibernate.orm:hibernate-core:6.0.0.Beta3'
 }
 
 ext {
