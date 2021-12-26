@@ -4,24 +4,14 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public abstract class SlashCommandDuplex extends AuthDiscordDuplex<SlashCommandEvent>
+public abstract class SlashCommandDuplex
+        extends DiscordDuplex<SlashCommandEvent>
 {
     private final String commandName;
 
-    public SlashCommandDuplex(
-            String commandName,
-            Permission... permissions
-    ) {
-        super(SlashCommandEvent.class, permissions);
+    public SlashCommandDuplex(String commandName) {
+        super(SlashCommandEvent.class);
         this.commandName = commandName;
-    }
-
-    @Override
-    public void emit() {
-        super.flux
-                .filter(this::isValid)
-                .filter(this::authorize)
-                .subscribe(this::receive);
     }
 
     @Override
@@ -38,14 +28,14 @@ public abstract class SlashCommandDuplex extends AuthDiscordDuplex<SlashCommandE
     public boolean authorize(SlashCommandEvent event) {
         Member self = event.getGuild().getSelfMember();
 
-        if (self.hasPermission(super.requiredPermissions())) {
+        if (self.hasPermission(super.getRequiredPermissions())) {
             return true;
         }
 
         StringBuilder builder = new StringBuilder()
                 .append("I am missing the required permissions for this command!" +
                         "\nPlease make sure that I have these permissions:\n\n");
-        for (Permission p : super.requiredPermissions()) {
+        for (Permission p : super.getRequiredPermissions()) {
             builder.append(p.getName()).append("\n");
         }
 

@@ -1,6 +1,7 @@
 package personal.opensrcerer.duplex.abstractions;
 
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.Contract;
@@ -12,12 +13,15 @@ import personal.opensrcerer.launch.SupersonicConstants;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
+import java.util.EnumSet;
+
 public abstract class DiscordDuplex<
         E extends GenericEvent
         > implements Duplex<E>, Authorizable<E>, Filterable<E>
 {
     private final Class<E> type;
     protected final Flux<E> flux;
+    private EnumSet<Permission> requiredPermissions;
 
     public DiscordDuplex(Class<E> type) {
         this.type = type;
@@ -26,7 +30,8 @@ public abstract class DiscordDuplex<
 
     @Override
     public void emit() {
-        flux.filter(this::isValid)
+        this.flux.filter(this::isValid)
+                .filter(this::authorize)
                 .subscribe(this::receive);
     }
 
@@ -44,5 +49,15 @@ public abstract class DiscordDuplex<
                 emitter.next(type.cast(event));
             }
         };
+    }
+
+    public EnumSet<Permission> getRequiredPermissions() {
+        return requiredPermissions;
+    }
+
+    public void setRequiredPermissions(Permission[] requiredPermissions) {
+        this.requiredPermissions = requiredPermissions.length > 0 ?
+                EnumSet.of(requiredPermissions[0], requiredPermissions) :
+                EnumSet.noneOf(Permission.class);
     }
 }
