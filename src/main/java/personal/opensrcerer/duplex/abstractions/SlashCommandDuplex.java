@@ -27,8 +27,9 @@ public abstract class SlashCommandDuplex
     @SuppressWarnings("ConstantConditions")
     public boolean authorize(SlashCommandEvent event) {
         Member self = event.getGuild().getSelfMember();
+        var requiredPermissions = super.getRequiredPermissions();
 
-        if (self.hasPermission(super.getRequiredPermissions())) {
+        if (requiredPermissions.isEmpty() || self.hasPermission(requiredPermissions)) {
             return true;
         }
 
