@@ -1,7 +1,18 @@
 plugins {
     id 'java'
-    id "com.github.johnrengelman.shadow" version "7.0.0"
-    id "org.jetbrains.kotlin.jvm" version "1.5.30"
+
+    // ShadowJar
+    id "com.github.johnrengelman.shadow" version "7.1.1"
+
+    // Kotlin JVM
+    id "org.jetbrains.kotlin.jvm" version "1.6.10"
+
+    // No argument constructor
+    id "org.jetbrains.kotlin.plugin.noarg" version "1.6.10"
+}
+
+noArg {
+    annotation("jakarta.persistence.Entity")
 }
 
 group 'personal.opensrcerer'
@@ -29,7 +40,7 @@ compileKotlin {
 
 dependencies {
     // SLF4J
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.16.0'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.0'
 
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
@@ -39,7 +50,7 @@ dependencies {
     implementation("net.dv8tion:JDA:4.4.0_352")
 
     // Jackson XML
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.1'
 
     // OkHttp4
     implementation('com.squareup.okhttp3:okhttp:4.9.3')
