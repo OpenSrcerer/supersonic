@@ -14,6 +14,14 @@ class Guild(
         fetch = FetchType.LAZY,
         mappedBy = "guild"
     )
-    @JoinColumn(name = "guild_servers")
-    val servers: Set<SubsonicServer>
-)
+    @Column(name = "guild_servers")
+    val servers: MutableSet<SubsonicServer>
+) {
+    fun addServer(server: SubsonicServer) {
+        this.servers.add(server)
+    }
+
+    fun removeServer(server: SubsonicServer) {
+        this.servers.remove(server)
+    }
+}
