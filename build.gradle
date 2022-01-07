@@ -77,8 +77,8 @@ dependencies {
     // Hibernate
     implementation 'org.hibernate.orm:hibernate-core:6.0.0.Beta3'
 
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
-    implementation 'mysql:mysql-connector-java:8.0.27'
+    // Postgres Driver
+    implementation 'org.postgresql:postgresql:42.3.1'
 }
 
 ext {
@@ -92,15 +92,5 @@ test {
 task runsupersonic(type: Exec, dependsOn: [compileKotlin, compileJava, processResources, classes]) {
     group = "Execution"
     description = "Run the supersonic bot"
-
-    Properties properties = new Properties()
-    def variables = project.rootProject.file(".env")
-    if (variables.exists()) {
-        properties.load(variables.newDataInputStream())
-    } else {
-        throw new Exception("Missing .env file in root project dir")
-    }
-    environment "DISCORD_TOKEN", properties.getProperty('DISCORD_TOKEN')
-
     commandLine "java", "-classpath", sourceSets.main.runtimeClasspath.getAsPath(), javaMainClass
 }

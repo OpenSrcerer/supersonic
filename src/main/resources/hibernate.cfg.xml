@@ -5,10 +5,10 @@
     <session-factory>
 
         <!-- JDBC Database connection settings -->
-        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/hibernate_db?useSSL=false</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">root</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/ss_db</property>
+        <property name="connection.username">supersonic</property>
+        <property name="connection.password">s0p3r!!s0n1c_=>>=>></property>
 
         <!-- JDBC connection pool settings using built-in test pool -->
         <property name="connection.pool_size">1</property>
