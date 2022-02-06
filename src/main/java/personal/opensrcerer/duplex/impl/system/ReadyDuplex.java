@@ -6,15 +6,15 @@ import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.RestAction;
 import personal.opensrcerer.aspect.DuplexInitializer;
-import personal.opensrcerer.aspect.PreDuplex;
+import personal.opensrcerer.aspect.annotations.PreDuplex;
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.duplex.abstractions.DiscordDuplex;
+import personal.opensrcerer.duplex.abstractions.DefaultDuplex;
 import personal.opensrcerer.launch.SupersonicConstants;
 
 import java.util.EnumSet;
 
 @PreDuplex
-public class ReadyDuplex extends DiscordDuplex<ReadyEvent> {
+public class ReadyDuplex extends DefaultDuplex<ReadyEvent> {
     public ReadyDuplex() {
         super(ReadyEvent.class);
     }

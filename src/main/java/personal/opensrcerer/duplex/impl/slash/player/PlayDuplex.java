@@ -1,11 +1,13 @@
 package personal.opensrcerer.duplex.impl.slash.player;
 
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.managers.AudioManager;
-import personal.opensrcerer.aspect.PostDuplex;
+import personal.opensrcerer.aspect.annotations.MappingStrategy;
+import personal.opensrcerer.aspect.annotations.PostDuplex;
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
+import personal.opensrcerer.duplex.abstractions.GenericSlashCommandDuplex;
+import personal.opensrcerer.duplex.payloads.impl.PlayEvent;
+import personal.opensrcerer.duplex.payloads.interfaces.EventMappingStrategy;
 import personal.opensrcerer.requests.RequestFormatter;
 import personal.opensrcerer.requests.media.StreamRequest;
 import personal.opensrcerer.services.audio.MusicPlayer;
@@ -13,14 +15,17 @@ import personal.opensrcerer.services.audio.MusicPlayer;
 import java.util.Map;
 
 @PostDuplex
-public class PlayDuplex extends SlashCommandDuplex {
+@MappingStrategy(EventMappingStrategy.SLASHCOMMANDEVENT_TO_PLAYEVENT)
+public class PlayDuplex extends GenericSlashCommandDuplex<PlayEvent> {
     public PlayDuplex() {
         super(SlashCommand.PLAY.getName());
     }
 
     @Override
     @SuppressWarnings("ConstantConditions")
-    public void onEvent(SlashCommandEvent event) {
+    public void onEvent(PlayEvent playEvent) {
+        var event = playEvent.raw();
+
         AudioManager manager = event.getGuild().getAudioManager();
         OptionMapping o = event.getOption("id");
         String botChannelId = (manager.isConnected()) ? manager.getConnectedChannel().getId() : null;

@@ -15,21 +15,21 @@ import reactor.core.publisher.FluxSink;
 
 import java.util.EnumSet;
 
-public abstract class DiscordDuplex<
-        E extends GenericEvent
-        > implements Duplex<E>, Authorizable<E>, Filterable<E>
+public abstract class DefaultDuplex<E>
+        implements Duplex<E>, Authorizable<E>, Filterable<E>
 {
-    private final Class<E> type;
     protected final Flux<E> flux;
+    protected final Class<E> jdaEventType;
+
     private EnumSet<Permission> requiredPermissions;
 
-    public DiscordDuplex(Class<E> type) {
-        this.type = type;
+    public DefaultDuplex(Class<E> jdaEventType) {
+        this.jdaEventType = jdaEventType;
         this.flux = Flux.create(this::consumeFluxSink, FluxSink.OverflowStrategy.BUFFER);
     }
 
     @Override
-    public void emit() {
+    public final void emit() {
         this.flux.filter(this::isValid)
                 .filter(this::authorize)
                 .subscribe(this::receive);
@@ -43,19 +43,19 @@ public abstract class DiscordDuplex<
     }
 
     @Contract(pure = true)
-    private @NotNull EventListener getEventListener(FluxSink<E> emitter) {
+    protected @NotNull EventListener getEventListener(FluxSink<E> emitter) {
         return event -> {
-            if (type.isInstance(event)) { // This is done to replace the usage of ListenerAdapter
-                emitter.next(type.cast(event));
+            if (jdaEventType.isInstance(event)) { // Find if the event type matches
+                emitter.next(jdaEventType.cast(event)); // If it does, cast
             }
         };
     }
 
-    public EnumSet<Permission> getRequiredPermissions() {
+    public final EnumSet<Permission> getRequiredPermissions() {
         return requiredPermissions;
     }
 
-    public void setRequiredPermissions(Permission[] requiredPermissions) {
+    public final void setRequiredPermissions(Permission[] requiredPermissions) {
         this.requiredPermissions = requiredPermissions.length > 0 ?
                 EnumSet.of(requiredPermissions[0], requiredPermissions) :
                 EnumSet.noneOf(Permission.class);

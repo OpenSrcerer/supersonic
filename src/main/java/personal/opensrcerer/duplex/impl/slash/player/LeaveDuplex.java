@@ -4,17 +4,17 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
-import personal.opensrcerer.aspect.AuthorizedBy;
-import personal.opensrcerer.aspect.PostDuplex;
+import personal.opensrcerer.aspect.annotations.AuthorizedBy;
+import personal.opensrcerer.aspect.annotations.PostDuplex;
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
+import personal.opensrcerer.duplex.abstractions.DefaultSlashCommandDuplex;
 import personal.opensrcerer.services.audio.MusicPlayer;
 
 @PostDuplex
-@AuthorizedBy(requiredPermissions = {
+@AuthorizedBy({
         Permission.MESSAGE_WRITE
 })
-public class LeaveDuplex extends SlashCommandDuplex {
+public class LeaveDuplex extends DefaultSlashCommandDuplex {
     public LeaveDuplex() {
         super(SlashCommand.LEAVE.getName());
     }

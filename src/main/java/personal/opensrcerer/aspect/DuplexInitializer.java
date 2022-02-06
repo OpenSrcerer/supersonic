@@ -6,7 +6,12 @@ import org.reflections.scanners.Scanners;
 import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import personal.opensrcerer.duplex.abstractions.DiscordDuplex;
+import personal.opensrcerer.aspect.annotations.AuthorizedBy;
+import personal.opensrcerer.aspect.annotations.MappingStrategy;
+import personal.opensrcerer.aspect.annotations.PostDuplex;
+import personal.opensrcerer.aspect.annotations.PreDuplex;
+import personal.opensrcerer.duplex.abstractions.DefaultDuplex;
+import personal.opensrcerer.duplex.abstractions.GenericDuplex;
 
 import javax.annotation.CheckForNull;
 import java.util.Arrays;
@@ -45,19 +50,29 @@ public class DuplexInitializer {
                 .ifPresent(con -> {
                     con.setAccessible(true);
                     try {
-                        DiscordDuplex<?> duplexInstance = (DiscordDuplex<?>) con.newInstance();
+                        DefaultDuplex<?> duplexInstance = (DefaultDuplex<?>) con.newInstance();
                         Permission[] permissions = secureDuplex(duplexInstance);
+                        String mappingStrategyName = null;
+
+                        if (duplexInstance instanceof GenericDuplex<?, ?> genericDuplex) {
+                            mappingStrategyName = setDuplexMappingStrategy(genericDuplex);
+                            if (mappingStrategyName == null) {
+                                logger.error(duplex.getSimpleName() + " - Missing mapping strategy, cannot init.");
+                                return;
+                            }
+                        }
+
                         duplexInstance.emit();
-                        logInitialization(duplex.getSimpleName(), permissions);
+                        logInitialization(duplex.getSimpleName(), permissions, mappingStrategyName);
                     } catch (Exception ex) {
-                        logger.error("Issue initializing duplexes:", ex);
+                        logger.error("Unhandled issue initializing duplexes:", ex);
                     }
                 })
         );
     }
 
     @CheckForNull
-    private static Permission[] secureDuplex(DiscordDuplex<?> duplex) {
+    private static Permission[] secureDuplex(DefaultDuplex<?> duplex) {
         Class<?> duplexType = duplex.getClass();
 
         if (duplexType.getAnnotation(AuthorizedBy.class) == null) {
@@ -66,25 +81,39 @@ public class DuplexInitializer {
 
         Permission[] requiredPermissions = duplexType
                 .getAnnotation(AuthorizedBy.class)
-                .requiredPermissions();
+                .value();
         duplex.setRequiredPermissions(requiredPermissions);
 
         return requiredPermissions;
     }
 
+    @CheckForNull
+    private static String setDuplexMappingStrategy(GenericDuplex<?, ?> duplex) {
+        Class<?> duplexType = duplex.getClass();
+
+        if (duplexType.getAnnotation(MappingStrategy.class) == null) {
+            return null;
+        }
+
+        personal.opensrcerer.duplex.payloads.interfaces.MappingStrategy<?, ?> mappingStrategy = duplexType
+                .getAnnotation(MappingStrategy.class)
+                .value()
+                .get();
+        duplex.setStrategy(mappingStrategy);
+
+        return mappingStrategy.getClass().getName();
+    }
+
     private static void logInitialization(
             String duplexName,
-            Permission[] permissions
+            Permission[] permissions,
+            String mappingStrategyName
     ) {
-        StringBuilder output = new StringBuilder();
-        if (permissions == null) {
-            output.append(duplexName)
-                    .append(" initialized with no Permission requirements.");
-        } else {
-            output.append(duplexName)
-                    .append(" initialized. Will be secured with: ")
-                    .append(Arrays.toString(permissions));
-        }
-        logger.info(output.toString());
+        String output = duplexName +
+                " - Required permissions: " +
+                ((permissions != null) ? Arrays.toString(permissions) : "none") +
+                ". Mapping strategy: " +
+                ((mappingStrategyName != null) ? mappingStrategyName : "none.");
+        logger.info(output);
     }
 }

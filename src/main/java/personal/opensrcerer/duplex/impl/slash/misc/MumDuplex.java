@@ -2,18 +2,18 @@ package personal.opensrcerer.duplex.impl.slash.misc;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import personal.opensrcerer.aspect.AuthorizedBy;
-import personal.opensrcerer.aspect.PostDuplex;
+import personal.opensrcerer.aspect.annotations.AuthorizedBy;
+import personal.opensrcerer.aspect.annotations.PostDuplex;
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.duplex.abstractions.SlashCommandDuplex;
+import personal.opensrcerer.duplex.abstractions.DefaultSlashCommandDuplex;
 
 @PostDuplex
-@AuthorizedBy(requiredPermissions = {
+@AuthorizedBy({
         Permission.VIEW_CHANNEL,
         Permission.MESSAGE_WRITE,
         Permission.ADMINISTRATOR
 })
-public class MumDuplex extends SlashCommandDuplex {
+public class MumDuplex extends DefaultSlashCommandDuplex {
     public MumDuplex() {
         super(SlashCommand.MUM.getName());
     }

@@ -4,12 +4,12 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
-public abstract class SlashCommandDuplex
-        extends DiscordDuplex<SlashCommandEvent>
+public abstract class DefaultSlashCommandDuplex
+        extends DefaultDuplex<SlashCommandEvent>
 {
     private final String commandName;
 
-    public SlashCommandDuplex(String commandName) {
+    public DefaultSlashCommandDuplex(String commandName) {
         super(SlashCommandEvent.class);
         this.commandName = commandName;
     }

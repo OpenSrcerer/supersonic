@@ -1,4 +1,4 @@
-package personal.opensrcerer.aspect;
+package personal.opensrcerer.aspect.annotations;
 
 import net.dv8tion.jda.api.Permission;
 
@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface AuthorizedBy {
-    Permission[] requiredPermissions();
+    Permission[] value();
 }
