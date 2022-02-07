@@ -7,7 +7,7 @@ import personal.opensrcerer.aspect.annotations.PostDuplex;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.duplex.abstractions.GenericSlashCommandDuplex;
 import personal.opensrcerer.duplex.payloads.impl.PlayEvent;
-import personal.opensrcerer.duplex.payloads.interfaces.EventMappingStrategy;
+import personal.opensrcerer.duplex.payloads.EventMappingStrategy;
 import personal.opensrcerer.requests.RequestFormatter;
 import personal.opensrcerer.requests.media.StreamRequest;
 import personal.opensrcerer.services.audio.MusicPlayer;
@@ -24,7 +24,7 @@ public class PlayDuplex extends GenericSlashCommandDuplex<PlayEvent> {
     @Override
     @SuppressWarnings("ConstantConditions")
     public void onEvent(PlayEvent playEvent) {
-        var event = playEvent.raw();
+
 
         AudioManager manager = event.getGuild().getAudioManager();
         OptionMapping o = event.getOption("id");

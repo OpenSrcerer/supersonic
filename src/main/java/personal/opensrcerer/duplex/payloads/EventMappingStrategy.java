@@ -1,11 +1,13 @@
-package personal.opensrcerer.duplex.payloads.interfaces;
+package personal.opensrcerer.duplex.payloads;
+
+import personal.opensrcerer.duplex.payloads.interfaces.SupersonicEvent;
 
 public enum EventMappingStrategy {
     SLASHCOMMANDEVENT_TO_PLAYEVENT(MappingStrategy.slashCommandEventToPlayEventStrategy);
 
     private final MappingStrategy<?, ?> mappingStrategy;
 
-    <E, R extends SupersonicEvent<E>> EventMappingStrategy(MappingStrategy<E, R> strategy) {
+    <E, R extends SupersonicEvent> EventMappingStrategy(MappingStrategy<E, R> strategy) {
         this.mappingStrategy = strategy;
     }
 

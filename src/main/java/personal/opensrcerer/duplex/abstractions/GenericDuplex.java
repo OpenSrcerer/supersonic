@@ -3,12 +3,12 @@ package personal.opensrcerer.duplex.abstractions;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import personal.opensrcerer.duplex.payloads.interfaces.MappingStrategy;
+import personal.opensrcerer.duplex.payloads.MappingStrategy;
 import personal.opensrcerer.duplex.payloads.interfaces.SupersonicEvent;
 import reactor.core.publisher.FluxSink;
 
 public abstract class GenericDuplex<
-        E, R extends SupersonicEvent<E>
+        E, R extends SupersonicEvent
         > extends DefaultDuplex<R>
 {
     private final Class<E> jdaEventType;

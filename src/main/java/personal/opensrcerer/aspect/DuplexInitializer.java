@@ -12,6 +12,7 @@ import personal.opensrcerer.aspect.annotations.PostDuplex;
 import personal.opensrcerer.aspect.annotations.PreDuplex;
 import personal.opensrcerer.duplex.abstractions.DefaultDuplex;
 import personal.opensrcerer.duplex.abstractions.GenericDuplex;
+import personal.opensrcerer.duplex.payloads.EventMappingStrategy;
 
 import javax.annotation.CheckForNull;
 import java.util.Arrays;
@@ -95,13 +96,12 @@ public class DuplexInitializer {
             return null;
         }
 
-        personal.opensrcerer.duplex.payloads.interfaces.MappingStrategy<?, ?> mappingStrategy = duplexType
+        EventMappingStrategy mappingStrategy = duplexType
                 .getAnnotation(MappingStrategy.class)
-                .value()
-                .get();
-        duplex.setStrategy(mappingStrategy);
+                .value();
+        duplex.setStrategy(mappingStrategy.get());
 
-        return mappingStrategy.getClass().getName();
+        return mappingStrategy.name();
     }
 
     private static void logInitialization(

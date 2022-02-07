@@ -2,22 +2,17 @@ package personal.opensrcerer.duplex.abstractions;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import personal.opensrcerer.duplex.interfaces.Authorizable;
 import personal.opensrcerer.duplex.interfaces.Duplex;
-import personal.opensrcerer.duplex.interfaces.Filterable;
 import personal.opensrcerer.launch.SupersonicConstants;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
 import java.util.EnumSet;
 
-public abstract class DefaultDuplex<E>
-        implements Duplex<E>, Authorizable<E>, Filterable<E>
-{
+public abstract class DefaultDuplex<E> implements Duplex<E> {
     protected final Flux<E> flux;
     protected final Class<E> jdaEventType;
 
