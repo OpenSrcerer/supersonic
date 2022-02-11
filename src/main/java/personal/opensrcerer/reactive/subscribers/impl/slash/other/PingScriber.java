@@ -15,13 +15,13 @@ import personal.opensrcerer.requests.system.Ping;
 @BoundTo(SlashCommand.PING)
 public class PingScriber extends SlashCommandSuperscriber<PingEvent> {
     @Override
-    public void onEvent(PingEvent event) {
-        SlashCommandEvent raw = event.raw();
+    public void onEvent(PingEvent boxed) {
+        SlashCommandEvent event = boxed.raw();
         SubsonicClient.INSTANCE.request(
                         new Ping(),
-                        raw.getGuild().getId()
+                        event.getGuild().getId()
                 )
-                .subscribe(res -> raw.reply(
+                .subscribe(res -> event.reply(
                         "Pong!\nSubsonic Server Version: **" + res.getVersion() + "**\n"
                                 + "Status: **" + res.getStatus() + "**\n"
                                 + "Request took: **" + res.getTime() + "ms**\n").queue()

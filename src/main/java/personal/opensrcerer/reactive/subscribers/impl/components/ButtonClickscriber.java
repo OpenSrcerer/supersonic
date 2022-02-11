@@ -11,11 +11,11 @@ import personal.opensrcerer.services.pagination.PaginationService;
         strategy = EventMappingStrategy.BUTTONCLICK_TO_CLICK)
 public class ButtonClickscriber extends GenericSuperscriber<ButtonClickEvent, ClickEvent> {
     @Override
-    public void onEvent(ClickEvent event) {
-        ButtonClickEvent buttonClickEvent = event.raw();
-        if (buttonClickEvent.getButton() != null && buttonClickEvent.getButton().getId() != null) {
+    public void onEvent(ClickEvent boxed) {
+        ButtonClickEvent event = boxed.raw();
+        if (event.getButton() == null && event.getButton().getId() == null) {
             return;
         }
-        PaginationService.decode(buttonClickEvent);
+        PaginationService.decode(event);
     }
 }

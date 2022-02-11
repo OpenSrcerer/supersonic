@@ -6,9 +6,9 @@ import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSupers
 
 public class MumScriber extends SlashCommandSuperscriber<MumEvent> {
     @Override
-    public void onEvent(MumEvent event) {
-        SlashCommandEvent raw = event.raw();
-        String reply = (raw.getUser().getId().equals("178603029115830282")) ? "Yes." : "No.";
-        raw.reply(reply).queue();
+    public void onEvent(MumEvent boxed) {
+        SlashCommandEvent event = boxed.raw();
+        String reply = (event.getUser().getId().equals("178603029115830282")) ? "Yes." : "No.";
+        event.reply(reply).queue();
     }
 }
