@@ -4,14 +4,15 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import personal.opensrcerer.aspect.DuplexInitializer;
+import personal.opensrcerer.aspect.SubscriberInitializer;
+import personal.opensrcerer.aspect.annotations.Phase;
 
 import javax.security.auth.login.LoginException;
 import java.util.stream.Collectors;
 
 public abstract class SupersonicLaunchWrapper {
     public static void run() throws LoginException {
-        DuplexInitializer.scan();
+        SubscriberInitializer.scan();
 
         SupersonicConstants.ENVIRONMENT_VARIABLES = System.getenv();
 
@@ -32,6 +33,6 @@ public abstract class SupersonicLaunchWrapper {
                         )
                 ).build();
 
-        DuplexInitializer.initializePreDuplexes();
+        SubscriberInitializer.initializeSubscribers(Phase.PRE_READY);
     }
 }
