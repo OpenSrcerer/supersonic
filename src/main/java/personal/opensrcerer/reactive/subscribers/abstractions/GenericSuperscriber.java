@@ -21,6 +21,7 @@ public abstract class GenericSuperscriber<
     public void subscribe() {
         EventMulticaster.of(eventToCapture)
                 .map(mappingStrategy)
+                .log()
                 .doOnNext(this::onEvent)
                 .checkpoint()
                 .onErrorContinue((t, r) -> this.onError(t, (R) r))

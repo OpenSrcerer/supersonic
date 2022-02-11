@@ -22,6 +22,7 @@ public abstract class SlashCommandSuperscriber<R extends SupersonicSlashCommandE
         EventMulticaster.of(eventToCapture)
                 .filter(event -> event.getName().equals(commandName))
                 .map(mappingStrategy)
+                .log()
                 .doOnNext(this::onEvent)
                 .checkpoint()
                 .onErrorContinue((t, r) -> this.onError(t, (R) r))

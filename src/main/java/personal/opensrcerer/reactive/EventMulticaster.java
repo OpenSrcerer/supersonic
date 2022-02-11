@@ -41,8 +41,7 @@ public final class EventMulticaster {
 
     public static <E extends GenericEvent> Flux<E> of(Class<E> eventToCapture) {
         return getFlux().filter(eventToCapture::isInstance)
-                .map(eventToCapture::cast)
-                .log();
+                .map(eventToCapture::cast);
     }
 
     public static <E extends GenericEvent> Flux<E> ofMock(Class<E> eventToCapture) {
