@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import personal.opensrcerer.db.hibernate.HibernateClient
 import personal.opensrcerer.requests.RequestFormatter
 import personal.opensrcerer.requests.subsonic.SubsonicRequest
 import personal.opensrcerer.requests.subsonic.VoidRequest
