@@ -1,9 +1,9 @@
 package personal.opensrcerer.reactive.payloads.abstractions;
 
 import net.dv8tion.jda.api.events.GenericEvent;
-import personal.opensrcerer.reactive.payloads.records.Result;
+import personal.opensrcerer.reactive.payloads.Maybe;
 
-public class SupersonicEvent<E extends GenericEvent> {
+public abstract class SupersonicEvent<E extends GenericEvent> {
 
     protected final E rawEvent;
 
@@ -15,7 +15,5 @@ public class SupersonicEvent<E extends GenericEvent> {
         return rawEvent;
     }
 
-    public Result evaluate() {
-        return null;
-    }
+    public abstract Maybe<?> evaluate();
 }

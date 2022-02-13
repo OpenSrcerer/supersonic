@@ -3,13 +3,14 @@ package personal.opensrcerer.requests
 import okhttp3.HttpUrl
 import personal.opensrcerer.client.cache.SubsonicCache
 import personal.opensrcerer.client.cache.SubsonicConfig
+import personal.opensrcerer.requests.search.Search3
 import personal.opensrcerer.requests.subsonic.SubsonicRequest
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.streams.asSequence
 
-object RequestFormatter {
+object RequestUtils {
     private val charPool : List<Char> = ('a'..'z') + ('0'..'9')
 
     fun <T> getUrl(req: SubsonicRequest<T>, guildId: String): HttpUrl {
@@ -23,9 +24,15 @@ object RequestFormatter {
         return builder.build()
     }
 
+    fun searchForSingleSong(query: String): Search3 {
+        return Search3(mapOf(
+                Pair("query", query),
+                Pair("songCount", "1")
+        ))
+    }
+
     private fun addConfigParams(builder: HttpUrl.Builder, config: SubsonicConfig) {
-        builder
-            .host(config.host)
+        builder.host(config.host)
             .port(config.port)
             .addQueryParameter("v", config.version)
             .addQueryParameter("c", "supersonic-bot")

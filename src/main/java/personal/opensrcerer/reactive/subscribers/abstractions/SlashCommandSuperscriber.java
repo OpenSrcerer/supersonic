@@ -25,16 +25,16 @@ public abstract class SlashCommandSuperscriber<R extends SupersonicSlashCommandE
                 .log()
                 .doOnNext(this::onEvent)
                 .checkpoint()
-                .onErrorContinue((t, r) -> this.onError(t, (R) r))
+                .onErrorContinue(this::onError)
                 .subscribe();
     }
 
     @Override
-    public void onError(Throwable throwable, R event) {
-        if (!event.raw().isAcknowledged()) {
-            event.raw().reply("Uh oh! Some error occurred." +
-                            "\nReport this error with this message: " + throwable.getMessage())
-                    .queue();
+    public void onError(Throwable throwable, Object event) {
+        SlashCommandEvent castEvent = (SlashCommandEvent) event;
+        if (!castEvent.isAcknowledged()) {
+            castEvent.reply("Uh oh! Some error occurred." +
+                            "\nReport this error with this message: " + throwable.getMessage()).queue();
         }
         super.onError(throwable, event);
     }

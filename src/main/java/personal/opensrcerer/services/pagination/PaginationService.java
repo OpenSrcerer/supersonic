@@ -3,16 +3,15 @@ package personal.opensrcerer.services.pagination;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import personal.opensrcerer.launch.SupersonicConstants;
-import personal.opensrcerer.messaging.constant.ConstantEmbeds;
 import personal.opensrcerer.messaging.entities.EmbedEntity;
 import personal.opensrcerer.messaging.entities.Page;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
+import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 import personal.opensrcerer.messaging.interfaces.discordInterfaces.InteractionHookWrapper;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.Cursorized;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.Paginated;
-import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
-import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedType;
 import personal.opensrcerer.messaging.interfaces.embedInterfaces.PaginatedCursorized;
-import personal.opensrcerer.services.audio.AudioService;
+import personal.opensrcerer.services.audio.AudioUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -73,7 +72,7 @@ public class PaginationService {
 
             /* Cursorization */
             case UP -> navigate(event, wrapper, Cursorized::up);
-            case SELECT -> addTrackToQueue(event, wrapper);
+            case SELECT -> wrapper.run(embed -> AudioUtils.playSongById(event, embed.select().embedName(), embed.select().id()));
             case DOWN -> navigate(event, wrapper, Cursorized::down);
 
             /* SearchEmbed Specific */
@@ -89,14 +88,6 @@ public class PaginationService {
 
             case DELETE -> removeNow(wrapper, messageId);
         }
-    }
-
-    public static void addTrackToQueue(@Nonnull ButtonClickEvent event,
-                                       @Nonnull InteractionHookWrapper wrapper) {
-        wrapper.run(embed -> {
-            AudioService.getInstance().addToQueueHandler(event, embed);
-            wrapper.replace(ConstantEmbeds.Companion.addedToQueue(embed.select()));
-        });
     }
 
     /**
