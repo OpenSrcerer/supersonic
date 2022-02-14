@@ -24,12 +24,12 @@ public abstract class GenericSuperscriber<
                 .log()
                 .doOnNext(this::onEvent)
                 .checkpoint()
-                .onErrorContinue((t, r) -> this.onError(t, (R) r))
+                .onErrorContinue(this::onError)
                 .subscribe();
     }
 
-    protected void onError(Throwable throwable, R mappedEvent) {
-        logger.error("Oh noes! :( Supersonic got an exception:", throwable);
+    protected void onError(Throwable throwable, Object event) {
+        logger.error("Oh noes! :( Supersonic got an exception: " + throwable + "\nEvent that caused this issue: " + event);
     }
 
     public void setTranslation(

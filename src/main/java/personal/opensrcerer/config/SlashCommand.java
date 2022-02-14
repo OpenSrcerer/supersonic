@@ -15,9 +15,9 @@ public enum SlashCommand {
 
     /* MUSIC PLAYER */
     JOIN("join", "Join a voice channel."),
-    PLAY("play", "Play a song by ID.", Map.of(
-            "id",
-            Pair.of(OptionType.STRING, "The Subsonic ID of the track to play."))
+    PLAY("play", "Play a song by any query.", Map.of(
+            "query",
+            Pair.of(OptionType.STRING, "The searching query."))
     ),
     SEARCH("search", "Search for songs in the server.", Map.of(
             "query",

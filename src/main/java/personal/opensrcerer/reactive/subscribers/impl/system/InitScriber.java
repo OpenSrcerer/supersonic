@@ -19,7 +19,7 @@ import java.util.EnumSet;
 @Subscriber(typeToHandle = ReadyEvent.class,
         strategy = EventMappingStrategy.READY_TO_INIT,
         phase = Phase.PRE_READY)
-public class Readyscriber extends GenericSuperscriber<ReadyEvent, InitEvent> {
+public class InitScriber extends GenericSuperscriber<ReadyEvent, InitEvent> {
     @Override
     public void onEvent(InitEvent event) {
         initSlashCommands();

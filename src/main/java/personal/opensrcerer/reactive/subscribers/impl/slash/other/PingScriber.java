@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import personal.opensrcerer.aspect.annotations.BoundTo;
 import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
-import personal.opensrcerer.client.SubsonicClient;
+import personal.opensrcerer.client.SubsonicService;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.reactive.payloads.impl.slash.PingEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
@@ -16,15 +16,14 @@ import personal.opensrcerer.requests.system.Ping;
 public class PingScriber extends SlashCommandSuperscriber<PingEvent> {
     @Override
     public void onEvent(PingEvent boxed) {
-        SlashCommandEvent event = boxed.raw();
-        SubsonicClient.INSTANCE.request(
+        SubsonicService.INSTANCE.request(
                         new Ping(),
-                        event.getGuild().getId()
+                        boxed.getGuild().getId()
                 )
-                .subscribe(res -> event.reply(
+                .subscribe(res -> boxed.reply(
                         "Pong!\nSubsonic Server Version: **" + res.getVersion() + "**\n"
                                 + "Status: **" + res.getStatus() + "**\n"
-                                + "Request took: **" + res.getTime() + "ms**\n").queue()
+                                + "Request took: **" + res.getTime() + "ms**\n", true).queue()
                 );
     }
 }

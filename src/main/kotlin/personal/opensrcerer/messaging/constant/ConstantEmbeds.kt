@@ -14,10 +14,24 @@ class ConstantEmbeds {
             )}
         }
 
-        fun addedToQueue(entity: EmbedEntity): MessageEmbed {
+        fun addedToQueue(title: String): MessageEmbed {
             return QuickEmbed.get { b -> b.addField(
                 ConstantMessages.ADDED_TO_QUEUE_TITLE,
-                "${entity.embedName()} was successfully added to the queue.",
+                "$title was successfully added to the queue.",
+                false
+            )}
+        }
+
+        fun plainEmbed(title: String, description: String): MessageEmbed {
+            return QuickEmbed.get { b -> b.addField(
+                title, description, false
+            )}
+        }
+
+        fun timeout(): MessageEmbed {
+            return QuickEmbed.get { b -> b.addField(
+                "Request timed out",
+                "This request took too long to complete.",
                 false
             )}
         }
