@@ -5,6 +5,7 @@ import personal.opensrcerer.aspect.annotations.BoundTo;
 import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
 import personal.opensrcerer.config.SlashCommand;
+import personal.opensrcerer.messaging.constant.ConstantEmbeds;
 import personal.opensrcerer.reactive.payloads.impl.slash.LeaveEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.services.audio.MusicPlayer;
@@ -15,10 +16,11 @@ import personal.opensrcerer.services.audio.MusicPlayer;
 public class LeaveScriber extends SlashCommandSuperscriber<LeaveEvent> {
     @Override
     public void onEvent(LeaveEvent boxed) {
-
-
-        MusicPlayer.MUSIC_PLAYER.stop(event.getGuild());
-        manager.closeAudioConnection();
-        event.reply("Bye bye!").queue();
+        MusicPlayer.MUSIC_PLAYER.stop(boxed.getGuild());
+        boxed.getAudioManager().closeAudioConnection();
+        boxed.replyEmbeds(ConstantEmbeds.Companion.plainEmbed(
+                "Bye bye!",
+                "See you some other time!"
+        )).queue();
     }
 }

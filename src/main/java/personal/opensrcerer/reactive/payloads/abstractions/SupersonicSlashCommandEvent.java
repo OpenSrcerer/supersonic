@@ -16,7 +16,7 @@ public abstract class SupersonicSlashCommandEvent extends SupersonicEvent<SlashC
 
     @CheckReturnValue
     public ReplyAction replyEmbeds(MessageEmbed... embeds) {
-        return rawEvent.replyEmbeds(Arrays.asList(embeds)).setEphemeral(true);
+        return rawEvent.replyEmbeds(Arrays.asList(embeds)).setEphemeral(false);
     }
 
     @CheckReturnValue

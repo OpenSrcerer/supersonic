@@ -14,7 +14,7 @@ public enum EventMappingStrategy {
     SLASHCOMMAND_TO_PLAY(MappingStrategy.slashCommandToPlay),
     SLASHCOMMAND_TO_SEARCH(MappingStrategy.slashCommandToSearch),
     SLASHCOMMAND_TO_SKIP(MappingStrategy.slashCommandToSkip),
-    SLASHCOMMAND_TO_UNPAUSE(MappingStrategy.slashCommandToSkip),
+    SLASHCOMMAND_TO_UNPAUSE(MappingStrategy.slashCommandToUnpause),
 
     READY_TO_INIT(MappingStrategy.readyToInit);
 

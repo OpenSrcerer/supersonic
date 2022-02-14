@@ -31,7 +31,7 @@ public class AudioUtils {
         } else {
             addToQueue(event, songId);
         }
-        event.replyEmbeds(ConstantEmbeds.Companion.addedToQueue(songTitle)).setEphemeral(true).queue();
+        event.replyEmbeds(ConstantEmbeds.Companion.addedToQueue(songTitle)).queue();
     }
 
     private static void addToQueue(GenericInteractionCreateEvent event, String trackId) {
