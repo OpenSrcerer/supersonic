@@ -1,6 +1,5 @@
 package fluxTests;
 
-import fluxTests.mockEvents.BlahEvent;
 import fluxTests.mockEvents.SlashCommandBlahEvent;
 import fluxTests.mockMulticaster.TestMockEventMulticaster;
 import fluxTests.mockSubscribers.DataOrderSubscriber;

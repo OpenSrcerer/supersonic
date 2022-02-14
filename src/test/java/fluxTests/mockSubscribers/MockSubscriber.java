@@ -22,7 +22,7 @@ public abstract class MockSubscriber extends GenericSuperscriber<SlashCommandEve
         mappedMulticaster
                 .doOnNext(this::onEvent)
                 .checkpoint()
-                .onErrorContinue((t, r) -> onError(t, (BlahEvent) r))
+                .onErrorContinue(this::onError)
                 .subscribe();
     }
 }

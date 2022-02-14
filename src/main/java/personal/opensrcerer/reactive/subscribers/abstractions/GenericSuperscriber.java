@@ -7,6 +7,8 @@ import personal.opensrcerer.aspect.mapping.MappingStrategy;
 import personal.opensrcerer.reactive.EventMulticaster;
 import personal.opensrcerer.reactive.payloads.abstractions.SupersonicEvent;
 
+import java.util.Arrays;
+
 public abstract class GenericSuperscriber<
         E extends GenericEvent,
         R extends SupersonicEvent<E>
@@ -29,7 +31,7 @@ public abstract class GenericSuperscriber<
     }
 
     protected void onError(Throwable throwable, Object event) {
-        logger.error("Oh noes! :( Supersonic got an exception: " + throwable + "\nEvent that caused this issue: " + event);
+        logger.error("Oh noes! :( Supersonic got an exception: " + Arrays.toString(throwable.getStackTrace()) + "\nEvent that caused this issue: " + event);
     }
 
     public void setTranslation(
