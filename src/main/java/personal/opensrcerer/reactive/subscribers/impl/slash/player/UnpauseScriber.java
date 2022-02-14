@@ -5,6 +5,7 @@ import personal.opensrcerer.aspect.annotations.BoundTo;
 import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
 import personal.opensrcerer.config.SlashCommand;
+import personal.opensrcerer.messaging.constant.ConstantEmbeds;
 import personal.opensrcerer.reactive.payloads.impl.slash.UnpauseEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.services.audio.MusicPlayer;
@@ -15,8 +16,10 @@ import personal.opensrcerer.services.audio.MusicPlayer;
 public class UnpauseScriber extends SlashCommandSuperscriber<UnpauseEvent> {
     @Override
     public void onEvent(UnpauseEvent boxed) {
-        SlashCommandEvent event = boxed.raw();
-        MusicPlayer.MUSIC_PLAYER.unpause(event.getGuild());
-        event.reply("Player unpaused!").queue();
+        MusicPlayer.MUSIC_PLAYER.unpause(boxed.getGuild());
+        boxed.replyEmbeds(ConstantEmbeds.Companion.plainEmbed(
+                "Player unpaused",
+                "<@" + boxed.getMember().getId() + "> unpaused the player."
+        )).queue();
     }
 }

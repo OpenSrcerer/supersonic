@@ -10,7 +10,7 @@ public class ClickEvent extends SupersonicEvent<ButtonClickEvent> {
     }
 
     @Override
-    public Maybe<?> evaluate() {
+    public Maybe<Void> evaluate() {
         return new Maybe<>(null);
     }
 }

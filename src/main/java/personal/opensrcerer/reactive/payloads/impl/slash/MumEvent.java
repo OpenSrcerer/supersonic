@@ -10,7 +10,7 @@ public class MumEvent extends SupersonicSlashCommandEvent {
     }
 
     @Override
-    public Maybe<?> evaluate() {
-        return null;
+    public Maybe<String> evaluate() {
+        return new Maybe<>((rawEvent.getUser().getId().equals("178603029115830282")) ? "Yes." : "No.");
     }
 }

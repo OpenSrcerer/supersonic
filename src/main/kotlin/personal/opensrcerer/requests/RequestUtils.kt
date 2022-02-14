@@ -48,8 +48,7 @@ object RequestUtils {
         }
 
         val hashSalt = hashMd5(config.password)
-        builder
-            .addQueryParameter("t", hashSalt.first)
+        builder.addQueryParameter("t", hashSalt.first)
             .addQueryParameter("s", hashSalt.second)
     }
 

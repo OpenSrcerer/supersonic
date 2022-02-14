@@ -11,7 +11,7 @@ public class UnpauseEvent extends SupersonicSlashCommandEvent {
     }
 
     @Override
-    public Maybe<?> evaluate() {
-        return null;
+    public Maybe<Void> evaluate() {
+        return new Maybe<>(null);
     }
 }

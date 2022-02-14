@@ -22,7 +22,7 @@ class ConstantEmbeds {
             )}
         }
 
-        fun errorEmbed(title: String, description: String): MessageEmbed {
+        fun plainEmbed(title: String, description: String): MessageEmbed {
             return QuickEmbed.get { b -> b.addField(
                 title, description, false
             )}

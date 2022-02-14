@@ -13,7 +13,7 @@ public class SearchEvent extends SupersonicSlashCommandEvent {
     @Override
     public Maybe<String> evaluate() {
         if (rawEvent.getOption("query") == null) {
-            return new Maybe<>(ConstantEmbeds.Companion.errorEmbed(
+            return new Maybe<>(ConstantEmbeds.Companion.plainEmbed(
                     "The slash command you input was invalid",
                     "Please check your arguments and try again."
             ));

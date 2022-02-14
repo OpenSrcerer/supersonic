@@ -18,6 +18,7 @@ public final class EventMulticaster {
             var jdaFlux = Flux.<GenericEvent>create(sink -> {
                 listener = sink::next;
                 SupersonicConstants.getJDA().addEventListener(listener);
+                sink.onDispose(() -> SupersonicConstants.getJDA().removeEventListener(listener));
             });
             multicastFlux = jdaFlux.publishOn(Schedulers.single());
         }

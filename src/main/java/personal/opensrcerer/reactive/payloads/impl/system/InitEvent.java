@@ -10,7 +10,7 @@ public class InitEvent extends SupersonicEvent<ReadyEvent> {
     }
 
     @Override
-    public Maybe<?> evaluate() {
+    public Maybe<Void> evaluate() {
         return null;
     }
 }

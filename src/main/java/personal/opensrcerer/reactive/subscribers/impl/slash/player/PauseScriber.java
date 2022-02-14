@@ -5,6 +5,7 @@ import personal.opensrcerer.aspect.annotations.BoundTo;
 import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
 import personal.opensrcerer.config.SlashCommand;
+import personal.opensrcerer.messaging.constant.ConstantEmbeds;
 import personal.opensrcerer.reactive.payloads.impl.slash.PauseEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.services.audio.MusicPlayer;
@@ -15,8 +16,10 @@ import personal.opensrcerer.services.audio.MusicPlayer;
 public class PauseScriber extends SlashCommandSuperscriber<PauseEvent> {
     @Override
     public void onEvent(PauseEvent boxed) {
-        SlashCommandEvent event = boxed.raw();
-        MusicPlayer.MUSIC_PLAYER.pause(event.getGuild());
-        event.reply("Player paused!").queue();
+        MusicPlayer.MUSIC_PLAYER.pause(boxed.getGuild());
+        boxed.replyEmbeds(ConstantEmbeds.Companion.plainEmbed(
+                "Player paused",
+                "<@" + boxed.getMember().getId() + "> paused the player."
+        )).queue();
     }
 }

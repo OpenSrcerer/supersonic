@@ -9,24 +9,19 @@ import personal.opensrcerer.reactive.payloads.mock.EmbedPlayEvent;
 import personal.opensrcerer.reactive.payloads.Maybe;
 
 public class PlayEvent extends SupersonicSlashCommandEvent {
-
-    private final String botChannelId;
-    private final String memberChannelId;
-
-    @SuppressWarnings("")
     public PlayEvent(SlashCommandEvent event) {
         super(event);
-        AudioManager manager = event.getGuild().getAudioManager();
-        botChannelId = (manager.isConnected()) ? manager.getConnectedChannel().getId() : null;
-        memberChannelId = (event.getMember().getVoiceState().inVoiceChannel()) ?
-                event.getMember().getVoiceState().getChannel().getId() : null;
     }
 
     @Override
     public Maybe<String> evaluate() {
+        String botChannelId = (getAudioManager().isConnected()) ? getAudioManager().getConnectedChannel().getId() : null;
+        String memberChannelId = (getMemberVoiceState().inVoiceChannel()) ?
+                getMemberVoiceChannel().getId() : null;
+
         if (botChannelId == null && memberChannelId == null) {
             return new Maybe<>(
-                    ConstantEmbeds.Companion.errorEmbed(
+                    ConstantEmbeds.Companion.plainEmbed(
                             "Join a voice channel",
                             "You must join a voice channel to use this command!"
                     ));
@@ -34,7 +29,7 @@ public class PlayEvent extends SupersonicSlashCommandEvent {
 
         if ((memberChannelId == null || !memberChannelId.equals(botChannelId)) && botChannelId != null) {
             return new Maybe<>(
-                    ConstantEmbeds.Companion.errorEmbed(
+                    ConstantEmbeds.Companion.plainEmbed(
                             "Join the active voice channel",
                             "You must join <#" + botChannelId + "> to be able to add music!"
                     ));
@@ -47,7 +42,7 @@ public class PlayEvent extends SupersonicSlashCommandEvent {
         OptionMapping mapping = raw().getOption("query");
         if (mapping == null) {
             return new Maybe<>(
-                    ConstantEmbeds.Companion.errorEmbed(
+                    ConstantEmbeds.Companion.plainEmbed(
                             "The slash command you input was invalid",
                             "Please check your arguments and try again."
                     ));
