@@ -5,7 +5,10 @@ import org.hibernate.annotations.GenericGenerator
 import java.util.*
 
 @Entity(name = "subsonicServer")
-@Table(name = "servers")
+@Table(name = "servers",
+    indexes = [
+        Index(columnList = "server_name", name = "idx_servers_server_name")
+    ])
 class SubsonicServer(
     @Id
     @GeneratedValue(generator = "UUID")
@@ -15,6 +18,14 @@ class SubsonicServer(
     )
     @Column(name = "server_id", updatable = false, nullable = false)
     val id: UUID,
+
+    // User-Assignable Properties
+    // ----------------------------
+    @Column(name = "server_name", nullable = false)
+    val name: String,
+
+    @Column(name = "server_description")
+    val description: String,
 
     @Column(name = "server_host", nullable = false)
     val host: String,
@@ -27,6 +38,7 @@ class SubsonicServer(
 
     @Column(name = "server_password", nullable = false)
     val password: String,
+    // ----------------------------
 
     @Column(name = "server_version")
     val version: String,

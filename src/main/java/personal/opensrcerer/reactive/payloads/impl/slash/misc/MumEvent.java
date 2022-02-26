@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive.payloads.impl.slash;
+package personal.opensrcerer.reactive.payloads.impl.slash.misc;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import personal.opensrcerer.reactive.payloads.Maybe;

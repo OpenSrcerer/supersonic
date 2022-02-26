@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive.subscribers.impl.slash.other;
+package personal.opensrcerer.reactive.subscribers.impl.slash.servers;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import personal.opensrcerer.aspect.annotations.BoundTo;
@@ -6,7 +6,7 @@ import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
 import personal.opensrcerer.client.SubsonicService;
 import personal.opensrcerer.config.SlashCommand;
-import personal.opensrcerer.reactive.payloads.impl.slash.PingEvent;
+import personal.opensrcerer.reactive.payloads.impl.slash.servers.PingEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.requests.system.Ping;
 

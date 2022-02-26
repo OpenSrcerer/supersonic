@@ -1,8 +1,6 @@
 package personal.opensrcerer.reactive.subscribers.impl.slash.player;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import personal.opensrcerer.aspect.annotations.BoundTo;
 import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
@@ -10,7 +8,7 @@ import personal.opensrcerer.client.SubsonicService;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.messaging.constant.ConstantEmbeds;
 import personal.opensrcerer.reactive.payloads.Maybe;
-import personal.opensrcerer.reactive.payloads.impl.slash.PlayEvent;
+import personal.opensrcerer.reactive.payloads.impl.slash.player.PlayEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.requests.RequestUtils;
 import personal.opensrcerer.services.audio.AudioUtils;

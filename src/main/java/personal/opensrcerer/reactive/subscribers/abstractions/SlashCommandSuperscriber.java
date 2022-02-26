@@ -31,10 +31,10 @@ public abstract class SlashCommandSuperscriber<R extends SupersonicSlashCommandE
 
     @Override
     public void onError(Throwable throwable, Object event) {
-        SlashCommandEvent castEvent = (SlashCommandEvent) event;
-        if (!castEvent.isAcknowledged()) {
+        SupersonicSlashCommandEvent castEvent = (SupersonicSlashCommandEvent) event;
+        if (!castEvent.raw().isAcknowledged()) {
             castEvent.reply("Uh oh! Some error occurred." +
-                            "\nReport this error with this message: " + throwable.getMessage()).queue();
+                            "\nReport this error with this message: " + throwable.getMessage(), true).queue();
         }
         super.onError(throwable, event);
     }

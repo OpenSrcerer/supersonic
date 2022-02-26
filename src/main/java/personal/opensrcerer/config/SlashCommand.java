@@ -7,7 +7,9 @@ import java.util.Map;
 
 public enum SlashCommand {
 
-    /* SYSTEM & CHECKS */
+    /* SERVER MANAGEMENT */
+    ADD_SERVER("addserver", "Add a new server in your server list."),
+    REMOVE_SERVER("removeserver", "Remove a server from your server list."),
     PING("ping", "Check the status of the Subsonic server you are currently connected to."),
 
     /* MISCELLANEOUS */

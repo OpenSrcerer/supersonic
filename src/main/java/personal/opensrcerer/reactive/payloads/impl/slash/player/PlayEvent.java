@@ -1,4 +1,4 @@
-package personal.opensrcerer.reactive.payloads.impl.slash;
+package personal.opensrcerer.reactive.payloads.impl.slash.player;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;

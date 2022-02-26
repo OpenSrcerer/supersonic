@@ -1,6 +1,6 @@
 package personal.opensrcerer.reactive.subscribers.impl.slash.misc;
 
-import personal.opensrcerer.reactive.payloads.impl.slash.MumEvent;
+import personal.opensrcerer.reactive.payloads.impl.slash.misc.MumEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 
 public class MumScriber extends SlashCommandSuperscriber<MumEvent> {

@@ -9,7 +9,7 @@ import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbed;
 import personal.opensrcerer.messaging.impl.paginatedEmbeds.search.SearchEmbedActionRowTemplates;
 import personal.opensrcerer.reactive.payloads.Maybe;
-import personal.opensrcerer.reactive.payloads.impl.slash.SearchEvent;
+import personal.opensrcerer.reactive.payloads.impl.slash.player.SearchEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.requests.search.Search3;
 import personal.opensrcerer.services.pagination.PaginationService;

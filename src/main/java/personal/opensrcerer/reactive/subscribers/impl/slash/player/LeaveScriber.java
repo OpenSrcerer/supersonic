@@ -6,7 +6,7 @@ import personal.opensrcerer.aspect.annotations.Subscriber;
 import personal.opensrcerer.aspect.mapping.EventMappingStrategy;
 import personal.opensrcerer.config.SlashCommand;
 import personal.opensrcerer.messaging.constant.ConstantEmbeds;
-import personal.opensrcerer.reactive.payloads.impl.slash.LeaveEvent;
+import personal.opensrcerer.reactive.payloads.impl.slash.player.LeaveEvent;
 import personal.opensrcerer.reactive.subscribers.abstractions.SlashCommandSuperscriber;
 import personal.opensrcerer.services.audio.MusicPlayer;
 
