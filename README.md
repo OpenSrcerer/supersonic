@@ -5,7 +5,7 @@
   <a href="https://github.com/OpenSrcerer/supersonic/network">
     <img src="https://img.shields.io/github/forks/OpenSrcerer/supersonic?style=flat-square" width=86/>
   </a>
-  <a href="https://github.com/OpenSrcerer/thermostat/issues">
+  <a href="https://github.com/OpenSrcerer/supersonic/issues">
     <img src="https://img.shields.io/github/issues/OpenSrcerer/supersonic?style=flat-square" width=140/>
   </a>
   <a href="https://app.travis-ci.com/github/OpenSrcerer/supersonic">
