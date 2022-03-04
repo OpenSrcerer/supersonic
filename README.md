@@ -15,6 +15,14 @@
 
 <br>
 
+<h2>
+    NOTE: This project is still under heavy development.
+    If you wish to talk about the project, 
+    <a href="https://discord.gg/EHuhw2Qhgv">visit the Discord Server.</a>
+</h2>
+
+---
+
 <h1 align=center>About</h1>
 Supersonic is a bot made for Discord. It aims to provide a limitless music playing experience by putting the power in the hands of the user. It works through the Subsonic API, so any media server such as Airsonic or Subsonic support it.
 
