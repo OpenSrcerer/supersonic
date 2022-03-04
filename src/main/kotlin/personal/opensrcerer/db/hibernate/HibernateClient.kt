@@ -11,33 +11,16 @@ internal object HibernateClient {
         .configure()
         .buildSessionFactory()
 
-    inline fun <reified T> query(action: HibernateSessionAction): Mono<HibernateResult<T>> {
+    inline fun <reified T> query(action: HibernateSessionAction): Mono<HibernateResult<T?>> {
         val session = sessionFactory.currentSession
-        val returnValue = action.perform(session) as T
+        val returnValue = action.perform(session) as T?
         return Mono.just(HibernateResult(returnValue, session))
     }
 
-    inline fun <reified T> transaction(action: HibernateSessionAction): Mono<HibernateResult<T>> {
+    inline fun <reified T> transaction(action: HibernateSessionAction): Mono<HibernateResult<T?>> {
         val session = sessionFactory.currentSession
-        val transaction = session.beginTransaction()
-        val returnValue = action.perform(session) as T
-        return Mono.just(HibernateResult(returnValue, session))
-    }
-
-    inline fun <reified T> query(
-        action: HibernateSessionAction,
-        session: Session
-    ): Mono<HibernateResult<T>> {
-        val returnValue = action.perform(session) as T
-        return Mono.just(HibernateResult(returnValue, session))
-    }
-
-    inline fun <reified T> transaction(
-        action: HibernateSessionAction,
-        session: Session
-    ): Mono<HibernateResult<T>> {
-        val transaction = session.beginTransaction()
-        val returnValue = action.perform(session) as T
+        session.beginTransaction()
+        val returnValue = action.perform(session) as T?
         return Mono.just(HibernateResult(returnValue, session))
     }
 }
