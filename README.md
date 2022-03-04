@@ -38,11 +38,11 @@ After larger music bots like Groovy and Rhythm were taken down by Youtube in an 
 Currently, this project connects to a known server to prove it is online and functioning as expected. However, most would prefer they host their own music. Currently, Docker allows you to pass environment variables to connect to your current server. It does this by passing the values via the .env file prior to the image being built by Docker. if you would like custom server support outside of Docker, this can currently be achieved by editing the default values in `src/main/kotlin/personal/opensrcerer/client/cache/SubsonicCache.kt` (right of the ?:)
 
 The variables that need to be passed are as follows, if you are happy with the default values for these, feel free to leave them be:
-- sub_url
-- sub_port
-- sub_user
-- sub_pass
-- sub_version
+- SUB_URL
+- SUB_PORT
+- SUB_USER
+- SUB_PASS
+- SUB_VERSION
 
 <h1 align=center>
   GNU © OpenSrcerer
